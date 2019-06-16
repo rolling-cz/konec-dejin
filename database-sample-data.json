@@ -1,0 +1,52 @@
+{
+  "actions" : {
+    "round_1" : {
+      "action_id_1" : {
+        "delegate" : "delegate_id_1",
+        "delegation" : "delegation_id_1",
+        "description" : "Lokalizace Abú Musa Zarkávího",
+        "keyword" : "OMEGA",
+        "result" : "Obrovský úspěch! Povedlo se nám Zarkávího zahnat do rohu a protože neměl zjevně žádnou podporu...dostali jsme ho. Máme ho jako zajatce u našich hochů v Iráku. Co dál?",
+        "spentDf" : 10,
+        "targetDelegation" : "delegation_id_2",
+        "type" : "support",
+        "visibility" : "secret"
+      }
+    }
+  },
+  "delegateRounds" : {
+    "delegate_id_1" : {
+      "round_1" : {
+        "availableMainActions" : 3,
+        "delegation" : "delegation_id_1",
+        "leader" : true
+      }
+    }
+  },
+  "delegates" : {
+    "delegate_id_1" : {
+      "name" : "Daniel Appleby",
+      "password" : "secret"
+    }
+  },
+  "delegationRounds" : {
+    "delegation_1" : {
+      "round_1" : {
+        "availableDf" : 200,
+        "message" : "Nízké ceny ropy pomohly mírně oživit naši ekonomiku. Finanční krize a krize Eura však dále poškozuje naši ekonomiku"
+      }
+    }
+  },
+  "delegations" : {
+    "delegation_id_1" : {
+      "flag" : "🇬🇧",
+      "name" : "Velká Británie"
+    }
+  },
+  "rounds" : {
+    "round_1" : {
+      "deadline" : 1457015264428,
+      "name" : "1. kolo - pátek večer"
+    }
+  }
+}
