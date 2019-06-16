@@ -10,5 +10,6 @@ This document defines constants used in database.
         - elections
         - other
     - visibility
-        - secret
-        - public
+        - public (visible to the world)
+        - covert (visible only in a delegation)
+        - private (visible only for a delegate & orgs)
