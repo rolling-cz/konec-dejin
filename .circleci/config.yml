@@ -3,7 +3,7 @@ jobs:
     build:
         working_directory: ~/konec-dejin/app
         docker:
-            - image: circleci/node:8.9.3-browsers
+            - image: circleci/node:10.16.0-browsers
         steps:
             - checkout:
                 path: ~/konec-dejin
@@ -24,12 +24,6 @@ jobs:
                 paths:
                     - node_modules
             - run:
-                name: Linting
-                command: npm run lint
-            - run:
-                name: Testing
-                command: npm run test-prod
-            - run:
                 name: Building
                 command: npm run build-prod
             - save_cache:
@@ -41,15 +35,12 @@ jobs:
                     - .firebaserc
     deploy:
         docker:
-            - image: circleci/node:chakracore-8.11-browsers-legacy
+            - image: circleci/node:10.16.0-browsers-legacy
         working_directory: ~/konec-dejin/app
         steps:
             - run:
                 name: Show current branch
-                command: echo ${CIRCLE_BRANCH}
-            - run:
-                name: Go to Angular directory
-                command: cd app  
+                command: echo ${CIRCLE_BRANCH} 
             - restore_cache:
                 key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
             - run:
