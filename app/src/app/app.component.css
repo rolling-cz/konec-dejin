@@ -9,3 +9,6 @@
 .separator {
     color: lightgray;
 }
+.tab-content {
+    padding: 1em;
+}
