@@ -12,3 +12,15 @@
 .tab-content {
     padding: 1em;
 }
+.stretch {
+    width: 100%;
+}
+.action {
+    margin-bottom: 1em;
+}
+.df {
+    width: 4em;
+}
+.type {
+    width: 8em;
+}
