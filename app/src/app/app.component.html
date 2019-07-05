@@ -10,7 +10,7 @@
       <mat-card>
         <p><i class="em-svg em-gb"></i> Velká Británie, vedoucí delegace </p>
         <p>Deadline odevzdání depeše: <strong>pátek 20:00</strong></p>
-        <p> K dispozici: <strong>60 DF</strong>, využito: <strong>0 DF</strong></p>
+        <p>K dispozici: <strong>{{remainingDf}} DF</strong> z {{availableDf}} DF</p>
       </mat-card>
       <p>Primární akce:</p>
       <mat-card *ngFor="let action of primaryActions" class="action">
@@ -18,7 +18,8 @@
           <input matInput placeholder="Popis akce" type="text">
         </mat-form-field>
         <mat-form-field class="df">
-          <input matInput placeholder="DF" type="number" value="{{action.df}}">
+          <input matInput placeholder="DF" type="number" [ngModel]="action.df"
+            (ngModelChange)="calculateRemainingDf(action, $event)">
         </mat-form-field>
         &nbsp;
         <mat-form-field>
@@ -49,7 +50,8 @@
           <input matInput placeholder="Popis akce" type="text">
         </mat-form-field>
         <mat-form-field class="df">
-          <input matInput placeholder="DF" type="number" value="{{action.df}}">
+          <input matInput placeholder="DF" type="number" [ngModel]="action.df"
+            (ngModelChange)="calculateRemainingDf(action, $event)">
         </mat-form-field>
         &nbsp;
         <mat-form-field>

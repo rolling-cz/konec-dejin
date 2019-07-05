@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { stripGeneratedFileSuffix } from '@angular/compiler/src/aot/util';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,15 @@ export class AppComponent {
     {value: 'private', name: "Tajná uvnitř delegace"}
   ]
   sent = false
+  availableDf = 60
+  remainingDf = this.availableDf
+
+  calculateRemainingDf(action: Action, newValue: number) {
+    action.df = newValue
+    let primarySum = this.primaryActions.reduce((sum, current) => sum + current.df, 0)
+    let secondarySum = this.secondaryActions.reduce((sum, current) => sum + current.df, 0)
+    this.remainingDf = this.availableDf - primarySum - secondarySum
+  }
 
   addSecondaryAction() {
     this.secondaryActions.push(
