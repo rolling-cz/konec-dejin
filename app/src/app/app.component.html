@@ -5,11 +5,37 @@
 </mat-toolbar>
 
 <mat-tab-group>
-  <mat-tab label="1. kolo (aktuální)">
+  <mat-tab label="1. kolo">
+    <div class="tab-content">
+      <mat-card class="action">
+        <p><i class="em-svg em-gb"></i> Velká Británie, vedoucí delegace: Daniel Appleby</p>
+        <p>Deadline odeslání depeše: pátek 20:00</p>
+        <p>Použito: 41 DF z 61 DF</p>
+      </mat-card>
+      <mat-card class="action">
+        <p>Důležitá sdělení vlády:</p>
+        <p><strong>Nízké ceny ropy pomohly mírně oživit naši ekonomiku. Finanční krize a krize Eura však dále poškozuje naši
+          ekonomiku</strong></p>
+      </mat-card>
+      <p>Primární akce:</p>
+      <mat-card *ngFor="let action of primaryDoneActions" class="action">
+          <p>{{formatDoneActionDescription(action)}}</p>
+          <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}</p>
+          <p><strong>{{action.result}}</strong></p>
+      </mat-card>
+      <p>Sekundární akce:</p>
+      <mat-card *ngFor="let action of secondaryDoneActions" class="action">
+          <p>{{formatDoneActionDescription(action)}}</p>
+          <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}</p>
+          <p><strong>{{action.result}}</strong></p>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="2. kolo (aktuální)">
     <div class="tab-content">
       <mat-card>
         <p><i class="em-svg em-gb"></i> Velká Británie, vedoucí delegace </p>
-        <p>Deadline odeslání depeše: <strong>pátek 20:00</strong></p>
+        <p>Deadline odeslání depeše: <strong>sobota 15:00</strong></p>
         <p>K dispozici: <strong>{{remainingDf}} DF</strong> z {{availableDf}} DF</p>
       </mat-card>
       <p>Primární akce:</p>
@@ -30,7 +56,7 @@
           <mat-label>Cílová země</mat-label>
           <mat-select>
             <mat-option *ngFor="let country of countries" [value]="country.value">
-              <i class="em-svg {{country.value}}"></i> {{country.name}}
+              <i class="em-svg em-{{country.value}}"></i> {{country.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -62,7 +88,7 @@
           <mat-label>Cílová země</mat-label>
           <mat-select>
             <mat-option *ngFor="let country of countries" [value]="country.value">
-              <i class="em-svg {{country.value}}"></i> {{country.name}}
+              <i class="em-svg em-{{country.value}}"></i> {{country.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -99,11 +125,6 @@
       (Všechny změny v depeši se ukládají automaticky. Kliknutím na "Odeslat depeši" dáváte najevo, že depeše je
       kompletní a může začít vyhodnocování. Vyhodnocování také začne po deadlinu i pokud jste depeši neodeslali. Pokud
       potřebujete více času, napište Reuters.)
-    </div>
-  </mat-tab>
-  <mat-tab label="2. kolo">
-    <div class="tab-content">
-      <h1>TODO</h1>
     </div>
   </mat-tab>
   <mat-tab label="3. kolo">

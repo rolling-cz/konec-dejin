@@ -7,7 +7,7 @@
         "description" : "Lokalizace Abú Musa Zarkávího",
         "keyword" : "OMEGA",
         "result" : "Obrovský úspěch! Povedlo se nám Zarkávího zahnat do rohu a protože neměl zjevně žádnou podporu...dostali jsme ho. Máme ho jako zajatce u našich hochů v Iráku. Co dál?",
-        "spentDf" : 10,
+        "df" : 10,
         "targetDelegation" : "delegation_id_2",
         "type" : "support",
         "visibility" : "secret"

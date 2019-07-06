@@ -10,28 +10,47 @@ export class AppComponent {
   title = 'app';
   // https://afeld.github.io/emoji-css/
   countries: SelectRow[] = [
-    {value: 'em-flag-iq', name: 'Irák'},
-    {value: 'em-flag-ir', name: 'Írán'},
-    {value: 'em-gb', name: 'Velká Británie'}
+    { value: 'flag-af', name: 'Afgánistán' },
+    { value: 'flag-in', name: 'Indie' },
+    { value: 'flag-iq', name: 'Irák' },
+    { value: 'flag-ir', name: 'Írán' },
+    { value: 'flag-il', name: 'Izrael' },
+    { value: 'flag-ps', name: 'Palestina' },
+    { value: 'flag-sa', name: 'Saudská Arábie' },
+    { value: 'flag-sy', name: 'Sýrie' },
+    { value: 'gb', name: 'Velká Británie' }
   ];
-  primaryActions: Action[] = [
-    {df: 0, visibility: 'public', type: 'main'},
-    {df: 0, visibility: 'public', type: 'main'},
-    {df: 0, visibility: 'public', type: 'main'}
-  ]
-  secondaryActions: Action[] = [
-    {df: 0, visibility: 'public', type: 'support'}
-  ]
   actionTypes: SelectRow[] = [
-    {value: 'support', name: "Podpora"},
-    {value: 'economic', name: "Ekonomika"},
-    {value: 'elections', name: "Volby"},
-    {value: 'other', name: "Jiné"}
+    { value: 'support', name: "Podpora" },
+    { value: 'economic', name: "Ekonomika" },
+    { value: 'elections', name: "Volby" },
+    { value: 'other', name: "Jiné" }
   ]
   visibilities: SelectRow[] = [
-    {value: 'public', name: "Veřejná"},
-    {value: 'covert', name: "Tajná vůči delegacím"},
-    {value: 'private', name: "Tajná uvnitř delegace"}
+    { value: 'public', name: "Veřejná" },
+    { value: 'covert', name: "Tajná vůči delegacím" },
+    { value: 'private', name: "Tajná uvnitř delegace" }
+  ]
+  primaryActions: Action[] = [
+    { description: "", df: 0, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" },
+    { description: "", df: 0, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" },
+    { description: "", df: 0, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" }
+  ]
+  secondaryActions: Action[] = [
+    { description: "", df: 0, visibility: 'public', type: 'support', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" }
+  ]
+  primaryDoneActions: Action[] = [
+    { description: "Sabotáž íránského jaderného programu", df: 12, visibility: 'covert', type: 'main', delegate: "Daniel Appleby", keyword: "OHEŇ V DÍŘE", result: "Naše obrovská a mezinárodně koordinovaná akce nepřinesla žádané ovoce. Povedlo se nám sice vyhodit do vzduchu kompletní zařízení Íránu - ale už vesměs prázdné a navíc za cenu rozsáhlé zpravodajské akce, kterou asi dokáže někdo zpětně dořešit.", targetDelegation: "flag-ir" },
+    { description: "Afghánistán - elektrifikace měst", df: 5, visibility: 'public', type: 'main', delegate: "Harold Cross", keyword: "", result: "Proběhlo, Afghánistán se připojuje k modernímu světu.", targetDelegation: "flag-af" },
+    { description: "Ovlivňování veřejného mínění ohledně budoucí federace Izraele a Palestiny", df: 5, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "FEDERACE", result: "Propagační kampaně ze strany Britů vyvolávají odpor Izraelců.", targetDelegation: "flag-il" },
+    { description: "Inspekce vodní elektrárny mezi Indií a Pakistánem", df: 2, visibility: 'public', type: 'main', delegate: "Harold Cross", keyword: "CHANEB", result: "Vše je v pořádku, stavba ja na dobré cestě.", targetDelegation: "flag-in" },
+    { description: "Podpora integrace Palestinských uprchlíků v Sýrii", df: 2, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "Současná situace v Sýrii je na hraně občanské války, tudíž se není příliš kam integrovat. Ale můžete ovlivnit, na čí stranu se přidají.", targetDelegation: "flag-sy" }
+  ]
+  secondaryDoneActions: Action[] = [
+    { description: "Výstavba přístavu v Gaze", df: 5, visibility: 'public', type: 'support', delegate: "Harold Cross", keyword: "PŘÍSTAV", result: "Vybudováno", targetDelegation: "flag-ps" },
+    { description: 'Kampaň v UK: "Proč mít euro je super"', df: 10, visibility: 'public', type: 'support', delegate: "Daniel Appleby", keyword: "EURO", result: "Britové jsou nakloněni přechodu na Euro.", targetDelegation: "gb" },
+    { description: "Sleva na dodání stíhaček Eurofigter do SA", df: 0, visibility: 'public', type: 'other', delegate: "Daniel Appleby", keyword: "", result: "OK", targetDelegation: "flag-sa" },
+    { description: "Zakázka od firmy BAS v oboru tězké strojírenství", df: 0, visibility: 'public', type: 'economic', delegate: "Daniel Appleby", keyword: "", result: "Smlouvy byly uzavřeny", targetDelegation: "flag-sa" }
   ]
   sent = false
   availableDf = 60
@@ -46,22 +65,56 @@ export class AppComponent {
 
   addSecondaryAction() {
     this.secondaryActions.push(
-      {df: 0, visibility: 'public', type: 'support'}
+      { description: "", df: 0, visibility: 'public', type: 'support', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" }
     )
   }
 
   send() {
     this.sent = true;
   }
+
+  formatDoneActionDescription(action: Action) {
+    let description = action.description
+    if (!isBlank(action.keyword)) {
+      description += " (" + action.keyword + ")"
+    }
+    return description
+  }
+
+  formatDoneActionDetails(action: Action) {
+    let details = findRowName(this.countries, action.targetDelegation) + ", "
+    if (action.df > 0) {
+      details += action.df + " DF, "
+    }
+    if (action.type != "main") {
+      details += findRowName(this.actionTypes, action.type) + ", "
+    }
+    details += findRowName(this.visibilities, action.visibility) + ", "
+    details += action.delegate
+    return details
+  }
+}
+
+function isBlank(str) {
+  return (!str || /^\s*$/.test(str));
+}
+
+function findRowName(rows: SelectRow[], value: string) {
+  return rows.find((row) => row.value == value).name
 }
 
 export interface SelectRow {
-  value: string; 
+  value: string;
   name: string;
 }
 
 export interface Action {
+  description: string,
   df: number;
   visibility: string;
   type: string;
+  delegate: string,
+  keyword: string,
+  result: string,
+  targetDelegation: string,
 }
