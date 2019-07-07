@@ -20,14 +20,14 @@
       <p>Primární akce:</p>
       <mat-card *ngFor="let action of primaryDoneActions" class="action">
           <p>{{formatDoneActionDescription(action)}}</p>
-          <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}<span *ngIf="action.delegate=='Daniel Appleby'">★</span></p>
           <p>Odpověď vlády: <strong>{{action.result}}</strong></p>
+          <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}<span *ngIf="action.delegate=='Daniel Appleby'">★</span></p>
       </mat-card>
       <p>Sekundární akce:</p>
       <mat-card *ngFor="let action of secondaryDoneActions" class="action">
           <p>{{formatDoneActionDescription(action)}}</p>
-          <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}<span *ngIf="action.delegate=='Daniel Appleby'">★</span></p>
           <p>Odpověď vlády: <strong>{{action.result}}</strong></p>
+          <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}<span *ngIf="action.delegate=='Daniel Appleby'">★</span></p>
       </mat-card>
     </div>
   </mat-tab>
