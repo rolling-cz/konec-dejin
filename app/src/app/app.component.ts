@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { stripGeneratedFileSuffix } from '@angular/compiler/src/aot/util';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,11 @@ import { stripGeneratedFileSuffix } from '@angular/compiler/src/aot/util';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor(public auth: AngularFireAuth) {
+  }
+
+  title = 'Komunikace s vládou';
   // https://afeld.github.io/emoji-css/
   countries: SelectRow[] = [
     { value: 'flag-af', name: 'Afgánistán' },
@@ -92,6 +97,10 @@ export class AppComponent {
     details += findRowName(this.visibilities, action.visibility) + ", "
     details += action.delegate
     return details
+  }
+
+  logout() {
+    this.auth.auth.signOut();
   }
 }
 
