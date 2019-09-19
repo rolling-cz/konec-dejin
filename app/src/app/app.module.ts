@@ -9,13 +9,25 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoginNavigationComponent } from './login-navigation/login-navigation.component';
+import { RoundsComponent } from './rounds/rounds.component';
+import { PastRoundComponent } from './past-round/past-round.component';
+import { PresentRoundComponent } from './present-round/present-round.component';
+import { FutureRoundComponent } from './future-round/future-round.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginNavigationComponent,
+    RoundsComponent,
+    PastRoundComponent,
+    PresentRoundComponent,
+    FutureRoundComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,

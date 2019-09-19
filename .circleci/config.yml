@@ -36,7 +36,7 @@ jobs:
     deploy:
         docker:
             - image: circleci/node:10.16.0-browsers-legacy
-        working_directory: ~/konec-dejin/app
+        working_directory: ~/konec-dejin
         steps:
             - run:
                 name: Show current branch

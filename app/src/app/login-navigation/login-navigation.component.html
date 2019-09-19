@@ -1,0 +1,27 @@
+<div *ngIf="showSignedIn">
+    <mat-toolbar color="primary">
+        <span>{{title}}</span>
+        <span class="fill-remaining-space"></span>
+        <span class="name">{{ delegateName }}</span>
+        <button mat-icon-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar>
+</div>
+<div *ngIf="showLogin">
+    <mat-toolbar color="primary">
+        <span>{{title}}</span>
+    </mat-toolbar>
+
+    <div class="tab-content">
+        <mat-card>
+            <mat-form-field>
+                <input matInput placeholder="Váš tajný kód" type="password" id="password" #password>
+            </mat-form-field>
+            <br />
+            <button mat-raised-button color="accent" (click)="login(password)"
+                [disabled]="loading">{{loading ? "Ověřuji…" : "Ověřit identitu"}}</button>
+            <p class="error" *ngIf="passwordError">Neplatná identita, zkuste to znovu.</p>
+        </mat-card>
+    </div>
+</div>
