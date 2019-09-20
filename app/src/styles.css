@@ -5,10 +5,6 @@ body { margin: 0;
      font-family: Roboto, "Helvetica Neue", sans-serif;
      background-color: #F5F5F5;
 }
-
-.tab-content {
-    padding: 1em;
-}
 .error {
     color: #f44336;
 }
@@ -16,4 +12,8 @@ body { margin: 0;
     /* This fills the remaining space, by using flexbox. 
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
+}
+
+.action {
+    margin-bottom: 1em;
 }

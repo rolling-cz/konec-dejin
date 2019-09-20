@@ -23,7 +23,7 @@ export class RoundsComponent implements OnInit {
         snaps.map(snap => {
           let val = snap.payload.val()
           let suffix = (val["tense"] == "past") ? " (proběhlo)" : (val["tense"] == "present") ? " (aktuální)" : ""
-          return new Round(snap.key, val["name"] + suffix)
+          return new Round(snap.key, val["name"] + suffix, val["tense"])
         }
         )), map(rounds => {
           for (let i = 0; i < rounds.length; i++) {

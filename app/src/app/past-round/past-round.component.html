@@ -1,27 +1,25 @@
-<div class="tab-content">
-    <mat-card class="action">
-        <p><i class="em-svg em-gb"></i> Velká Británie, vedoucí delegace: Daniel Appleby</p>
-        <p>Deadline odeslání depeše: pátek 20:00</p>
-        <p>Použito: 41 DF z 61 DF</p>
-    </mat-card>
-    <mat-card class="action">
-        <p>Důležitá sdělení vlády:</p>
-        <p><strong>Nízké ceny ropy pomohly mírně oživit naši ekonomiku. Finanční krize a krize Eura však dále
-                poškozuje naši
-                ekonomiku</strong></p>
-    </mat-card>
-    <p>Primární akce:</p>
-    <mat-card *ngFor="let action of primaryDoneActions" class="action">
-        <p>{{formatDoneActionDescription(action)}}</p>
-        <p>Odpověď vlády: <strong>{{action.result}}</strong></p>
-        <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}<span
-                *ngIf="action.delegate=='Daniel Appleby'">★</span></p>
-    </mat-card>
-    <p>Sekundární akce:</p>
-    <mat-card *ngFor="let action of secondaryDoneActions" class="action">
-        <p>{{formatDoneActionDescription(action)}}</p>
-        <p>Odpověď vlády: <strong>{{action.result}}</strong></p>
-        <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}<span
-                *ngIf="action.delegate=='Daniel Appleby'">★</span></p>
-    </mat-card>
-</div>
+<mat-card class="action">
+    <p><i class="em-svg em-gb"></i> Velká Británie, vedoucí delegace: Daniel Appleby</p>
+    <p>Deadline odeslání depeše: pátek 20:00</p>
+    <p>Použito: 41 DF z 61 DF</p>
+</mat-card>
+<mat-card class="action">
+    <p>Důležitá sdělení vlády:</p>
+    <p><strong>Nízké ceny ropy pomohly mírně oživit naši ekonomiku. Finanční krize a krize Eura však dále
+            poškozuje naši
+            ekonomiku</strong></p>
+</mat-card>
+<p>Primární akce:</p>
+<mat-card *ngFor="let action of primaryDoneActions" class="action">
+    <p>{{formatDoneActionDescription(action)}}</p>
+    <p>Odpověď vlády: <strong>{{action.result}}</strong></p>
+    <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}<span
+            *ngIf="action.delegate=='Daniel Appleby'">★</span></p>
+</mat-card>
+<p>Sekundární akce:</p>
+<mat-card *ngFor="let action of secondaryDoneActions" class="action">
+    <p>{{formatDoneActionDescription(action)}}</p>
+    <p>Odpověď vlády: <strong>{{action.result}}</strong></p>
+    <p><i class="em-svg em-{{action.targetDelegation}}"></i> {{formatDoneActionDetails(action)}}<span
+            *ngIf="action.delegate=='Daniel Appleby'">★</span></p>
+</mat-card>
