@@ -50,8 +50,8 @@ jobs:
                 name: Install Firebase
                 command: sudo npm install -g firebase-tools
             - run:
-                name: Show current directory
-                command: pwd      
+                name: Show contents of current directory
+                command: ls -al     
             - run:
                 name: Deploy Master to Firebase
                 command: firebase deploy --token=$FIREBASE_TOKEN
