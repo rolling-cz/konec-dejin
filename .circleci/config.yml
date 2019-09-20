@@ -12,44 +12,19 @@ jobs:
                 command: echo ${CIRCLE_BRANCH} 
             - run:
                 name: Show current directory
-                command: pwd
-            - run:
-                name: Go to app
-                command: cd app    
-            - run:
-                name: Show current directory
                 command: pwd    
-            - restore_cache:
-                keys:
-                    - v1-dependencies-{{ checksum "package.json" }}
             - run:
                 name: Install dependencies
-                command: npm install
-            - save_cache:
-                key: v1-dependencies-{{ checksum "package.json" }}
-                paths:
-                    - node_modules
+                command: cd app && npm install
             - run:
                 name: Building
-                command: npm run build-prod
-            - run:
-                name: Go to functions
-                command: cd ../functions
-            - run:
-                name: Show current directory
-                command: pwd    
+                command: cd app && npm run build-prod  
             - run:
                 name: Install dependencies
-                command: npm install
+                command: cd functions && npm install
             - run:
                 name: Install Firebase
-                command: sudo npm install -g firebase-tools
-            - run:
-                name: Go to root
-                command: cd ..
-            - run:
-                name: Show current directory
-                command: pwd   
+                command: sudo npm install -g firebase-tools 
             - run:
                 name: Deploy Master to Firebase
                 command: firebase deploy --token=$FIREBASE_TOKEN       
