@@ -13,3 +13,8 @@ This document defines constants used in database.
         - public (visible to the world)
         - covert (visible only in a delegation)
         - private (visible only for a delegate & orgs)
+- rounds/$roundId
+    - tense
+        - past
+        - present
+        - future

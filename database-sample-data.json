@@ -46,7 +46,8 @@
   "rounds" : {
     "round_1" : {
       "deadline" : 1457015264428,
-      "name" : "1. kolo - pátek večer"
+      "name" : "1. kolo",
+      "tense": "past"
     }
   }
 }
