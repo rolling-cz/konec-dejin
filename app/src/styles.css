@@ -17,3 +17,6 @@ body { margin: 0;
 .action {
     margin-bottom: 1em;
 }
+.tab-content {
+    padding: 1em;
+}
