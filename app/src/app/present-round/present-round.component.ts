@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Action, COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../model';
+import { Action } from '../model';
+import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../config';
 
 @Component({
   selector: 'app-present-round',
@@ -23,9 +24,9 @@ export class PresentRoundComponent implements OnInit {
   sent = false
   availableDf = 60
   remainingDf = this.availableDf
-  countries = COUNTRIES()
-  visibilities = VISIBILITIES()
-  actionTypes = ACTION_TYPES()
+  countries = COUNTRIES
+  visibilities = VISIBILITIES
+  actionTypes = ACTION_TYPES
 
   calculateRemainingDf(action: Action, newValue: number) {
     action.df = newValue

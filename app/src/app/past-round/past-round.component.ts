@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Action, SelectRow, COUNTRIES, ACTION_TYPES, VISIBILITIES } from '../model';
+import { Action, SelectRow } from '../model';
+import { COUNTRIES, ACTION_TYPES, VISIBILITIES } from "../config"
 
 @Component({
   selector: 'app-past-round',
@@ -36,14 +37,14 @@ export class PastRoundComponent implements OnInit {
   }
 
   formatDoneActionDetails(action: Action) {
-    let details = findRowName(COUNTRIES(), action.targetDelegation) + ", "
+    let details = findRowName(COUNTRIES, action.targetDelegation) + ", "
     if (action.df > 0) {
       details += action.df + " DF, "
     }
     if (action.type != "main") {
-      details += findRowName(ACTION_TYPES(), action.type) + ", "
+      details += findRowName(ACTION_TYPES, action.type) + ", "
     }
-    details += findRowName(VISIBILITIES(), action.visibility) + ", "
+    details += findRowName(VISIBILITIES, action.visibility) + ", "
     details += action.delegate
     return details
   }
