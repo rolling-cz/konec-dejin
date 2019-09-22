@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Action } from '../model';
+import { Component, OnInit, Input } from '@angular/core';
+import { Action, DelegateRound } from '../model';
 import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../config';
+import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-present-round',
@@ -9,10 +13,25 @@ import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../config';
 })
 export class PresentRoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(public db: AngularFireDatabase, public auth: AngularFireAuth) { }
+
+  @Input()
+  roundId: string
+
+  delegationId: Observable<string>
+  delegateId: string
 
   ngOnInit() {
+    this.delegateId = this.auth.auth.currentUser.uid
+    console.log("delegateRounds/" + this.delegateId + "/" + this.roundId)
+    this.delegationId = this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId).valueChanges().pipe(
+      map(val => {
+        console.log("id="+val["delegation"]);
+        return val["delegation"]
+      })
+    )
   }
+
   primaryActions: Action[] = [
     { description: "", df: 0, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" },
     { description: "", df: 0, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" },

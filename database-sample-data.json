@@ -18,8 +18,7 @@
     "delegate_id_1" : {
       "round_1" : {
         "availableMainActions" : 3,
-        "delegation" : "delegation_id_1",
-        "leader" : true
+        "delegation" : "delegation_id_1"
       }
     }
   },
@@ -32,6 +31,7 @@
   "delegationRounds" : {
     "delegation_1" : {
       "round_1" : {
+        "leader": "delegate_id_1",
         "availableDf" : 200,
         "message" : "Nízké ceny ropy pomohly mírně oživit naši ekonomiku. Finanční krize a krize Eura však dále poškozuje naši ekonomiku"
       }
@@ -39,7 +39,7 @@
   },
   "delegations" : {
     "delegation_id_1" : {
-      "flag" : "🇬🇧",
+      "country" : "gb",
       "name" : "Velká Británie"
     }
   },

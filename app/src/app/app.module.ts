@@ -15,6 +15,7 @@ import { PastRoundComponent } from './past-round/past-round.component';
 import { PresentRoundComponent } from './present-round/present-round.component';
 import { FutureRoundComponent } from './future-round/future-round.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RoundInfoComponent } from './round-info/round-info.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     RoundsComponent,
     PastRoundComponent,
     PresentRoundComponent,
-    FutureRoundComponent
+    FutureRoundComponent,
+    RoundInfoComponent
   ],
   imports: [
     BrowserModule,

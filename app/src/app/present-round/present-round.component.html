@@ -1,6 +1,5 @@
 <mat-card>
-  <p><i class="em-svg em-gb"></i> Velká Británie, vedoucí delegace </p>
-  <p>Deadline odeslání depeše: <strong>sobota 15:00</strong></p>
+  <app-round-info [roundId]="roundId" [delegationId]="delegationId|async" *ngIf="delegationId|async"></app-round-info>
   <p>K dispozici: <strong>{{remainingDf}} DF</strong> z {{availableDf}} DF</p>
 </mat-card>
 <p>Primární akce:</p>

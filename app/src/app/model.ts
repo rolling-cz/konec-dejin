@@ -3,8 +3,8 @@ export interface SignInResponse {
     token: string;
 }
 
-export class Round {
-    constructor(public id: string, public name: string, public tense: string) { }
+export interface Round {
+    id: string, name: string, tense: string
 }
 
 export interface Action {
@@ -21,4 +21,17 @@ export interface Action {
 export interface SelectRow {
     value: string;
     name: string;
+}
+
+export interface DelegateRound {
+    availableMainActions: number,
+    delegationId: string
+}
+
+export interface DelegationRoundInfo {
+    name: string,
+    country: string,
+    deadline: string,
+    leader: string,
+    presentRound: boolean
 }

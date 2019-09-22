@@ -2,7 +2,7 @@
     <mat-tab *ngFor="let round of rounds | async" label="{{round.name}}">
         <div class="tab-content">
             <app-past-round *ngIf="round.tense == 'past'"></app-past-round>
-            <app-present-round *ngIf="round.tense == 'present'"></app-present-round>
+            <app-present-round *ngIf="round.tense == 'present'" [roundId]="round.id"></app-present-round>
             <app-future-round *ngIf="round.tense == 'future'"></app-future-round>
         </div>
     </mat-tab>
