@@ -23,10 +23,9 @@ export class PresentRoundComponent implements OnInit {
 
   ngOnInit() {
     this.delegateId = this.auth.auth.currentUser.uid
-    console.log("delegateRounds/" + this.delegateId + "/" + this.roundId)
     this.delegationId = this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId).valueChanges().pipe(
       map(val => {
-        console.log("id="+val["delegation"]);
+        console.log("mapping id in parent="+val["delegation"]);
         return val["delegation"]
       })
     )

@@ -17,12 +17,15 @@ export class RoundInfoComponent implements OnInit {
   roundId: String
 
   @Input()
-  delegationId: String
+  delegationId: Observable<String>
 
-  info: Observable<DelegationRoundInfo>
+  //info: Observable<DelegationRoundInfo>
 
   ngOnInit() {
-    console.log("roundId=" + this.roundId + ", delegationId=" + this.delegationId)
+    this.delegationId.subscribe(id => {
+      console.log("id=" + id)
+    })
+    /*
     this.info = combineLatest<DelegationRoundInfo>(
       this.db.object("rounds/" + this.roundId).valueChanges(),
       this.db.object("delegations/" + this.delegationId).valueChanges(),
@@ -30,7 +33,7 @@ export class RoundInfoComponent implements OnInit {
       (round, delegation, delegationRound) => {
         return { name: delegation["name"], country: delegation["country"], deadline: round["deadline"], leader: delegationRound["leader"], presentRound: round["tense"] == "present" }
       }
-    )
+    )*/
   }
 
 }
