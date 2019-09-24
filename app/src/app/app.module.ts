@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,8 @@ import { PresentRoundComponent } from './present-round/present-round.component';
 import { FutureRoundComponent } from './future-round/future-round.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RoundInfoComponent } from './round-info/round-info.component';
+import { registerLocaleData } from '@angular/common';
+import localeCs from '@angular/common/locales/cs';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { RoundInfoComponent } from './round-info/round-info.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'cs' } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+registerLocaleData(localeCs, 'cs');

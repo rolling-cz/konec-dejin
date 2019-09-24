@@ -1,7 +1,7 @@
 <mat-tab-group [selectedIndex]="selectedTab">
     <mat-tab *ngFor="let round of rounds | async" label="{{round.name}}">
         <div class="tab-content">
-            <app-past-round *ngIf="round.tense == 'past'"></app-past-round>
+            <app-past-round *ngIf="round.tense == 'past'" [roundId]="round.id"></app-past-round>
             <app-present-round *ngIf="round.tense == 'present'" [roundId]="round.id"></app-present-round>
             <app-future-round *ngIf="round.tense == 'future'"></app-future-round>
         </div>

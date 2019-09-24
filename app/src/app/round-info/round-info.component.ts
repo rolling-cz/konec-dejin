@@ -3,6 +3,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { DelegationRoundInfo } from '../model';
 import { flatMap } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-round-info',
@@ -11,29 +12,28 @@ import { flatMap } from 'rxjs/operators';
 })
 export class RoundInfoComponent implements OnInit {
 
-  constructor(public db: AngularFireDatabase) { }
+  constructor(public db: AngularFireDatabase, public auth: AngularFireAuth) { }
 
   @Input()
-  roundId: String
+  roundId: string
 
-  @Input()
-  delegationId: Observable<String>
-
-  //info: Observable<DelegationRoundInfo>
+  roundInfo: Observable<DelegationRoundInfo>
 
   ngOnInit() {
-    this.delegationId.subscribe(id => {
-      console.log("id=" + id)
-    })
-    /*
-    this.info = combineLatest<DelegationRoundInfo>(
-      this.db.object("rounds/" + this.roundId).valueChanges(),
-      this.db.object("delegations/" + this.delegationId).valueChanges(),
-      this.db.object("delegationRounds/" + this.delegationId + "/" + this.roundId).valueChanges(),
-      (round, delegation, delegationRound) => {
-        return { name: delegation["name"], country: delegation["country"], deadline: round["deadline"], leader: delegationRound["leader"], presentRound: round["tense"] == "present" }
+    this.roundInfo = this.db.object("delegateRounds/" + this.auth.auth.currentUser.uid + "/" + this.roundId + "/delegation").valueChanges().pipe(
+      flatMap((delegationId, _) => {
+        return combineLatest<DelegationRoundInfo>(
+          this.db.object("rounds/" + this.roundId).valueChanges(),
+          this.db.object("delegations/" + delegationId).valueChanges(),
+          this.db.object("delegationRounds/" + delegationId + "/" + this.roundId + "/leader").valueChanges().pipe(
+            flatMap(leaderId => this.db.object("delegates/" + leaderId + "/name").valueChanges())
+          ),
+          (round, delegation, leaderName) => {
+            return { name: delegation["name"], country: delegation["country"], deadline: round["deadline"], leader: leaderName, presentRound: round["tense"] == "present" }
+          }
+        )
       }
-    )*/
+      ))
   }
 
 }

@@ -1,3 +1,6 @@
-<!--p><i class="em-svg {{ info.country }}"></i> {{ info.name }}, vedoucí delegace: {{ info.leader }}</p>
-<p *ngIf="info.presentRound">Deadline odeslání depeše: <strong>{{ info.deadline }}</strong></p>
-<p *ngIf="!info.presentRound">Deadline odeslání depeše: {{ info.deadline }}</p>-->
+<ng-container *ngIf="(roundInfo | async) as info">
+    <p class="first"><i class="em-svg em-{{ info.country }}"></i> {{ info.name }}, vedoucí delegace: {{ info.leader }}
+    </p>
+    <p *ngIf="info.presentRound">Deadline odeslání depeše: <strong>{{ info.deadline | date:'EEEE HH:mm' }}</strong></p>
+    <p *ngIf="!info.presentRound">Deadline odeslání depeše: {{ info.deadline | date:'EEEE HH:mm' }}</p>
+</ng-container>

@@ -18,17 +18,7 @@ export class PresentRoundComponent implements OnInit {
   @Input()
   roundId: string
 
-  delegationId: Observable<string>
-  delegateId: string
-
   ngOnInit() {
-    this.delegateId = this.auth.auth.currentUser.uid
-    this.delegationId = this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId).valueChanges().pipe(
-      map(val => {
-        console.log("mapping id in parent="+val["delegation"]);
-        return val["delegation"]
-      })
-    )
   }
 
   primaryActions: Action[] = [

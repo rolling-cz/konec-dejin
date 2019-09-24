@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Action, SelectRow } from '../model';
 import { COUNTRIES, ACTION_TYPES, VISIBILITIES } from "../config"
 
@@ -10,6 +10,9 @@ import { COUNTRIES, ACTION_TYPES, VISIBILITIES } from "../config"
 export class PastRoundComponent implements OnInit {
 
   constructor() { }
+
+  @Input()
+  roundId: string
 
   primaryDoneActions: Action[] = [
     { description: "Sabotáž íránského jaderného programu", df: 12, visibility: 'covert', type: 'main', delegate: "Daniel Appleby", keyword: "OHEŇ V DÍŘE", result: "Naše obrovská a mezinárodně koordinovaná akce nepřinesla žádané ovoce. Povedlo se nám sice vyhodit do vzduchu kompletní zařízení Íránu - ale už vesměs prázdné a navíc za cenu rozsáhlé zpravodajské akce, kterou asi dokáže někdo zpětně dořešit.", targetDelegation: "flag-ir" },
