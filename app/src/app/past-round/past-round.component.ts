@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Action, SelectRow } from '../model';
 import { COUNTRIES, ACTION_TYPES, VISIBILITIES } from "../config"
+import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-past-round',
@@ -9,7 +12,7 @@ import { COUNTRIES, ACTION_TYPES, VISIBILITIES } from "../config"
 })
 export class PastRoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(public db: AngularFireDatabase, public auth: AngularFireAuth) { }
 
   @Input()
   roundId: string

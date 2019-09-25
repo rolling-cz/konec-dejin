@@ -28,10 +28,12 @@ export interface DelegateRound {
     delegationId: string
 }
 
-export interface DelegationRoundInfo {
+export interface RoundInfo {
     name: string,
     country: string,
     deadline: string,
     leader: string,
-    presentRound: boolean
+    presentRound: boolean,
+    availableDf: number,
+    message: string
 }

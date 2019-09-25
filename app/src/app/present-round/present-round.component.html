@@ -1,7 +1,4 @@
-<mat-card>
-  <app-round-info [roundId]="roundId"></app-round-info>
-  <p>K dispozici: <strong>{{remainingDf}} DF</strong> z {{availableDf}} DF</p>
-</mat-card>
+<app-round-info [roundId]="roundId"></app-round-info>
 <p>Primární akce:</p>
 <mat-card *ngFor="let action of primaryActions" class="action">
   <mat-form-field class="stretch">

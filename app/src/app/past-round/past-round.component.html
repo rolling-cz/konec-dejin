@@ -1,13 +1,4 @@
-<mat-card class="action">
-    <app-round-info [roundId]="roundId"></app-round-info>
-    <p>Použito: 41 DF z 61 DF</p>
-</mat-card>
-<mat-card class="action">
-    <p>Důležitá sdělení vlády:</p>
-    <p><strong>Nízké ceny ropy pomohly mírně oživit naši ekonomiku. Finanční krize a krize Eura však dále
-            poškozuje naši
-            ekonomiku</strong></p>
-</mat-card>
+<app-round-info [roundId]="roundId"></app-round-info>
 <p>Primární akce:</p>
 <mat-card *ngFor="let action of primaryDoneActions" class="action">
     <p>{{formatDoneActionDescription(action)}}</p>
