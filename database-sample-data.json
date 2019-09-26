@@ -8,7 +8,7 @@
         "keyword" : "OMEGA",
         "result" : "Obrovský úspěch! Povedlo se nám Zarkávího zahnat do rohu a protože neměl zjevně žádnou podporu...dostali jsme ho. Máme ho jako zajatce u našich hochů v Iráku. Co dál?",
         "df" : 10,
-        "targetDelegation" : "delegation_id_2",
+        "targetCountry" : "ir",
         "type" : "support",
         "visibility" : "secret"
       }
@@ -17,7 +17,6 @@
   "delegateRounds" : {
     "delegate_id_1" : {
       "round_1" : {
-        "availableMainActions" : 3,
         "delegation" : "delegation_id_1"
       }
     }

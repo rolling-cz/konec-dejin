@@ -1,0 +1,42 @@
+<mat-card class="action">
+    <form [formGroup]="actionForm" appFireForm path="actions/round_1/action_id_1" (stateChange)="changeHandler($event)">
+        <mat-form-field class="stretch">
+            <input matInput placeholder="Popis akce" type="text" formControlName="description">
+        </mat-form-field>
+        <mat-form-field class="df">
+            <input matInput placeholder="DF" type="number" formControlName="df">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <input matInput placeholder="Klíčové slovo" type="text" formControlName="keyword">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Cílová země</mat-label>
+            <mat-select formControlName="targetCountry">
+                <mat-option *ngFor="let country of countries" [value]="country.value">
+                    <i class="em-svg em-{{country.value}}"></i> {{country.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Viditelnost</mat-label>
+            <mat-select formControlName="visibility">
+                <mat-option *ngFor="let visibility of visibilities" value="{{visibility.value}}">
+                    {{visibility.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field class="type" *ngIf="actionForm.get('type').value!='main'">
+            <mat-label>Typ</mat-label>
+            <mat-select formControlName="type">
+                <mat-option *ngFor="let type of actionTypes" value="{{type.value}}">
+                    {{type.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <mat-card-footer class="state mat-small">{{state}}</mat-card-footer>
+</mat-card>

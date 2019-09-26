@@ -18,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RoundInfoComponent } from './round-info/round-info.component';
 import { registerLocaleData } from '@angular/common';
 import localeCs from '@angular/common/locales/cs';
+import { FireFormDirective } from './fire-form.directive';
+import { ActionFormComponent } from './action-form/action-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import localeCs from '@angular/common/locales/cs';
     PastRoundComponent,
     PresentRoundComponent,
     FutureRoundComponent,
-    RoundInfoComponent
+    RoundInfoComponent,
+    FireFormDirective,
+    ActionFormComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,8 @@ import localeCs from '@angular/common/locales/cs';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'cs' } ],
   bootstrap: [AppComponent]

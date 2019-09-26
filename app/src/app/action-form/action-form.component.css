@@ -1,0 +1,15 @@
+.stretch {
+    width: 100%;
+}
+.df {
+    width: 4em;
+}
+.type {
+    width: 8em;
+}
+.state {
+    text-align: right;
+    color: grey;
+    padding-bottom: 3px;
+    padding-right: 5px;
+}
