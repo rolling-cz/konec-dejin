@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../config';
 
@@ -18,6 +18,9 @@ export class ActionFormComponent implements OnInit {
   countries = COUNTRIES
   visibilities = VISIBILITIES
   actionTypes = ACTION_TYPES
+
+  @Input()
+  path: string
 
   ngOnInit() {
     this.actionForm = this.fb.group({

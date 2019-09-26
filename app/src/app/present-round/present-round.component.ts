@@ -13,40 +13,34 @@ import { map } from 'rxjs/operators';
 })
 export class PresentRoundComponent implements OnInit {
 
-  constructor(public db: AngularFireDatabase, public auth: AngularFireAuth) { }
+  constructor(public db: AngularFireDatabase, public auth: AngularFireAuth) {
+    this.delegateId = this.auth.auth.currentUser.uid
+  }
 
   @Input()
   roundId: string
 
-  ngOnInit() {
-  }
-
-  primaryActions: Action[] = [
-    { description: "", df: 0, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" },
-    { description: "", df: 0, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" },
-    { description: "", df: 0, visibility: 'public', type: 'main', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" }
-  ]
-  secondaryActions: Action[] = [
-    { description: "", df: 0, visibility: 'public', type: 'support', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" }
-  ]
+  primaryActionPaths: Observable<string[]>
+  secondaryActionPaths: Observable<string[]>
   sent = false
-  availableDf = 60
-  remainingDf = this.availableDf
-  countries = COUNTRIES
-  visibilities = VISIBILITIES
-  actionTypes = ACTION_TYPES
+  delegateId: string
 
-  calculateRemainingDf(action: Action, newValue: number) {
-    action.df = newValue
-    let primarySum = this.primaryActions.reduce((sum, current) => sum + current.df, 0)
-    let secondarySum = this.secondaryActions.reduce((sum, current) => sum + current.df, 0)
-    this.remainingDf = this.availableDf - primarySum - secondarySum
+  ngOnInit() {
+    // TODO: get delegation id here and flatmap it with actions
+    let delegateActions = this.db.list("actions/" + this.roundId, ref => ref.orderByChild("delegate").equalTo(this.delegateId)).snapshotChanges()
+    this.primaryActionPaths = delegateActions.pipe(map(snapshots => {
+      return snapshots.filter(snapshot => snapshot.payload.val()["type"] == "main").map(snapshot => "actions/" + this.roundId + "/" + snapshot.key)
+    }))
+    this.secondaryActionPaths = delegateActions.pipe(map(snapshots => {
+      return snapshots.filter(snapshot => snapshot.payload.val()["type"] != "main").map(snapshot => "actions/" + this.roundId + "/" + snapshot.key)
+    }))
   }
 
   addSecondaryAction() {
-    this.secondaryActions.push(
-      { description: "", df: 0, visibility: 'public', type: 'support', delegate: "Daniel Appleby", keyword: "", result: "", targetDelegation: "" }
-    )
+    this.db.list("actions/"+this.roundId).push(<Action> {
+      delegate : this.delegateId,
+      delegation: 
+    })
   }
 
   send() {

@@ -13,9 +13,10 @@ export interface Action {
     visibility: string;
     type: string;
     delegate: string,
+    delegation: string,
     keyword: string,
     result: string,
-    targetDelegation: string,
+    targetCountry: string,
 }
 
 export interface SelectRow {

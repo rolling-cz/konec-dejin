@@ -1,5 +1,5 @@
 <mat-card class="action">
-    <form [formGroup]="actionForm" appFireForm path="actions/round_1/action_id_1" (stateChange)="changeHandler($event)">
+    <form [formGroup]="actionForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
         <mat-form-field class="stretch">
             <input matInput placeholder="Popis akce" type="text" formControlName="description">
         </mat-form-field>
