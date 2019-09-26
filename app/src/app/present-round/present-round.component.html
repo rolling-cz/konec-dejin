@@ -10,8 +10,10 @@
 <br />
 <br />
 <br />
-<button mat-raised-button color="accent" *ngIf="!sent" (click)="send()">Odeslat depeši</button>
-<strong *ngIf="sent">Depeše odeslána</strong>
+<button mat-raised-button color="accent" *ngIf="!(markedAsSent | async) else sent" (click)="send()">Odeslat depeši</button>
+<ng-template #sent>
+  <strong>Depeše odeslána</strong>
+</ng-template>
 <br />
 <br />
 (Všechny změny v depeši se ukládají automaticky. Kliknutím na "Odeslat depeši" dáváte najevo, že depeše je

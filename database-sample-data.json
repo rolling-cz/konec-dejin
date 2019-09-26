@@ -17,6 +17,7 @@
   "delegateRounds" : {
     "delegate_id_1" : {
       "round_1" : {
+        "markedAsSent" : false,
         "delegation" : "delegation_id_1"
       }
     }

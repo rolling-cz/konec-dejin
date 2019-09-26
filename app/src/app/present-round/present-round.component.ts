@@ -22,7 +22,7 @@ export class PresentRoundComponent implements OnInit {
 
   primaryActionPaths: Observable<string[]>
   secondaryActionPaths: Observable<string[]>
-  sent = false
+  markedAsSent: Observable<boolean>
   delegateId: string
   delegationId: string
 
@@ -39,6 +39,11 @@ export class PresentRoundComponent implements OnInit {
     this.secondaryActionPaths = delegateActions.pipe(map(snapshots => {
       return snapshots.filter(snapshot => snapshot.payload.val()["type"] != "main").map(snapshot => "actions/" + this.roundId + "/" + snapshot.key)
     }))
+    this.markedAsSent = this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId + "/markedAsSent").valueChanges().pipe(
+      map(val => {
+        return val as boolean
+      })
+    )
   }
 
   addSecondaryAction() {
@@ -51,6 +56,6 @@ export class PresentRoundComponent implements OnInit {
   }
 
   send() {
-    this.sent = true;
+    this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId + "/markedAsSent").set(true)
   }
 }
