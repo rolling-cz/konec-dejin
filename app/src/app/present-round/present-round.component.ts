@@ -4,7 +4,7 @@ import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../config';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
+import { map, flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-present-round',
@@ -24,10 +24,15 @@ export class PresentRoundComponent implements OnInit {
   secondaryActionPaths: Observable<string[]>
   sent = false
   delegateId: string
+  delegationId: string
 
   ngOnInit() {
-    // TODO: get delegation id here and flatmap it with actions
-    let delegateActions = this.db.list("actions/" + this.roundId, ref => ref.orderByChild("delegate").equalTo(this.delegateId)).snapshotChanges()
+    let delegateActions = this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId + "/delegation").valueChanges().pipe(
+      flatMap((delegationId, _) => {
+        this.delegationId = delegationId as string
+        return this.db.list("actions/" + this.roundId, ref => ref.orderByChild("delegate").equalTo(this.delegateId)).snapshotChanges()
+      })
+    )
     this.primaryActionPaths = delegateActions.pipe(map(snapshots => {
       return snapshots.filter(snapshot => snapshot.payload.val()["type"] == "main").map(snapshot => "actions/" + this.roundId + "/" + snapshot.key)
     }))
@@ -37,9 +42,11 @@ export class PresentRoundComponent implements OnInit {
   }
 
   addSecondaryAction() {
-    this.db.list("actions/"+this.roundId).push(<Action> {
-      delegate : this.delegateId,
-      delegation: 
+    this.db.list("actions/" + this.roundId).push(<Action>{
+      delegate: this.delegateId,
+      delegation: this.delegationId,
+      type: "support",
+      visibility: "public"
     })
   }
 
