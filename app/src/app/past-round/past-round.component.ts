@@ -15,7 +15,7 @@ export class PastRoundComponent implements OnInit {
 
   constructor(public db: AngularFireDatabase, public auth: AngularFireAuth) {
     this.delegateId = this.auth.auth.currentUser.uid
-   }
+  }
 
   @Input()
   roundId: string
@@ -55,7 +55,6 @@ export class PastRoundComponent implements OnInit {
       details += findRowName(ACTION_TYPES, action.type) + ", "
     }
     details += findRowName(VISIBILITIES, action.visibility) + ", "
-    details += action.delegate
     return details
   }
 

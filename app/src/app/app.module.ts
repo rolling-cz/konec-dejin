@@ -21,6 +21,7 @@ import localeCs from '@angular/common/locales/cs';
 import { FireFormDirective } from './fire-form.directive';
 import { ActionFormComponent } from './action-form/action-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DelegateNameComponent } from './delegate-name/delegate-name.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FutureRoundComponent,
     RoundInfoComponent,
     FireFormDirective,
-    ActionFormComponent
+    ActionFormComponent,
+    DelegateNameComponent
   ],
   imports: [
     BrowserModule,
