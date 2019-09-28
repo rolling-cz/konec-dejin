@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Action, DelegateRound } from '../model';
-import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../config';
+import { Action } from '../model';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
