@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Action, SelectRow } from '../model';
 import { COUNTRIES, ACTION_TYPES, VISIBILITIES } from "../config"
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { flatMap, map } from 'rxjs/operators';
+import { flatMap, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-past-round',
@@ -23,11 +23,17 @@ export class PastRoundComponent implements OnInit {
   delegateId: string
   primaryActions: Observable<Action[]>
   secondaryActions: Observable<Action[]>
+  spentDf = new BehaviorSubject<number>(0)
 
   ngOnInit() {
     let delegationActions = this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId + "/delegation").valueChanges().pipe(
       flatMap((delegationId, _) => {
-        return this.db.list("actions/" + this.roundId, ref => ref.orderByChild("delegation").equalTo(delegationId as string)).valueChanges()
+        return this.db.list("actions/" + this.roundId, ref => ref.orderByChild("delegation").equalTo(delegationId as string)).valueChanges().pipe(tap(
+          vals => {
+            let spentDf = vals.map(val => val["df"] || 0).reduce((sum, current) => sum + current)
+            this.spentDf.next(spentDf)
+          }
+        ))
       })
     )
     this.primaryActions = delegationActions.pipe(map(actions => {

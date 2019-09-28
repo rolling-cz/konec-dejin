@@ -1,4 +1,4 @@
-<app-round-info [roundId]="roundId"></app-round-info>
+<app-round-info [roundId]="roundId" [spentDf]="spentDf"></app-round-info>
 <p>Primární akce:</p>
 <app-action-form *ngFor="let path of primaryActionPaths | async" [path]="path"></app-action-form>
 <p>Sekundární akce:</p>

@@ -17,6 +17,9 @@ export class RoundInfoComponent implements OnInit {
   @Input()
   roundId: string
 
+  @Input()
+  spentDf: Observable<number>
+
   roundInfo: Observable<RoundInfo>
 
   ngOnInit() {
@@ -30,11 +33,13 @@ export class RoundInfoComponent implements OnInit {
             flatMap(leaderId => this.db.object("delegates/" + leaderId + "/name").valueChanges())
           ),
           this.db.object("delegationRounds/" + delegationId + "/" + this.roundId).valueChanges(),
-          (round, delegation, leaderName, delegationRound) => {
+          this.spentDf,
+          (round, delegation, leaderName, delegationRound, spentDf) => {
             let presentRound = round["tense"] == "present"
             let delegationAvailableDf = delegationRound["availableDf"]
             let availableDf = (presentRound) ? this.calculateDelegateDf(delegationAvailableDf, delegationRound["delegateCount"], delegationRound["leader"] == delegateId) : delegationAvailableDf
-            return { name: delegation["name"], country: delegation["country"], deadline: round["deadline"], leader: leaderName, presentRound: presentRound, message: delegationRound["message"], availableDf: availableDf }
+            let df = (presentRound) ? availableDf-spentDf : spentDf
+            return { name: delegation["name"], country: delegation["country"], deadline: round["deadline"], leader: leaderName, presentRound: presentRound, message: delegationRound["message"], availableDf: availableDf, df: df }
           }
         )
       }

@@ -1,4 +1,4 @@
-<app-round-info [roundId]="roundId"></app-round-info>
+<app-round-info [roundId]="roundId" [spentDf]="spentDf"></app-round-info>
 <p>Primární akce:</p>
 <mat-card *ngFor="let action of primaryActions | async" class="action">
     <p>{{formatDoneActionDescription(action)}}</p>

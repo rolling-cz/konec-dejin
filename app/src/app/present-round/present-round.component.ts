@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Action } from '../model';
-import { Observable } from 'rxjs';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map, flatMap } from 'rxjs/operators';
+import { map, flatMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-present-round',
@@ -24,12 +24,18 @@ export class PresentRoundComponent implements OnInit {
   markedAsSent: Observable<boolean>
   delegateId: string
   delegationId: string
+  spentDf = new BehaviorSubject<number>(0)
 
   ngOnInit() {
     let delegateActions = this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId + "/delegation").valueChanges().pipe(
       flatMap((delegationId, _) => {
         this.delegationId = delegationId as string
-        return this.db.list("actions/" + this.roundId, ref => ref.orderByChild("delegate").equalTo(this.delegateId)).snapshotChanges()
+        return this.db.list("actions/" + this.roundId, ref => ref.orderByChild("delegate").equalTo(this.delegateId)).snapshotChanges().pipe(tap(
+          snaps => {
+            let spentDf = snaps.map(snap => snap.payload.val()["df"] || 0).reduce((sum, current) => sum + current)
+            this.spentDf.next(spentDf)
+          }
+        ))
       })
     )
     this.primaryActionPaths = delegateActions.pipe(map(snapshots => {

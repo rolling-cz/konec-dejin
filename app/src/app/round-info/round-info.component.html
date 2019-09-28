@@ -6,8 +6,8 @@
         <p *ngIf="info.presentRound">Deadline odeslání depeše: <strong>{{ info.deadline | date:'EEEE HH:mm' }}</strong>
         </p>
         <p *ngIf="!info.presentRound">Deadline odeslání depeše: {{ info.deadline | date:'EEEE HH:mm' }}</p>
-        <p *ngIf="info.presentRound">K dispozici: <strong>TODO DF</strong> z {{info.availableDf}} DF</p>
-        <p *ngIf="!info.presentRound">Použito: TODO DF z {{info.availableDf}} DF</p>
+        <p *ngIf="info.presentRound">K dispozici: <strong>{{ info.df }} DF</strong> z {{info.availableDf}} DF</p>
+        <p *ngIf="!info.presentRound">Použito: {{ info.df }} DF z {{info.availableDf}} DF</p>
     </mat-card>
     <mat-card class="action" *ngIf="info.message">
         <p>Důležitá sdělení vlády:</p>
