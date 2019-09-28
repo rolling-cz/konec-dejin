@@ -1,24 +1,77 @@
 {
   "actions" : {
     "round_1" : {
+      "-LpiIkTEaRtBAsIJXmZy" : {
+        "delegate" : "delegate_id_1",
+        "delegation" : "delegation_id_1",
+        "description" : "Kampaň v UK: \"Proč mít euro je super\"",
+        "df" : 10,
+        "result" : "Britové jsou nakloněni přechodu na Euro.",
+        "targetCountry" : "gb",
+        "type" : "support",
+        "visibility" : "public"
+      },
       "action_id_1" : {
         "delegate" : "delegate_id_1",
         "delegation" : "delegation_id_1",
         "description" : "Lokalizace Abú Musa Zarkávího",
+        "df" : 8,
         "keyword" : "OMEGA",
         "result" : "Obrovský úspěch! Povedlo se nám Zarkávího zahnat do rohu a protože neměl zjevně žádnou podporu...dostali jsme ho. Máme ho jako zajatce u našich hochů v Iráku. Co dál?",
-        "df" : 10,
-        "targetCountry" : "ir",
+        "targetCountry" : "flag-iq",
+        "type" : "main",
+        "visibility" : "covert"
+      }
+    },
+    "round_2" : {
+      "-LpiIrTJqpQerhqMq1rO" : {
+        "delegate" : "delegate_id_1",
+        "delegation" : "delegation_id_1",
+        "description" : "Test",
+        "df" : 11,
+        "keyword" : "sss",
+        "targetCountry" : "flag-iq",
         "type" : "support",
-        "visibility" : "secret"
+        "visibility" : "public"
+      },
+      "-LprTzOvxUt1WSVHdt5t" : {
+        "delegate" : "delegate_id_1",
+        "delegation" : "delegation_id_1",
+        "description" : "",
+        "keyword" : "",
+        "targetCountry" : "",
+        "type" : "main",
+        "visibility" : "public"
+      },
+      "-LprTzOvxUt1WSVHdt5u" : {
+        "delegate" : "delegate_id_1",
+        "delegation" : "delegation_id_1",
+        "description" : "",
+        "keyword" : "",
+        "targetCountry" : "",
+        "type" : "main",
+        "visibility" : "public"
+      },
+      "-LprTzOvxUt1WSVHdt5v" : {
+        "delegate" : "delegate_id_1",
+        "delegation" : "delegation_id_1",
+        "description" : "",
+        "keyword" : "",
+        "targetCountry" : "",
+        "type" : "main",
+        "visibility" : "public"
       }
     }
   },
   "delegateRounds" : {
     "delegate_id_1" : {
       "round_1" : {
-        "markedAsSent" : false,
-        "delegation" : "delegation_id_1"
+        "delegation" : "delegation_id_1",
+        "markedAsSent" : true
+      },
+      "round_2" : {
+        "delegation" : "delegation_id_1",
+        "markedAsSent" : true
       }
     }
   },
@@ -29,11 +82,17 @@
     }
   },
   "delegationRounds" : {
-    "delegation_1" : {
+    "delegation_id_1" : {
       "round_1" : {
-        "leader": "delegate_id_1",
         "availableDf" : 200,
+        "delegateCount" : 1,
+        "leader" : "delegate_id_1",
         "message" : "Nízké ceny ropy pomohly mírně oživit naši ekonomiku. Finanční krize a krize Eura však dále poškozuje naši ekonomiku"
+      },
+      "round_2" : {
+        "availableDf" : 303,
+        "delegateCount" : 2,
+        "leader" : "delegate_id_1"
       }
     }
   },
@@ -44,10 +103,20 @@
     }
   },
   "rounds" : {
+    "round3" : {
+      "deadline" : 1457015264499,
+      "name" : "3. kolo",
+      "tense" : "future"
+    },
     "round_1" : {
       "deadline" : 1457015264428,
       "name" : "1. kolo",
-      "tense": "past"
+      "tense" : "past"
+    },
+    "round_2" : {
+      "deadline" : 1457015264488,
+      "name" : "2. kolo",
+      "tense" : "present"
     }
   }
 }
