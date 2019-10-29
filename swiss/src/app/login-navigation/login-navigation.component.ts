@@ -3,8 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import { SignInResponse } from '../model';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-navigation',
@@ -12,30 +12,23 @@ import { map, flatMap } from 'rxjs/operators';
   styleUrls: ['./login-navigation.component.css']
 })
 export class LoginNavigationComponent implements OnInit {
-
   constructor(public firebaseAuth: AngularFireAuth, public http: HttpClient, public db: AngularFireDatabase) {
   }
 
-  title = "Komunikace s vládou"
+  title = "Švýcaři"
   passwordError = false
   loading = false
-  delegateName: Observable<string>
+  signedIn : Observable<boolean>
 
   ngOnInit() {
-    this.firebaseAuth.authState.pipe(flatMap((state, _) =>{
-      if (state== null) {
-        return new Observable(null)
-      } else {
-        return this.db.object("delegates/" + state.uid + "/name").valueChanges()
-      }
-    }))
+    this.signedIn = this.firebaseAuth.authState.pipe(map(state => (state != null)))
   }
 
   login(password) {
     this.loading = true
     this.passwordError = false
     let passwordValue = (password == undefined) ? "" : password.value
-    this.http.get<SignInResponse>("https://us-central1-konec-dejin.cloudfunctions.net/login?password=" + passwordValue).subscribe(
+    this.http.get<SignInResponse>("https://us-central1-konec-dejin.cloudfunctions.net/swissLogin?password=" + passwordValue).subscribe(
       (data: SignInResponse) => {
         if (data.invalidPassword) {
           this.loading = false
