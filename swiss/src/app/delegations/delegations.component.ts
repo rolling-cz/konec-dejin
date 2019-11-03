@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map, take, tap } from 'rxjs/operators';
-import { COUNTRIES } from '../config';
+import { COUNTRIES } from '../../../../common/config';
 import { NgForm } from '@angular/forms';
 
 @Component({

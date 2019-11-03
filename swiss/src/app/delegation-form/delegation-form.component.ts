@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { COUNTRIES } from '../config';
+import { COUNTRIES } from '../../../../common/config';
 
 @Component({
   selector: 'app-delegation-form',

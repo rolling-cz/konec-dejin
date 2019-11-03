@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Action } from '../model';
-import { COUNTRIES, ACTION_TYPES, VISIBILITIES } from "../config"
+import { COUNTRIES, ACTION_TYPES, VISIBILITIES } from "../../../../common/config"
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { flatMap, map, tap } from 'rxjs/operators';
-import { SelectRow } from '../config';
+import { ValueName } from '../../../../common/config';
 
 @Component({
   selector: 'app-past-round',
@@ -71,6 +71,6 @@ function isBlank(str) {
   return (!str || /^\s*$/.test(str));
 }
 
-function findRowName(rows: SelectRow[], value: string) {
+function findRowName(rows: ValueName[], value: string) {
   return rows.find((row) => row.value == value).name
 }

@@ -1,0 +1,33 @@
+<mat-card class="card">
+    <form [formGroup]="roundForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
+        <mat-form-field>
+            <input matInput placeholder="Název" type="text" formControlName="name">
+        </mat-form-field>&nbsp;
+        <mat-form-field>
+            <input matInput placeholder="Deadline odeslání depeší" type="text" formControlName="deadline">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Typ kola</mat-label>
+            <mat-select formControlName="tense">
+                <mat-option *ngFor="let tense of tenses" [value]="tense.value">
+                    {{tense.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <mat-card-footer class="state mat-small">{{state}}</mat-card-footer>
+</mat-card>
+<p>TODO: Tlačítko na Import a Export akcí</p>
+<p>TODO: Seznam delegátů a u nich:</p>
+<ul>
+    <li>Mají odeslanou depeši?</li>
+    <li>V jaké jsou delegaci</li>
+</ul>
+<p>TODO: Seznam delegací a u nich:</p>
+<ul>
+    <li>Kdo je vedoucí</li>
+    <li>Kolik DF je na delegaci</li>
+    <li>Důležitá sdělení vlády</li>
+</ul>
+<p>TODO: přidání nového kola a mazání kola a potvrzení, jestli fakt smazat</p>

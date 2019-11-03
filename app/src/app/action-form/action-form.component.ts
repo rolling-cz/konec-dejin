@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../config';
+import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../../../../common/config';
 
 @Component({
   selector: 'app-action-form',

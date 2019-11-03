@@ -1,5 +1,5 @@
 // https://afeld.github.io/emoji-css/
-export const COUNTRIES: SelectRow[] = [
+export const COUNTRIES: ValueName[] = [
     { value: 'flag-af', name: 'Afgánistán' },
     { value: 'flag-in', name: 'Indie' },
     { value: 'flag-iq', name: 'Irák' },
@@ -11,19 +11,25 @@ export const COUNTRIES: SelectRow[] = [
     { value: 'gb', name: 'Velká Británie' }
 ]
 
-export const ACTION_TYPES: SelectRow[] = [
+export const ACTION_TYPES: ValueName[] = [
     { value: 'support', name: "Podpora" },
     { value: 'economic', name: "Ekonomika" },
     { value: 'elections', name: "Volby" },
     { value: 'other', name: "Jiné" }
 ]
-export const VISIBILITIES: SelectRow[] = [
+export const VISIBILITIES: ValueName[] = [
     { value: 'public', name: "Veřejná" },
     { value: 'covert', name: "Tajná vůči delegacím" },
     { value: 'private', name: "Tajná uvnitř delegace" }
 ]
 
-export interface SelectRow {
+export const TENSES: ValueName[] = [
+    { value: 'past', name: "Proběhlo" },
+    { value: 'present', name: "Aktuální" },
+    { value: 'future', name: "Budoucí" }
+]
+
+export interface ValueName {
     value: string;
     name: string;
 }

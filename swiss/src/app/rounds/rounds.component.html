@@ -1,1 +1,7 @@
-<p class="tab-content">Tady bude všechno týkající se kol - export/import akcí, kdo je v jaké delegaci, kolik má jaká delegace DF, vytváření nových kol atd.</p>
+<mat-tab-group [selectedIndex]="selectedTab">
+    <mat-tab *ngFor="let round of rounds | async" label="{{round.name}}">
+        <div class="tab-content">
+            <app-round [roundId]="round.id"></app-round>
+        </div>
+    </mat-tab>
+</mat-tab-group>

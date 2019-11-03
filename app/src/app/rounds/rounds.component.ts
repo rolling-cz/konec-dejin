@@ -17,7 +17,7 @@ export class RoundsComponent implements OnInit {
   selectedTab: number
 
   ngOnInit() {
-    this.rounds = this.db.list<Round>("rounds", ref => ref.orderByChild("deadline"))
+    this.rounds = this.db.list<Round>("rounds")
       .snapshotChanges()
       .pipe(map(snaps =>
         snaps.map(snap => {
