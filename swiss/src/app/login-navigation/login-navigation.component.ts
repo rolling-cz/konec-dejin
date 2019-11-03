@@ -19,6 +19,7 @@ export class LoginNavigationComponent implements OnInit {
   passwordError = false
   loading = false
   signedIn : Observable<boolean>
+  selectedMenuItem = "rounds"
 
   ngOnInit() {
     this.signedIn = this.firebaseAuth.authState.pipe(map(state => (state != null)))

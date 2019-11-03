@@ -14,11 +14,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeCs from '@angular/common/locales/cs';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { RoundsComponent } from './rounds/rounds.component';
+import { DelegationsComponent } from './delegations/delegations.component';
+import { DelegatesComponent } from './delegates/delegates.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginNavigationComponent
+    LoginNavigationComponent,
+    RoundsComponent,
+    DelegationsComponent,
+    DelegatesComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
+    MatButtonToggleModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

@@ -1,12 +1,25 @@
 <div *ngIf="signedIn | async else showLogin">
     <mat-toolbar color="primary">
-        <span>{{title}}</span>
+        <span>{{title}}</span>&nbsp;&nbsp;&nbsp;
+        <mat-button-toggle-group [(ngModel)]="selectedMenuItem">
+            <mat-button-toggle value="rounds" class="small">
+                Kola
+            </mat-button-toggle>
+            <mat-button-toggle value="delegations" class="small">
+                Delegace
+            </mat-button-toggle>
+            <mat-button-toggle value="delegates" class="small">
+                Delegáti
+            </mat-button-toggle>
+        </mat-button-toggle-group>
         <span class="fill-remaining-space"></span>
         <button mat-icon-button (click)="logout()">
             <mat-icon>logout</mat-icon>
         </button>
     </mat-toolbar>
-    <!-- TODO -->
+    <app-rounds *ngIf="selectedMenuItem == 'rounds'"></app-rounds>
+    <app-delegations *ngIf="selectedMenuItem == 'delegations'"></app-delegations>
+    <app-delegates *ngIf="selectedMenuItem == 'delegates'"></app-delegates>
 </div>
 <ng-template #showLogin>
     <mat-toolbar color="primary">

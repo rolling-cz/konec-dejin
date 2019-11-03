@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "konec-dejin"
+  },
+  "targets": {
+    "konec-dejin": {
+      "hosting": {
+        "app": [
+          "konec-dejin"
+        ],
+        "swiss": [
+          "svycari"
+        ]
+      }
+    }
   }
 }
