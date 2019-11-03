@@ -9,6 +9,10 @@ export let login = functions.https.onRequest(async (request, response) => {
     await doLogin(request.query["password"], response)
 })
 
+export let swissLogin = functions.https.onRequest(async (request, response) => {
+    await doSwissLogin(request.query["password"], response)
+})
+
 async function doLogin(password: string, response: functions.Response) {
     let delegates = (await admin.database().ref("delegates").orderByChild("password").equalTo(password).once("value")).val()
     if (delegates == null) {
@@ -17,6 +21,17 @@ async function doLogin(password: string, response: functions.Response) {
     } else {
         let uid = Object.keys(delegates)[0]
         let token = await admin.auth().createCustomToken(uid)
+        sendResponse(new LoginResponse(token, false), response)
+    }
+}
+
+async function doSwissLogin(password: string, response: functions.Response) {
+    let swissPassword = (await admin.database().ref("config/swissPassword").once("value")).val()
+    if (password != swissPassword) {
+        await delay(2000)
+        sendResponse(new LoginResponse("", true), response)
+    } else {
+        let token = await admin.auth().createCustomToken("swiss")
         sendResponse(new LoginResponse(token, false), response)
     }
 }

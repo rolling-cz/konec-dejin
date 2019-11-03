@@ -6,9 +6,9 @@
             <mat-icon>logout</mat-icon>
         </button>
     </mat-toolbar>
-    <app-rounds></app-rounds>
+    <!-- TODO -->
 </div>
-<div #showLogin>
+<ng-template #showLogin>
     <mat-toolbar color="primary">
         <span>{{title}}</span>
     </mat-toolbar>
@@ -24,4 +24,4 @@
             <p class="error" *ngIf="passwordError">Neplatná identita, zkuste to znovu.</p>
         </mat-card>
     </div>
-</div>
+</ng-template>
