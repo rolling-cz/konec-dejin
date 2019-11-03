@@ -18,6 +18,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { RoundsComponent } from './rounds/rounds.component';
 import { DelegationsComponent } from './delegations/delegations.component';
 import { DelegatesComponent } from './delegates/delegates.component';
+import { DelegateFormComponent } from './delegate-form/delegate-form.component';
+import { FireFormDirective } from './fire-form.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { DelegatesComponent } from './delegates/delegates.component';
     LoginNavigationComponent,
     RoundsComponent,
     DelegationsComponent,
-    DelegatesComponent
+    DelegatesComponent,
+    DelegateFormComponent,
+    FireFormDirective
   ],
   imports: [
     BrowserModule,

@@ -15,3 +15,6 @@ body { margin: 0;
 .tab-content {
     padding: 1em;
 }
+.card {
+    margin-bottom: 1em;
+}

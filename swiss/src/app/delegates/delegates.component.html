@@ -1,1 +1,28 @@
-<p>delegates works!</p>
+<div class="tab-content">
+    <mat-card class="card">
+        <app-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-delegate-form>
+    </mat-card>
+    <p>Přidat delegáta:</p>
+    <mat-card class="card">
+        <form (ngSubmit)="addDelegate(addDelegateForm)" #addDelegateForm="ngForm">
+            <mat-form-field>
+                <input matInput placeholder="Jméno" type="text" name="name" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <input matInput placeholder="Heslo" type="text" name="password" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Výchozí delegace</mat-label>
+                <mat-select name="defaultDelegation" required ngModel>
+                    <mat-option *ngFor="let delegation of delegations | async" value="{{delegation.id}}">
+                        {{delegation.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <button type="Submit" mat-raised-button color="accent">Přidat delegáta</button>
+        </form>
+    </mat-card>
+</div>

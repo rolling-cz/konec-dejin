@@ -1,0 +1,12 @@
+<form [formGroup]="delegateForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
+    <mat-form-field>
+        <input matInput placeholder="Jméno" type="text" formControlName="name">
+    </mat-form-field>&nbsp;
+    <mat-form-field>
+        <input matInput placeholder="Heslo" type="text" formControlName="password">
+    </mat-form-field>
+    {{ state }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-stroked-button color="accent" (click)="delete()">
+        Smazat
+    </button>
+</form>
