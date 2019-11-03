@@ -28,8 +28,8 @@ import { FireFormDirective } from './fire-form.directive';
     RoundsComponent,
     DelegationsComponent,
     DelegatesComponent,
-    DelegateFormComponent,
-    FireFormDirective
+    FireFormDirective,
+    DelegateFormComponent
   ],
   imports: [
     BrowserModule,

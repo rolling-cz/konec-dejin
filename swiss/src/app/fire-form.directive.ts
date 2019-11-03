@@ -47,7 +47,7 @@ export class FireFormDirective implements OnInit, OnDestroy {
       .pipe(
         tap(doc => {
           if (doc) {
-            this.formGroup.patchValue(doc);
+            this.formGroup.patchValue(doc as {});
             this.formGroup.markAsPristine();
             this.state = 'synced';
           }
