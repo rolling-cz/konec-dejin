@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Action } from '../model';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map, flatMap, tap } from 'rxjs/operators';
 

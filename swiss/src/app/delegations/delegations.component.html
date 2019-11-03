@@ -1,1 +1,28 @@
-<p>delegations works!</p>
+<div class="tab-content">
+    <mat-card class="card">
+        <app-delegation-form *ngFor="let path of delegationPaths | async" [path]="path"></app-delegation-form>
+    </mat-card>
+    <p>Přidat delegaci:</p>
+    <mat-card class="card">
+        <form (ngSubmit)="addDelegation(addDelegationForm)" #addDelegationForm="ngForm">
+            <mat-form-field>
+                <input matInput placeholder="Název" type="text" name="name" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Země</mat-label>
+                <mat-select name="country" required ngModel>
+                    <mat-option *ngFor="let country of countries" value="{{country.value}}">
+                        <i class="em-svg em-{{country.value}}"></i> {{country.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <input matInput placeholder="Výchozí DF na kolo" type="number" name="defaultDf" required ngModel>
+            </mat-form-field>
+            <br />
+            <button type="Submit" mat-raised-button color="accent">Přidat delegaci</button>
+        </form>
+    </mat-card>
+</div>

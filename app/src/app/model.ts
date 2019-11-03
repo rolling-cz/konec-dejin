@@ -19,11 +19,6 @@ export interface Action {
     targetCountry: string,
 }
 
-export interface SelectRow {
-    value: string;
-    name: string;
-}
-
 export interface DelegateRound {
     availableMainActions: number,
     delegationId: string

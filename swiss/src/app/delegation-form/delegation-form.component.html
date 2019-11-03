@@ -1,0 +1,17 @@
+<form [formGroup]="delegationForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
+    <mat-form-field>
+        <input matInput placeholder="Název" type="text" formControlName="name">
+    </mat-form-field>&nbsp;
+    <mat-form-field>
+        <mat-label>Země</mat-label>
+        <mat-select formControlName="country">
+            <mat-option *ngFor="let country of countries" [value]="country.value">
+                <i class="em-svg em-{{country.value}}"></i> {{country.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    {{ state }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-stroked-button color="accent" (click)="delete()">
+        Smazat
+    </button>
+</form>

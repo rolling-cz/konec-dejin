@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { SignInResponse } from '../model';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, of } from 'rxjs';
-import { map, flatMap, switchMap } from 'rxjs/operators';
-import { JsonPipe } from '@angular/common';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-navigation',
