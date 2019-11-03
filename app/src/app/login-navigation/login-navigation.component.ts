@@ -3,8 +3,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import { SignInResponse } from '../model';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, flatMap, switchMap } from 'rxjs/operators';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login-navigation',
@@ -22,11 +23,11 @@ export class LoginNavigationComponent implements OnInit {
   delegateName: Observable<string>
 
   ngOnInit() {
-    this.firebaseAuth.authState.pipe(flatMap((state, _) =>{
-      if (state== null) {
-        return new Observable(null)
+    this.delegateName = this.firebaseAuth.authState.pipe(flatMap((state, _) => {
+      if (state == null) {
+        return of(null) as Observable<string>
       } else {
-        return this.db.object("delegates/" + state.uid + "/name").valueChanges()
+        return this.db.object("delegates/" + state.uid + "/name").valueChanges() as Observable<string>
       }
     }))
   }

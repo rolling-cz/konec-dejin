@@ -1,15 +1,15 @@
-<div *ngIf="delegateName | async else showLogin">
+<div *ngIf="delegateName | async as name else showLogin">
     <mat-toolbar color="primary">
         <span>{{title}}</span>
         <span class="fill-remaining-space"></span>
-        <span class="name">{{ delegateName }}</span>
+        <span class="name">{{ name }}</span>
         <button mat-icon-button (click)="logout()">
             <mat-icon>logout</mat-icon>
         </button>
     </mat-toolbar>
     <app-rounds></app-rounds>
 </div>
-<div #showLogin>
+<ng-template #showLogin>
     <mat-toolbar color="primary">
         <span>{{title}}</span>
     </mat-toolbar>
@@ -25,4 +25,4 @@
             <p class="error" *ngIf="passwordError">Neplatná identita, zkuste to znovu.</p>
         </mat-card>
     </div>
-</div>
+</ng-template>
