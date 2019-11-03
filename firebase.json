@@ -17,7 +17,7 @@
     },
     {
       "target": "swiss",
-      "public": "swiss/dist/app",
+      "public": "swiss/dist/swiss",
       "ignore": [
         "firebase.json",
         "**/.*",
