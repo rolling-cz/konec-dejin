@@ -43,10 +43,10 @@ export class PastRoundComponent implements OnInit {
       })
     )
     this.primaryActions = delegationActions.pipe(map(actions => {
-      return actions.filter(action => action["type"] == "main").map(action => action as Action)
+      return actions.filter(action => action["type"] == "main" && !this.isSecretForMe(action)).map(action => action as Action)
     }))
     this.secondaryActions = delegationActions.pipe(map(actions => {
-      return actions.filter(action => action["type"] != "main").map(action => action as Action)
+      return actions.filter(action => action["type"] != "main" && !this.isSecretForMe(action)).map(action => action as Action)
     }))
   }
 
@@ -68,6 +68,10 @@ export class PastRoundComponent implements OnInit {
     }
     details += findValueName(VISIBILITIES, action.visibility) + ", "
     return details
+  }
+
+  isSecretForMe(action: {}) {
+    return action["visibility"] == "private" && action["delegate"] != this.delegateId 
   }
 
 }
