@@ -28,13 +28,15 @@
 
     <div class="tab-content">
         <mat-card>
-            <mat-form-field>
-                <input matInput placeholder="Váš švýcarský kód" type="password" id="password" #password>
-            </mat-form-field>
-            <br />
-            <button mat-raised-button color="accent" (click)="login(password)"
-                [disabled]="loading">{{loading ? "Ověřuji…" : "Ověřit identitu"}}</button>
-            <p class="error" *ngIf="passwordError">Neplatná identita, zkuste to znovu.</p>
+            <form (submit)="login(password)">
+                <mat-form-field>
+                    <input matInput placeholder="Váš švýcarský kód" type="password" id="password" #password>
+                </mat-form-field>
+                <br />
+                <button type="submit" mat-raised-button color="accent" (click)="login(password)"
+                    [disabled]="loading">{{loading ? "Ověřuji…" : "Ověřit identitu"}}</button>
+                <p class="error" *ngIf="passwordError">Neplatná identita, zkuste to znovu.</p>
+            </form>
         </mat-card>
     </div>
 </ng-template>
