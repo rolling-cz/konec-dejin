@@ -31,7 +31,12 @@ export class PastRoundComponent implements OnInit {
       flatMap((delegationId, _) => {
         return this.db.list("actions/" + this.roundId, ref => ref.orderByChild("delegation").equalTo(delegationId as string)).valueChanges().pipe(tap(
           vals => {
-            let spentDf = vals.map(val => val["df"] || 0).reduce((sum, current) => sum + current)
+            let spentDf
+            if (vals.length == 0) {
+              spentDf = 0
+            } else {
+              spentDf = vals.map(val => val["df"] || 0).reduce((sum, current) => sum + current)
+            }
             this.spentDf.next(spentDf)
           }
         ))
@@ -54,14 +59,14 @@ export class PastRoundComponent implements OnInit {
   }
 
   formatDoneActionDetails(action: Action) {
-    let details = findRowName(COUNTRIES, action.targetCountry) + ", "
+    let details = findValueName(COUNTRIES, action.targetCountry) + ", "
     if (action.df > 0) {
       details += action.df + " DF, "
     }
     if (action.type != "main") {
-      details += findRowName(ACTION_TYPES, action.type) + ", "
+      details += findValueName(ACTION_TYPES, action.type) + ", "
     }
-    details += findRowName(VISIBILITIES, action.visibility) + ", "
+    details += findValueName(VISIBILITIES, action.visibility) + ", "
     return details
   }
 
@@ -71,6 +76,7 @@ function isBlank(str) {
   return (!str || /^\s*$/.test(str));
 }
 
-function findRowName(rows: ValueName[], value: string) {
+function findValueName(rows: ValueName[], value: string) {
+  if (value == undefined) return "N/A"
   return rows.find((row) => row.value == value).name
 }

@@ -1,0 +1,13 @@
+{
+  "name": "common",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "ts-node": "~8.3.0",
+    "tslint": "~5.20.0",
+    "typescript": "<3.6"
+  }
+}
