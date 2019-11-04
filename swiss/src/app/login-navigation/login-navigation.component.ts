@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import { SignInResponse } from '../model';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,11 +18,17 @@ export class LoginNavigationComponent implements OnInit {
   title = "Švýcaři"
   passwordError = false
   loading = false
-  signedIn : Observable<boolean>
+  initializing = true
+  signedIn: Observable<boolean>
   selectedMenuItem = "rounds"
 
   ngOnInit() {
-    this.signedIn = this.firebaseAuth.authState.pipe(map(state => (state != null)))
+    this.signedIn = this.firebaseAuth.authState.pipe(
+      map(state => (state != null)),
+      tap(_ => {
+        this.initializing = false
+      })
+    )
   }
 
   login(password) {

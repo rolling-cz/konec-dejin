@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { SignInResponse } from '../model';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, of } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-navigation',
@@ -19,6 +19,7 @@ export class LoginNavigationComponent implements OnInit {
   title = "Komunikace s vládou"
   passwordError = false
   loading = false
+  initializing = true
   delegateName: Observable<string>
 
   ngOnInit() {
@@ -28,7 +29,11 @@ export class LoginNavigationComponent implements OnInit {
       } else {
         return this.db.object("delegates/" + state.uid + "/name").valueChanges() as Observable<string>
       }
-    }))
+    }), tap(
+      _ => {
+        this.initializing = false
+      }
+    ))
   }
 
   login(password) {
