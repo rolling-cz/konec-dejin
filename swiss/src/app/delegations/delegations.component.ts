@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map, take, tap } from 'rxjs/operators';
-import { COUNTRIES } from '../../../../common/config';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -13,8 +12,6 @@ import { NgForm } from '@angular/forms';
 export class DelegationsComponent implements OnInit {
 
   delegationPaths: Observable<string[]>
-
-  countries = COUNTRIES
 
   constructor(public db: AngularFireDatabase) { }
 
@@ -31,7 +28,7 @@ export class DelegationsComponent implements OnInit {
     if (form.valid) {
       let ref = this.db.list("delegations").push({
         name: form.value["name"],
-        country: form.value["country"]
+        flag: form.value["flag"]
       })
       this.db.list("rounds").snapshotChanges().pipe(
         take(1),

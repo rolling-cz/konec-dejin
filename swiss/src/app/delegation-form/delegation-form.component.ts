@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { COUNTRIES } from '../../../../common/config';
 
 @Component({
   selector: 'app-delegation-form',
@@ -13,7 +12,6 @@ export class DelegationFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private db: AngularFireDatabase) { }
 
   delegationForm: FormGroup;
-  countries = COUNTRIES
 
   state: string;
 
@@ -23,7 +21,7 @@ export class DelegationFormComponent implements OnInit {
   ngOnInit() {
     this.delegationForm = this.fb.group({
       name: [''],
-      country: ['']
+      flag: ['']
     })
   }
 

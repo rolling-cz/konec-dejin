@@ -26,7 +26,7 @@ export interface DelegateRound {
 
 export interface RoundInfo {
     name: string,
-    country: string,
+    flag: string,
     deadline: string,
     leader: string,
     presentRound: boolean,

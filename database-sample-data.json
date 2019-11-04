@@ -98,7 +98,7 @@
   },
   "delegations" : {
     "delegation_id_1" : {
-      "country" : "gb",
+      "flag" : "gb",
       "name" : "Velká Británie"
     }
   },

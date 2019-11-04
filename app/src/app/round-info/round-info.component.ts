@@ -39,7 +39,7 @@ export class RoundInfoComponent implements OnInit {
             let delegationAvailableDf = delegationRound["availableDf"]
             let availableDf = (presentRound) ? this.calculateDelegateDf(delegationAvailableDf, delegationRound["delegateCount"], delegationRound["leader"] == delegateId) : delegationAvailableDf
             let df = (presentRound) ? availableDf-spentDf : spentDf
-            return { name: delegation["name"], country: delegation["country"], deadline: round["deadline"], leader: leaderName, presentRound: presentRound, message: delegationRound["message"], availableDf: availableDf, df: df }
+            return { name: delegation["name"], flag: delegation["flag"], deadline: round["deadline"], leader: leaderName, presentRound: presentRound, message: delegationRound["message"], availableDf: availableDf, df: df }
           }
         )
       }
