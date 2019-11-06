@@ -1,7 +1,7 @@
 <mat-card class="action">
     <form [formGroup]="actionForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
         <mat-form-field class="stretch">
-            <input matInput placeholder="Popis akce" type="text" formControlName="description">
+            <textarea matInput placeholder="Popis akce" type="text" formControlName="description"></textarea>
         </mat-form-field>
         <mat-form-field class="df">
             <input matInput placeholder="DF" type="number" formControlName="df">
@@ -38,5 +38,5 @@
             </mat-select>
         </mat-form-field>
     </form>
-    <mat-card-footer class="state mat-small">{{state}}</mat-card-footer>
+    <mat-card-footer class="state mat-small">{{state}} <span *ngIf="actionForm.get('type').value!='main'"> | <a href="#" (click)="delete()">Smazat</a></span></mat-card-footer>
 </mat-card>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../../../../common/config';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-action-form',
@@ -9,7 +10,7 @@ import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../../../../common/config
 })
 export class ActionFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private db: AngularFireDatabase) { }
 
   actionForm: FormGroup;
 
@@ -41,6 +42,10 @@ export class ActionFormComponent implements OnInit {
       'error': "Chyba ukládání!"
     }
     this.state = names[e]
+  }
+
+  delete() {
+    this.db.object(this.path).remove()
   }
 }
 
