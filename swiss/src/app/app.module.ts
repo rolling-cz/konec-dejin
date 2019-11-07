@@ -23,6 +23,7 @@ import { FireFormDirective } from './fire-form.directive';
 import { DelegationFormComponent } from './delegation-form/delegation-form.component';
 import { RoundComponent } from './round/round.component';
 import { RoundDelegateFormComponent } from './round-delegate-form/round-delegate-form.component';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { RoundDelegateFormComponent } from './round-delegate-form/round-delegate
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
+    MaterialFileInputModule,
     MatButtonToggleModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),

@@ -5,6 +5,7 @@ import { AngularFireDatabase, DatabaseSnapshot, AngularFireAction } from '@angul
 import { Observable, combineLatest } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { Papa } from 'ngx-papaparse';
 
 @Component({
   selector: 'app-round',
@@ -72,19 +73,35 @@ export class RoundComponent implements OnInit {
               findValueName(ACTION_TYPES, values["type"]),
               findValueName(VISIBILITIES, values["visibility"]),
               values["result"] || "",
-              snapshot.key,
-              values["delegate"],
-              values["delegation"],
-              values["targetCountry"]
+              snapshot.key
             ]
           })
           let options = {
-            headers: ["Delegát", "Delegace", "Popis akce", "Cílová země", "DF", "Klíčové slovo", "Typ akce", "Viditelnost", "Výsledek", "ID akce", "ID delegáta", "ID delegace", "ID země"]
+            headers: ["Delegát", "Delegace", "Popis akce", "Cílová země", "DF", "Klíčové slovo", "Typ akce", "Viditelnost", "Výsledek", "ID akce"]
           };
           new ngxCsv(data, 'Export akcí ' + this.roundForm.controls.name.value, options);
         }
       )
     ).subscribe()
+  }
+
+  importActions(file) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      let papa = new Papa()
+      papa.parse(fileReader.result as string, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (result) => {
+          result.data.forEach(el => {
+            this.db.object("actions/" + this.roundId + "/" + el["ID akce"]).update({
+              result: el["Výsledek"]
+            })
+          });
+        }
+      });
+    }
+    fileReader.readAsText(file.value.files[0]);
   }
 
 }

@@ -23,9 +23,13 @@
     <app-round-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-round-delegate-form>
 </mat-card>
 <p>Akce:</p>
-<button mat-raised-button color="accent" (click)="exportActions()">Export</button>&nbsp;
-<button mat-stroked-button color="accent" (click)="importActions()">Import</button>
-<p>TODO: Tlačítko na Import a Export akcí</p>
+<button mat-raised-button color="accent" (click)="exportActions()">Export akcí</button><br /><br />
+<mat-form-field>
+    <ngx-mat-file-input placeholder="Vyber CSV soubor" [accept]="'.csv'" #file></ngx-mat-file-input>
+    <mat-icon matSuffix>folder</mat-icon>
+</mat-form-field>
+&nbsp;
+<button mat-stroked-button color="accent" (click)="importActions(file)">Import výsledků</button>
 <p>TODO: Seznam delegací a u nich:</p>
 <ul>
     <li>Kdo je vedoucí</li>
