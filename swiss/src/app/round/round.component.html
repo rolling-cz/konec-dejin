@@ -18,12 +18,11 @@
     </form>
     <mat-card-footer class="state mat-small">{{state}}</mat-card-footer>
 </mat-card>
+<p>Delegáti:</p>
+<mat-card class="card">
+    <app-round-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-round-delegate-form>
+</mat-card>
 <p>TODO: Tlačítko na Import a Export akcí</p>
-<p>TODO: Seznam delegátů a u nich:</p>
-<ul>
-    <li>Mají odeslanou depeši?</li>
-    <li>V jaké jsou delegaci</li>
-</ul>
 <p>TODO: Seznam delegací a u nich:</p>
 <ul>
     <li>Kdo je vedoucí</li>
@@ -31,3 +30,9 @@
     <li>Důležitá sdělení vlády</li>
 </ul>
 <p>TODO: přidání nového kola a mazání kola a potvrzení, jestli fakt smazat</p>
+<p>TODO obecně:</p>
+<ul>
+    <li>Přiřazování hlavních akcí</li>
+    <li>Počítání delegátů v delegacích</li>
+    <li>Security rules</li>
+</ul>

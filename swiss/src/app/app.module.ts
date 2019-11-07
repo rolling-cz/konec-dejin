@@ -22,6 +22,7 @@ import { DelegateFormComponent } from './delegate-form/delegate-form.component';
 import { FireFormDirective } from './fire-form.directive';
 import { DelegationFormComponent } from './delegation-form/delegation-form.component';
 import { RoundComponent } from './round/round.component';
+import { RoundDelegateFormComponent } from './round-delegate-form/round-delegate-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { RoundComponent } from './round/round.component';
     FireFormDirective,
     DelegateFormComponent,
     DelegationFormComponent,
-    RoundComponent
+    RoundComponent,
+    RoundDelegateFormComponent
   ],
   imports: [
     BrowserModule,

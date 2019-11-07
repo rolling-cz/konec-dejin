@@ -1,0 +1,14 @@
+<form [formGroup]="delegateForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
+    <div class="delegate-name">{{ name | async }}</div>&nbsp;    
+    <mat-form-field>
+        <mat-label>Delegace</mat-label>
+        <mat-select formControlName="delegation">
+            <mat-option *ngFor="let delegation of delegations | async" value="{{delegation.id}}">
+                {{delegation.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    {{ state }} | 
+    <span class="positive" *ngIf="delegateForm.controls.markedAsSent.value">Depeše odeslána</span>
+    <span class="negative" *ngIf="!delegateForm.controls.markedAsSent.value">Depeše neodeslána</span>
+</form>
