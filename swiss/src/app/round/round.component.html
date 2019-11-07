@@ -22,6 +22,9 @@
 <mat-card class="card">
     <app-round-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-round-delegate-form>
 </mat-card>
+<p>Akce:</p>
+<button mat-raised-button color="accent" (click)="exportActions()">Export</button>&nbsp;
+<button mat-stroked-button color="accent" (click)="importActions()">Import</button>
 <p>TODO: Tlačítko na Import a Export akcí</p>
 <p>TODO: Seznam delegací a u nich:</p>
 <ul>

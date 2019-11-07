@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { flatMap, map, tap } from 'rxjs/operators';
-import { ValueName } from '../../../../common/config';
+import { findValueName } from '../../../../common/config';
 
 @Component({
   selector: 'app-past-round',
@@ -78,9 +78,4 @@ export class PastRoundComponent implements OnInit {
 
 function isBlank(str) {
   return (!str || /^\s*$/.test(str));
-}
-
-function findValueName(rows: ValueName[], value: string) {
-  if (value == undefined) return "N/A"
-  return rows.find((row) => row.value == value).name
 }

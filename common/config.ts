@@ -33,3 +33,10 @@ export interface ValueName {
     value: string;
     name: string;
 }
+
+export function findValueName(rows: ValueName[], value: string) {
+    if (value == undefined) return "N/A"
+    let row = rows.find((row) => row.value == value)
+    if (row == undefined) return "N/A"
+    return row.name
+}
