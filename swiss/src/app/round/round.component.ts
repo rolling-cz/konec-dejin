@@ -30,6 +30,8 @@ export class RoundComponent implements OnInit {
 
   delegatePaths: Observable<string[]>
 
+  delegationPaths: Observable<string[]>
+
   ngOnInit() {
     this.path = "rounds/" + this.roundId
     this.roundForm = this.fb.group({
@@ -41,6 +43,12 @@ export class RoundComponent implements OnInit {
       map(
         snapshots => {
           return snapshots.map(snapshot => "delegateRounds/" + snapshot.key + "/" + this.roundId)
+        })
+    )
+    this.delegationPaths = this.db.list("delegationRounds").snapshotChanges().pipe(
+      map(
+        snapshots => {
+          return snapshots.map(snapshot => "delegationRounds/" + snapshot.key + "/" + this.roundId)
         })
     )
   }

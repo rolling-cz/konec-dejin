@@ -1,0 +1,18 @@
+<form [formGroup]="delegationForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
+    <div class="delegation-name">{{ name | async }}</div>&nbsp;    
+    <mat-form-field class="df">
+        <input matInput placeholder="DF na delegaci" type="number" formControlName="availableDf" />
+    </mat-form-field>&nbsp;
+    <mat-form-field>
+        <mat-label>Vedoucí</mat-label>
+        <mat-select formControlName="leader">
+            <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.id}}">
+                {{delegate.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>&nbsp;
+    <mat-form-field class="message">
+        <textarea matInput placeholder="Důležitá sdělení vlády" formControlName="message"></textarea>
+    </mat-form-field>
+    {{ state }}
+</form>

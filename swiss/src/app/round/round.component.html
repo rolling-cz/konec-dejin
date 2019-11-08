@@ -32,12 +32,10 @@
     &nbsp;
     <button mat-stroked-button color="accent" (click)="importActions(file)">Import výsledků</button>
 </mat-card>
-<p>TODO: Seznam delegací a u nich:</p>
-<ul>
-    <li>Kdo je vedoucí</li>
-    <li>Kolik DF je na delegaci</li>
-    <li>Důležitá sdělení vlády</li>
-</ul>
+<p>Delegace:</p>
+<mat-card class="card">
+    <app-round-delegation-form *ngFor="let path of delegationPaths | async" [path]="path"></app-round-delegation-form>
+</mat-card>
 <p>TODO: přidání nového kola a mazání kola a potvrzení, jestli fakt smazat</p>
 <p>TODO obecně:</p>
 <ul>

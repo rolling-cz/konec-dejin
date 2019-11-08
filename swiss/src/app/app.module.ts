@@ -24,6 +24,7 @@ import { DelegationFormComponent } from './delegation-form/delegation-form.compo
 import { RoundComponent } from './round/round.component';
 import { RoundDelegateFormComponent } from './round-delegate-form/round-delegate-form.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { RoundDelegationFormComponent } from './round-delegation-form/round-delegation-form.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     DelegateFormComponent,
     DelegationFormComponent,
     RoundComponent,
-    RoundDelegateFormComponent
+    RoundDelegateFormComponent,
+    RoundDelegationFormComponent
   ],
   imports: [
     BrowserModule,
