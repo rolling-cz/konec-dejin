@@ -6,6 +6,8 @@ import { Observable, combineLatest } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { Papa } from 'ngx-papaparse';
+import { MatDialog } from '@angular/material';
+import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 
 @Component({
   selector: 'app-round',
@@ -17,7 +19,7 @@ export class RoundComponent implements OnInit {
   @Input()
   roundId: string
 
-  constructor(private fb: FormBuilder, private db: AngularFireDatabase) {
+  constructor(private fb: FormBuilder, private db: AngularFireDatabase, private dialog: MatDialog) {
   }
 
   roundForm: FormGroup;
@@ -113,33 +115,38 @@ export class RoundComponent implements OnInit {
   }
 
   deleteRound() {
-    this.db.list("delegateRounds").snapshotChanges().pipe(
-      take(1),
-      tap(
-        snapshots => {
-          snapshots.forEach(
-            snapshot => {
-              this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId).remove()
-            }
-          )
+    this.dialog.open(DeleteConfirmDialogComponent, { data: this.roundForm.controls.name.value }).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.db.list("delegateRounds").snapshotChanges().pipe(
+            take(1),
+            tap(
+              snapshots => {
+                snapshots.forEach(
+                  snapshot => {
+                    this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId).remove()
+                  }
+                )
+              }
+            )
+          ).subscribe()
+          this.db.list("delegationRounds").snapshotChanges().pipe(
+            take(1),
+            tap(
+              snapshots => {
+                snapshots.forEach(
+                  snapshot => {
+                    this.db.object("delegationRounds/" + snapshot.key + "/" + this.roundId).remove()
+                  }
+                )
+              }
+            )
+          ).subscribe()
+          this.db.object(this.path).remove()
         }
-      )
-    ).subscribe()
-    this.db.list("delegationRounds").snapshotChanges().pipe(
-      take(1),
-      tap(
-        snapshots => {
-          snapshots.forEach(
-            snapshot => {
-              this.db.object("delegationRounds/" + snapshot.key + "/" + this.roundId).remove()
-            }
-          )
-        }
-      )
-    ).subscribe()
-    this.db.object(this.path).remove()
+      }
+    )
   }
-
 }
 
 function findName(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], id: string) {

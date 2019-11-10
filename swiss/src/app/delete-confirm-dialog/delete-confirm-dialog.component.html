@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+    Potvrď smazání "{{subject}}""
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Rozmyslel jsem si to</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Smazat</button>
+</div>

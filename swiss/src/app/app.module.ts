@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeCs from '@angular/common/locales/cs';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { RoundsComponent } from './rounds/rounds.component';
 import { DelegationsComponent } from './delegations/delegations.component';
 import { DelegatesComponent } from './delegates/delegates.component';
@@ -26,6 +26,8 @@ import { RoundDelegateFormComponent } from './round-delegate-form/round-delegate
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { RoundDelegationFormComponent } from './round-delegation-form/round-delegation-form.component';
 import { NewRoundComponent } from './new-round/new-round.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { NewRoundComponent } from './new-round/new-round.component';
     RoundComponent,
     RoundDelegateFormComponent,
     RoundDelegationFormComponent,
-    NewRoundComponent
+    NewRoundComponent,
+    DeleteConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { NewRoundComponent } from './new-round/new-round.component';
     MatTabsModule,
     MatCardModule,
     MatFormFieldModule,
+    MatDialogModule,
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
@@ -64,7 +68,10 @@ import { NewRoundComponent } from './new-round/new-round.component';
     AngularFireAuthModule,
     ReactiveFormsModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'cs' } ],
+  entryComponents: [
+    DeleteConfirmDialogComponent
+  ],
+  providers: [{ provide: LOCALE_ID, useValue: 'cs' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
