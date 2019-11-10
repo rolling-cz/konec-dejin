@@ -85,7 +85,9 @@ export async function doProcessDelegationChange(delegateId: string, roundId: str
         }
     });
     await admin.database().ref("delegationRounds/" + delegationId + "/" + roundId + "/delegateCount").set(delegateCount);
-    await admin.database().ref("delegationRounds/" + previousDelegationId + "/" + roundId + "/delegateCount").set(otherDelegateCount);
+    if (previousDelegationId != null) {
+        await admin.database().ref("delegationRounds/" + previousDelegationId + "/" + roundId + "/delegateCount").set(otherDelegateCount);
+    }
     // Change delegations also for actions
     let actionIds: string[] = [];
     (await admin.database().ref("actions/" + roundId).orderByChild("delegate").equalTo(delegateId).once("value")).forEach(snap => {

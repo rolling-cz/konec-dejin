@@ -27,7 +27,8 @@ export class DelegatesComponent implements OnInit {
       map(
         snapshots => {
           return snapshots.map(snapshot => {
-            return { id: snapshot.key, name: snapshot.payload.val()["name"] } })
+            return { id: snapshot.key, name: snapshot.payload.val()["name"] }
+          })
         })
     )
   }
@@ -44,12 +45,19 @@ export class DelegatesComponent implements OnInit {
           snapshots => {
             snapshots.forEach(
               snapshot => {
-                this.db.object("delegateRounds/"+ref.key+"/"+snapshot.key).set(
+                this.db.object("delegateRounds/" + ref.key + "/" + snapshot.key).set(
                   {
                     delegation: form.value["defaultDelegation"],
                     markedAsSent: false
                   }
                 )
+                if (form.value["defaultLeader"] == true) {
+                  this.db.object("delegationRounds/" + form.value["defaultDelegation"] + "/" + snapshot.key).update(
+                    {
+                      leader: ref.key
+                    }
+                  )
+                }
               }
             )
           }
