@@ -73,6 +73,8 @@ export class RoundComponent implements OnInit {
         combined => {
           let data = combined.actions.map(snapshot => {
             let values = snapshot.payload.val()
+            let actionTypes = ACTION_TYPES
+            actionTypes.push({value: "main", name: "Hlavní"})
             return [
               findName(combined.delegates, values["delegate"]),
               findName(combined.delegations, values["delegation"]),
@@ -80,7 +82,7 @@ export class RoundComponent implements OnInit {
               findValueName(COUNTRIES, values["targetCountry"]),
               values["df"] || "",
               values["keyword"] || "",
-              findValueName(ACTION_TYPES, values["type"]),
+              findValueName(actionTypes, values["type"]),
               findValueName(VISIBILITIES, values["visibility"]),
               values["result"] || "",
               snapshot.key
@@ -142,6 +144,7 @@ export class RoundComponent implements OnInit {
               }
             )
           ).subscribe()
+          this.db.object("actions/"+this.roundId).remove()
           this.db.object(this.path).remove()
         }
       }
