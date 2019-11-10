@@ -40,3 +40,11 @@ export function findValueName(rows: ValueName[], value: string) {
     if (row == undefined) return "N/A"
     return row.name
 }
+
+export function calculateDelegateDf(delegationDf: number, numberOfDelegates: number, leader: boolean): number {
+    let dfToLeader = delegationDf * 0.2
+    let remainingDf = delegationDf - dfToLeader
+    let dfPerDelegate = remainingDf / numberOfDelegates
+    let dfForCurrentDelegate = (leader) ? dfPerDelegate + dfToLeader : dfPerDelegate
+    return Math.ceil(dfForCurrentDelegate)
+}

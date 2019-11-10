@@ -4,6 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { RoundInfo } from '../model';
 import { flatMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { calculateDelegateDf } from '../../../../common/config';
 
 @Component({
   selector: 'app-round-info',
@@ -37,21 +38,13 @@ export class RoundInfoComponent implements OnInit {
           (round, delegation, leaderName, delegationRound, spentDf) => {
             let presentRound = round["tense"] == "present"
             let delegationAvailableDf = delegationRound["availableDf"]
-            let availableDf = (presentRound) ? this.calculateDelegateDf(delegationAvailableDf, delegationRound["delegateCount"], delegationRound["leader"] == delegateId) : delegationAvailableDf
+            let availableDf = (presentRound) ? calculateDelegateDf(delegationAvailableDf, delegationRound["delegateCount"], delegationRound["leader"] == delegateId) : delegationAvailableDf
             let df = (presentRound) ? availableDf-spentDf : spentDf
             return { name: delegation["name"], flag: delegation["flag"], deadline: round["deadline"], leader: leaderName, presentRound: presentRound, message: delegationRound["message"], availableDf: availableDf, df: df }
           }
         )
       }
       ))
-  }
-
-  calculateDelegateDf(delegationDf: number, numberOfDelegates: number, leader: boolean): number {
-    let dfToLeader = delegationDf*0.2
-    let remainingDf = delegationDf - dfToLeader
-    let dfPerDelegate = remainingDf / numberOfDelegates
-    let dfForCurrentDelegate = (leader)? dfPerDelegate + dfToLeader : dfPerDelegate
-    return Math.ceil(dfForCurrentDelegate)
   }
 
 }

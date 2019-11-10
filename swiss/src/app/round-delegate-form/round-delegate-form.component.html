@@ -12,6 +12,12 @@
         <input matInput placeholder="Hlavní akce" type="number" formControlName="mainActions" />
     </mat-form-field>
     {{ state }} |
+    <ng-container *ngIf="(dfInfo | async) as df">
+        <span class="positive" *ngIf="df.spentState == 1">{{df.spentDf}}</span>
+        <span class="negative" *ngIf="df.spentState == 3">{{df.spentDf}}</span>
+        <span *ngIf="df.spentState == 2">{{df.spentDf}}</span>
+        / {{df.availableDf}} DF použito
+    </ng-container> | 
     <span class="positive" *ngIf="delegateForm.controls.markedAsSent.value">Depeše odeslána</span>
     <span class="negative" *ngIf="!delegateForm.controls.markedAsSent.value">Depeše neodeslána</span>
 </form>
