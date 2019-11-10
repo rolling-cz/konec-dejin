@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { doLogin, doSwissLogin } from './login';
-import { doProcessLeaderChange } from './database';
+import { doProcessLeaderChange, doProcessMainActionsChange } from './database';
 
 admin.initializeApp({
     databaseURL: "https://konec-dejin.firebaseio.com"
@@ -17,4 +17,8 @@ export let swissLogin = functions.https.onRequest(async (request, response) => {
 
 export let processLeaderChange = functions.database.ref("delegationRounds/{delegationId}/{roundId}/leader").onWrite(async (change, context) => {
     await doProcessLeaderChange(context.params.delegationId, context.params.roundId, change)
+})
+
+export let processMainActionsChange = functions.database.ref("delegateRounds/{delegateId}/{roundId}/mainActions").onWrite(async (change, context) => {
+    await doProcessMainActionsChange(context.params.delegateId, context.params.roundId, change)
 })
