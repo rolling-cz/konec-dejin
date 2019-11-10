@@ -30,6 +30,7 @@ export class FireFormDirective implements OnInit, OnDestroy {
 
   // Subscriptions
   private formSub: Subscription;
+  private docSub: Subscription;
 
   constructor(private db: AngularFireDatabase) { }
 
@@ -42,7 +43,7 @@ export class FireFormDirective implements OnInit, OnDestroy {
   preloadData() {
     this.state = 'loading';
     this.docRef = this.getDocRef(this.path);
-    this.docRef
+    this.docSub = this.docRef
       .valueChanges()
       .pipe(
         tap(doc => {
@@ -51,8 +52,7 @@ export class FireFormDirective implements OnInit, OnDestroy {
             this.formGroup.markAsPristine();
             this.state = 'synced';
           }
-        }),
-        take(1)
+        })
       )
       .subscribe();
   }
@@ -106,5 +106,6 @@ export class FireFormDirective implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.formSub.unsubscribe();
+    this.docSub.unsubscribe();
   }
 }

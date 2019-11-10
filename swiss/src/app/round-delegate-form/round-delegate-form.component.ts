@@ -27,6 +27,7 @@ export class RoundDelegateFormComponent implements OnInit {
   ngOnInit() {
     this.delegateForm = this.fb.group({
       delegation: [''],
+      mainActions: [0],
       markedAsSent: [false]
     })
     let paths = this.path.split("/")

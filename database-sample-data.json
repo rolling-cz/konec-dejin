@@ -67,11 +67,13 @@
     "delegate_id_1" : {
       "round_1" : {
         "delegation" : "delegation_id_1",
-        "markedAsSent" : true
+        "markedAsSent" : true,
+        "mainActions": 3
       },
       "round_2" : {
         "delegation" : "delegation_id_1",
-        "markedAsSent" : true
+        "markedAsSent" : true,
+        "mainActions": 3
       }
     }
   },
