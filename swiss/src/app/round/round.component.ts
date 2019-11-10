@@ -112,6 +112,34 @@ export class RoundComponent implements OnInit {
     fileReader.readAsText(file.value.files[0]);
   }
 
+  deleteRound() {
+    this.db.list("delegateRounds").snapshotChanges().pipe(
+      take(1),
+      tap(
+        snapshots => {
+          snapshots.forEach(
+            snapshot => {
+              this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId).remove()
+            }
+          )
+        }
+      )
+    ).subscribe()
+    this.db.list("delegationRounds").snapshotChanges().pipe(
+      take(1),
+      tap(
+        snapshots => {
+          snapshots.forEach(
+            snapshot => {
+              this.db.object("delegationRounds/" + snapshot.key + "/" + this.roundId).remove()
+            }
+          )
+        }
+      )
+    ).subscribe()
+    this.db.object(this.path).remove()
+  }
+
 }
 
 function findName(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], id: string) {

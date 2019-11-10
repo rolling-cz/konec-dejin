@@ -36,10 +36,5 @@
 <mat-card class="card">
     <app-round-delegation-form *ngFor="let path of delegationPaths | async" [path]="path"></app-round-delegation-form>
 </mat-card>
-<p>TODO: přidání nového kola a mazání kola a potvrzení, jestli fakt smazat</p>
-<p>TODO obecně:</p>
-<ul>
-    <li>Přiřazování hlavních akcí</li>
-    <li>Počítání delegátů v delegacích</li>
-    <li>Security rules</li>
-</ul>
+<br />
+<button mat-stroked-button color="accent" (click)="deleteRound()">Smazat kolo</button>

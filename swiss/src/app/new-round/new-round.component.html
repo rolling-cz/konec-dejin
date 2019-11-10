@@ -1,0 +1,43 @@
+<mat-card class="card">
+    <form (ngSubmit)="addRound(addRoundForm)" #addRoundForm="ngForm">
+        <mat-form-field>
+            <input matInput placeholder="Název" type="text" name="name" required ngModel>
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+            <input matInput placeholder="Deadline odeslání depeší" type="text" name="deadline" required ngModel>
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+            <mat-label>Typ kola</mat-label>
+            <mat-select name="tense" required ngModel>
+                <mat-option *ngFor="let tense of tenses" [value]="tense.value">
+                    {{tense.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br />
+        <button type="submit" mat-raised-button color="accent">Přidat kolo</button>
+    </form>
+</mat-card>
+<p>Jak začít s čistou databází:</p>
+<ol>
+    <li>Přidejte všechna kola</li>
+    <li>Přidejte všechny delegace</li>
+    <li>Přidejte všechny delegáty</li>
+    <li>Změňte v kolech jiné hodnoty pro různá kola (počet DF, kdo je vedoucí atd.)</li>
+</ol>
+<p>Během hry:</p>
+<ol>
+    <li>V aktuálním kole čekejte až se bude blížit deadline, akce si můžete vyexportovat i dřív pro informaci</li>
+    <li>Sledujte kolik delegátů označilo depeši za odeslanou, těm kteří to pořád nemají blízko deadlinu napište</li>
+    <li>Pokud delegáti nestíhají, posuňte deadline</li>
+    <li>Až se rozhodnete ukončit kolo, změňte aktuální kolo na proběhlé a to další nastavte na aktuální</li>
+    <li>Vyexportujte akce, vyhodnoťe je v Google Sheets nebo Excelu a nahrajte CSV ve stejném formátu s výsledky zpět</li>
+</ol>
+<p>TODO:</p>
+<ul>
+    <li>Potvrzení smazání</li>
+    <li>Přiřazování hlavních akcí</li>
+    <li>Počítání delegátů v delegacích</li>
+    <li>Security rules</li>
+</ul>
