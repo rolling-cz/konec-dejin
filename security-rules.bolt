@@ -1,0 +1,12 @@
+path / {
+  read() { auth != null }
+  write() { auth != null }
+}
+
+path /actions/{round_id} {
+    index() {["delegate", "delegation"]}
+}
+
+path /delegates {
+    index() {"password"}
+}

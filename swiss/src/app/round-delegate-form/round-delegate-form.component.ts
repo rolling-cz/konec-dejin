@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 import { calculateDelegateDf } from '../../../../common/config';
 
@@ -49,6 +49,9 @@ export class RoundDelegateFormComponent implements OnInit {
     )
     this.dfInfo = this.db.object("delegateRounds/" + delegateId + "/" + roundId + "/delegation").valueChanges().pipe(
       flatMap((delegationId, _) => {
+        if (delegationId == null || delegationId == "") {
+          return of({spentDf: 0, availableDf: 0, spentState: SpentState.WARNING})
+        }
         return combineLatest<DfInfo>(
           this.db.object("delegationRounds/" + delegationId + "/" + roundId).valueChanges(),
           this.db.list("actions/" + roundId, ref => ref.orderByChild("delegate").equalTo(delegateId)).snapshotChanges().pipe(map(
