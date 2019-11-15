@@ -74,7 +74,7 @@ export class RoundComponent implements OnInit {
           let data = combined.actions.map(snapshot => {
             let values = snapshot.payload.val()
             let actionTypes = ACTION_TYPES
-            actionTypes.push({value: "main", name: "Hlavní"})
+            actionTypes.push({value: "main", name: "Primární"})
             return [
               findName(combined.delegates, values["delegate"]),
               findName(combined.delegations, values["delegation"]),
