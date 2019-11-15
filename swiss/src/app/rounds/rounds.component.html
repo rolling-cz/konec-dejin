@@ -1,12 +1,8 @@
 <mat-tab-group [selectedIndex]="selectedTab">
     <mat-tab *ngFor="let round of rounds | async" label="{{round.name}}">
         <div class="tab-content">
-            <app-round [roundId]="round.id"></app-round>
-        </div>
-    </mat-tab>
-    <mat-tab label="+ nové kolo">
-        <div class="tab-content">
-            <app-new-round></app-new-round>
+            <app-round [roundId]="round.id" *ngIf="round.id != 'new'"></app-round>
+            <app-new-round *ngIf="round.id == 'new'"></app-new-round>
         </div>
     </mat-tab>
 </mat-tab-group>

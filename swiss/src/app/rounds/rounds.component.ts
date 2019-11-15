@@ -31,7 +31,7 @@ export class RoundsComponent implements OnInit {
               this.selectedTab = i;
             }
           }
-          return rounds
+          return rounds.concat({id: "new", name: "+ nové kolo", tense: "future"})
         }
         ));
   }
