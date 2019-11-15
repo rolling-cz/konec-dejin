@@ -153,5 +153,9 @@ export class RoundComponent implements OnInit {
 }
 
 function findName(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], id: string) {
-  return snapshots.find((row) => row.key == id).payload.val()["name"]
+  let snapshot = snapshots.find((row) => row.key == id);
+  if (snapshot == null) {
+    return "N/A"
+  }
+  return snapshot.payload.val()["name"]
 }
