@@ -34,6 +34,10 @@ export class RoundComponent implements OnInit {
 
   delegationPaths: Observable<string[]>
 
+  editingDelegates = false
+
+  editingDelegations = false
+
   ngOnInit() {
     this.path = "rounds/" + this.roundId
     this.roundForm = this.fb.group({
@@ -149,6 +153,14 @@ export class RoundComponent implements OnInit {
         }
       }
     )
+  }
+
+  editDelegates() {
+    this.editingDelegates = true
+  }
+
+  editDelegations() {
+    this.editingDelegations = true
   }
 }
 

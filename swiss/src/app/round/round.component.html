@@ -20,7 +20,10 @@
 </mat-card>
 <p>Delegáti:</p>
 <mat-card class="card">
-    <app-round-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-round-delegate-form>
+    <div *ngIf="editingDelegates">
+        <app-round-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-round-delegate-form>
+    </div>
+    <button mat-button color="accent" *ngIf="!editingDelegates" (click)="editDelegates()">Upravit</button>
 </mat-card>
 <p>Akce:</p>
 <mat-card class="card">
@@ -34,7 +37,11 @@
 </mat-card>
 <p>Delegace:</p>
 <mat-card class="card">
-    <app-round-delegation-form *ngFor="let path of delegationPaths | async" [path]="path"></app-round-delegation-form>
+    <div *ngIf="editingDelegations">
+        <app-round-delegation-form *ngFor="let path of delegationPaths | async" [path]="path">
+        </app-round-delegation-form>
+    </div>
+    <button mat-button color="accent" *ngIf="!editingDelegations" (click)="editDelegations()">Upravit</button>
 </mat-card>
 <br />
 <button mat-stroked-button color="accent" (click)="deleteRound()">Smazat kolo</button>
