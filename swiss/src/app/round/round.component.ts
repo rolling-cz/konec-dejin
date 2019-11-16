@@ -89,7 +89,7 @@ export class RoundComponent implements OnInit {
               findValueName(actionTypes, values["type"]),
               findValueName(VISIBILITIES, values["visibility"]),
               values["result"] || "",
-              snapshot.key
+              snapshot.key.substr(1) // Excel doesn't like - at the beginning
             ]
           })
           let options = {
@@ -110,7 +110,7 @@ export class RoundComponent implements OnInit {
         skipEmptyLines: true,
         complete: (result) => {
           result.data.forEach(el => {
-            this.db.object("actions/" + this.roundId + "/" + el["ID akce"]).update({
+            this.db.object("actions/" + this.roundId + "/-" + el["ID akce"]).update({
               result: el["Výsledek"]
             })
           });
