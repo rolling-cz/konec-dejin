@@ -48,6 +48,7 @@ export class LoginNavigationComponent implements OnInit {
         } else {
           this.passwordError = false
           this.firebaseAuth.auth.signInWithCustomToken(data.token);
+          this.ngOnInit()
         }
       }
     )
