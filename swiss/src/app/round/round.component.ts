@@ -82,7 +82,7 @@ export class RoundComponent implements OnInit {
             return [
               findName(combined.delegates, values["delegate"]),
               findName(combined.delegations, values["delegation"]),
-              values["description"],
+              values["description"] || "",
               findValueName(COUNTRIES, values["targetCountry"]),
               values["df"] || "",
               values["keyword"] || "",
