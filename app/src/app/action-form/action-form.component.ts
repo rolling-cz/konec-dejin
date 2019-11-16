@@ -26,7 +26,7 @@ export class ActionFormComponent implements OnInit {
   ngOnInit() {
     this.actionForm = this.fb.group({
       description: [''],
-      df: [''],
+      df: [0],
       keyword: [''],
       targetCountry: [''],
       visibility: [''],

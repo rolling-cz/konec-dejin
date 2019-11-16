@@ -1,12 +1,144 @@
-path / {
-  read() { auth != null }
-  write() { auth != null }
-}
+// 
+// Actions 
+//
 
 path /actions/{round_id} {
     index() {["delegate", "delegation"]}
+    
+    read() { isSwiss() || (query.orderByChild == "delegate" && query.equalTo == auth.uid) || (query.orderByChild == "delegation" && query.equalTo == prior(root).delegateRounds[auth.uid][round_id].delegation) }
+
+    path /{action_id} is Action {
+      read() { isSameDelegation(this.delegation, round_id)}
+      write() { (isDelete(this) && isSameDelegate(prior(this).delegate)) || (!isDelete(this) && isSameDelegate(this.delegate)) }
+    }
 }
 
+type Action {
+  delegate: Id,
+  delegation: Id,
+  description: Description | Null,
+  df: Number | Null,
+  keyword: Keyword | Null,
+  targetCountry: Emoji | Null,
+  result: Description | Null,
+  type: ActionType,
+  visibility: ActionVisibility
+}
+
+type Description extends String {
+    validate() { hasMaxLength(this, 1000) }
+}
+
+type Keyword extends String {
+    validate() { hasMaxLength(this, 200) }
+}
+
+type ActionType extends String {
+    validate() { this == "main" || this == "support" || this == "economic" || this == "elections" || this == "other" }
+}
+
+type ActionVisibility extends String {
+    validate() { this == "public" || this == "covert" || this == "private" }
+}
+
+//
+// Delegate rounds
+//
+
+path /delegateRounds {
+  read() { isSignedIn() }
+  write() { isSwiss() }
+
+  path /{delegate_id}/{round_id}/markedAsSent is Boolean {
+    write() { isSameDelegate(delegate_id) }
+  }
+}
+
+//
+// Delegates
+//
+
 path /delegates {
-    index() {"password"}
+    read() { isSwiss() }
+    path /{delegate_id} {
+      write() { isSwiss() }
+      index() {"password"}
+
+      path /name {
+        read() { isSignedIn() }
+      }
+    }
+}
+
+//
+// Delegation rounds
+//
+
+path /delegationRounds {
+  read() { isSwiss() }
+  write() { isSwiss() }
+
+  path /{delegation_id}/{round_id} {
+    read() { isSameDelegation(delegation_id, round_id) }
+  }
+}
+
+//
+// Delegations
+//
+
+path /delegations {
+  read() { isSignedIn() }
+
+  path /{delegation_id} {
+    write() { isSwiss() }
+  }
+}
+
+//
+// Rounds
+//
+
+path /rounds {
+  read() { isSignedIn() }
+
+  path /{round_id} {
+    write() { isSwiss() }
+  }
+}
+
+//
+// Common
+//
+
+type Id extends String {
+    validate() { hasMaxLength(this, 50) }
+}
+
+type Emoji extends String {
+    validate() { hasMaxLength(this, 16) }
+}
+
+isSwiss() {
+  auth.uid == "swiss"
+}
+
+hasMaxLength(text, length) {
+    text.length <= length
+}
+
+isSignedIn() {
+    auth != null
+}
+
+isSameDelegate(delegate_id) {
+  isSwiss() || delegate_id == auth.uid
+}
+
+isSameDelegation(delegation_id, round_id) {
+  isSwiss() || delegation_id == prior(root).delegateRounds[auth.uid][round_id].delegation
+}
+
+isDelete(value) {
+    prior(value) != null && value == null
 }
