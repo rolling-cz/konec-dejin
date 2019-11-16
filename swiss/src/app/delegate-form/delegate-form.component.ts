@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MatDialog } from '@angular/material';
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-delegate-form',
@@ -36,6 +37,29 @@ export class DelegateFormComponent implements OnInit {
       result => {
         if (result) {
           this.db.object(this.path.replace("delegates", "delegateRounds")).remove()
+          let paths = this.path.split("/")
+          let delegateId = paths[1]
+          this.db.list("rounds").snapshotChanges().pipe(
+            take(1),
+            tap(
+              rounds => {
+                rounds.forEach(
+                  round => {
+                    this.db.list("actions/" + round.key, ref => ref.orderByChild("delegate").equalTo(delegateId)).snapshotChanges().pipe(
+                      take(1),
+                      tap(
+                        snapshots => {
+                          snapshots.forEach(snapshot => {
+                            this.db.object("actions/" + round.key + "/" + snapshot.key).remove()
+                          })
+                        }
+                      )
+                    ).subscribe()
+                  }
+                )
+              }
+            )
+          ).subscribe()
           this.db.object(this.path).remove()
         }
       })
