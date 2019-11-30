@@ -6,7 +6,11 @@
         <p *ngIf="info.presentRound">Deadline odeslání depeše: <strong>{{ info.deadline }}</strong>
         </p>
         <p *ngIf="!info.presentRound">Deadline odeslání depeše: {{ info.deadline }}</p>
-        <p *ngIf="info.presentRound">K dispozici: <strong>{{ info.df }} DF</strong> z {{info.availableDf}} DF</p>
+        <p *ngIf="info.presentRound">K dispozici:
+            <strong *ngIf="info.df == 0" class="positive">{{ info.df }} DF</strong>
+            <strong *ngIf="info.df > 0">{{ info.df }} DF</strong>
+            <strong *ngIf="info.df < 0" class="negative">{{ info.df }} DF</strong>
+            z {{info.availableDf}} DF</p>
         <p *ngIf="!info.presentRound">Použito: {{ info.df }} DF z {{info.availableDf}} DF</p>
     </mat-card>
     <mat-card class="action" *ngIf="info.message">
