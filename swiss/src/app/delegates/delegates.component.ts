@@ -48,7 +48,8 @@ export class DelegatesComponent implements OnInit {
                 this.db.object("delegateRounds/" + ref.key + "/" + snapshot.key).set(
                   {
                     delegation: form.value["defaultDelegation"],
-                    markedAsSent: false
+                    markedAsSent: false,
+                    mainActions: (form.value["defaultLeader"] == true) ? 3 : 2
                   }
                 )
                 if (form.value["defaultLeader"] == true) {
