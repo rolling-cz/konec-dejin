@@ -22,6 +22,10 @@ import { FireFormDirective } from './fire-form.directive';
 import { ActionFormComponent } from './action-form/action-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DelegateNameComponent } from './delegate-name/delegate-name.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SelectProjectDialogComponent } from './select-project-dialog/select-project-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import { DelegateNameComponent } from './delegate-name/delegate-name.component';
     RoundInfoComponent,
     FireFormDirective,
     ActionFormComponent,
-    DelegateNameComponent
+    DelegateNameComponent,
+    SelectProjectDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,16 +52,22 @@ import { DelegateNameComponent } from './delegate-name/delegate-name.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDialogModule,
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
     FormsModule,
+    MatListModule,
+    MatAutocompleteModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ReactiveFormsModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'cs' } ],
+  entryComponents: [
+    SelectProjectDialogComponent
+  ],
+  providers: [{ provide: LOCALE_ID, useValue: 'cs' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
