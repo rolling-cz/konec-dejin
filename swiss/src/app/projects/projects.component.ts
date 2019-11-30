@@ -16,6 +16,7 @@ export class ProjectsComponent implements OnInit {
   delegates: Observable<ValueName[]>
   types = PROJECT_TYPES
   selectedType = "general"
+  projectPaths: Observable<string[]>
 
   constructor(public db: AngularFireDatabase) { }
 
@@ -34,6 +35,12 @@ export class ProjectsComponent implements OnInit {
           return snapshots.map(snapshot => {
             return { value: snapshot.key, name: snapshot.payload.val()["name"] }
           })
+        })
+    )
+    this.projectPaths = this.db.list("projects").snapshotChanges().pipe(
+      map(
+        snapshots => {
+          return snapshots.map(snapshot => "projects/" + snapshot.key)
         })
     )
   }

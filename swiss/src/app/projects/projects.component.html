@@ -1,6 +1,6 @@
 <div class="tab-content">
     <mat-card class="card">
-        <!-- <app-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-delegate-form>-->
+         <app-project-form *ngFor="let path of projectPaths | async" [path]="path"></app-project-form>
     </mat-card>
     <p>Přidat projekt:</p>
     <mat-card class="card">
@@ -18,7 +18,7 @@
             </mat-form-field>
             <br />
             <mat-form-field class="number">
-                <input matInput placeholder="Hlavní akce" type="number" name="mainActions" required ngModel>
+                <input matInput placeholder="Primární akce" type="number" name="mainActions" required ngModel>
             </mat-form-field>
             <br />
             <mat-form-field >

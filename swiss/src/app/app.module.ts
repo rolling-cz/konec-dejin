@@ -29,6 +29,7 @@ import { NewRoundComponent } from './new-round/new-round.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ProjectsComponent } from './projects/projects.component';
     RoundDelegationFormComponent,
     NewRoundComponent,
     DeleteConfirmDialogComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ProjectFormComponent
   ],
   imports: [
     BrowserModule,
