@@ -20,10 +20,18 @@
             </mat-select>
         </mat-form-field>
         &nbsp;
-        <mat-form-field>
+        <mat-form-field *ngIf="actionForm.get('type').value!='main'">
             <mat-label>Viditelnost</mat-label>
             <mat-select formControlName="visibility">
-                <mat-option *ngFor="let visibility of visibilities" value="{{visibility.value}}">
+                <mat-option *ngFor="let visibility of secondaryVisibilities" value="{{visibility.value}}">
+                    {{visibility.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="actionForm.get('type').value=='main'">
+            <mat-label>Viditelnost</mat-label>
+            <mat-select formControlName="visibility">
+                <mat-option *ngFor="let visibility of primaryVisibilities" value="{{visibility.value}}">
                     {{visibility.name}}
                 </mat-option>
             </mat-select>

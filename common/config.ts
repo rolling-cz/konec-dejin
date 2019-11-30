@@ -45,6 +45,10 @@ export const VISIBILITIES: ValueName[] = [
     { value: 'covert', name: "Tajná vůči delegacím" },
     { value: 'private', name: "Tajná uvnitř delegace" }
 ]
+export const VISIBILITIES_PRIMARY: ValueName[] = [
+    { value: 'public', name: "Veřejná" },
+    { value: 'covert', name: "Tajná vůči delegacím" }
+]
 
 export const TENSES: ValueName[] = [
     { value: 'past', name: "Proběhlo" },

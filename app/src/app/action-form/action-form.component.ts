@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { COUNTRIES, VISIBILITIES, ACTION_TYPES } from '../../../../common/config';
+import { COUNTRIES, VISIBILITIES, ACTION_TYPES, VISIBILITIES_PRIMARY } from '../../../../common/config';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
@@ -17,7 +17,8 @@ export class ActionFormComponent implements OnInit {
   state: string;
 
   countries = COUNTRIES
-  visibilities = VISIBILITIES
+  secondaryVisibilities = VISIBILITIES
+  primaryVisibilities = VISIBILITIES_PRIMARY
   actionTypes = ACTION_TYPES
 
   @Input()
