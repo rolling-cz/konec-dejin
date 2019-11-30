@@ -96,6 +96,21 @@ path /delegations {
 }
 
 //
+// Projects
+//
+
+path /projects {
+    index() {["delegate", "delegation"]}
+    
+    read() { isSwiss() || (query.orderByChild == "delegate" && query.equalTo == auth.uid) || (query.orderByChild == "delegation" && query.equalTo == prior(root).delegateRounds[auth.uid][round_id].delegation) }
+
+    path /{project_id} {
+      read() { isSignedIn() }
+      write() { isSwiss() }
+    }
+}
+
+//
 // Rounds
 //
 

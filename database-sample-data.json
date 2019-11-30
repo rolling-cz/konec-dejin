@@ -104,6 +104,16 @@
       "name" : "Velká Británie"
     }
   },
+  "projects": {
+    "project_id": {
+      "name": "Vybudování ropovodu přes Afgánistán",
+      "type": "delegation",
+      "keyword": "ROPOVOD",
+      "delegation": "delegation_id_1",
+      "df": 50,
+      "mainActions": 1
+    }
+  },
   "rounds" : {
     "round3" : {
       "deadline" : 1457015264499,
