@@ -11,6 +11,9 @@
             <mat-button-toggle value="delegates" class="small">
                 Delegáti
             </mat-button-toggle>
+            <mat-button-toggle value="projects" class="small">
+                Projekty
+            </mat-button-toggle>
         </mat-button-toggle-group>
         <span class="fill-remaining-space"></span>
         <button mat-icon-button (click)="logout()">
@@ -20,6 +23,7 @@
     <app-rounds *ngIf="selectedMenuItem == 'rounds'"></app-rounds>
     <app-delegations *ngIf="selectedMenuItem == 'delegations'"></app-delegations>
     <app-delegates *ngIf="selectedMenuItem == 'delegates'"></app-delegates>
+    <app-projects *ngIf="selectedMenuItem == 'projects'"></app-projects>
 </div>
 <ng-template #showLogin>
     <mat-toolbar color="primary">

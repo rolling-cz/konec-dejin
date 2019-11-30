@@ -100,9 +100,9 @@ path /delegations {
 //
 
 path /projects {
-    index() {["delegate", "delegation"]}
+    index() {["delegate", "delegation", "type"]}
     
-    read() { isSwiss() || (query.orderByChild == "delegate" && query.equalTo == auth.uid) || (query.orderByChild == "delegation" && query.equalTo == prior(root).delegateRounds[auth.uid][round_id].delegation) }
+    read() { isSignedIn() }
 
     path /{project_id} {
       read() { isSignedIn() }
