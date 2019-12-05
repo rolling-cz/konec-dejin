@@ -1,12 +1,11 @@
 <h1 mat-dialog-title>Dostupné projekty:</h1>
-<mat-nav-list>
-    <a href="#" mat-list-item
-     *ngFor="let project of projects | async"
-     [mat-dialog-close]="project"
-     >
-        {{ project["name"]}} ({{ project["value"]}})
-    </a>
-</mat-nav-list>
+<mat-dialog-content>
+    <mat-nav-list>
+        <a href="#" mat-list-item *ngFor="let project of projects | async" [mat-dialog-close]="project">
+            {{ project["name"]}} ({{ project["value"]}})
+        </a>
+    </mat-nav-list>
+</mat-dialog-content>
 <div mat-dialog-actions>
     <button mat-button (click)="onCloseClick()">Zavřít</button>
 </div>
