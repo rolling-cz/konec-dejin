@@ -233,7 +233,7 @@ export class RoundComponent implements OnInit {
           }
           return ok
         }).map(project => {
-          let relatedActions = actionsForThisAndPreviousRounds.filter(action => action["keyword"].toLowerCase() == project["keyword"].toLowerCase())
+          let relatedActions = actionsForThisAndPreviousRounds.filter(action => action["keyword"] != null && action["keyword"].toLowerCase() == project["keyword"].toLowerCase())
           let delegationNames = relatedActions.map(action => delegations[action["delegation"]]["name"]).join(", ")
           let spentDf = relatedActions.map(action => action["df"] || 0).reduce((sum, current) => sum + current)
           let dfOk = spentDf >= project["df"]
