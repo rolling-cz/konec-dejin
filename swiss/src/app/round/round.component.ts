@@ -224,8 +224,17 @@ export class RoundComponent implements OnInit {
           }
         }
         let usedKeywords = actionsForThisAndPreviousRounds.map(action => action["keyword"])
+        let uniqueKeywords = []
         // TODO unique projects based on keyword
-        return projects.filter(project => usedKeywords.includes(project.keyword)).map(project => <Project>{ keyword: project["keyword"], name: project["name"], delegates: "aaa", df: "45/45", mainActions: "0/1" })
+        return projects.filter(project => {
+          let ok = usedKeywords.includes(project.keyword) && !uniqueKeywords.includes(project.keyword)
+          if (ok) {
+            uniqueKeywords.push(project["keyword"])
+          }
+          return ok
+        }).map(project => {          
+          return <Project>{ keyword: project["keyword"], name: project["name"], delegates: "TODO", df: "TODO/TODO", mainActions: "TODO/TODO" }
+        })
       }
     )
   }
