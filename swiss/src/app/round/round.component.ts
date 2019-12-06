@@ -78,7 +78,7 @@ export class RoundComponent implements OnInit {
           let data = combined.actions.map(snapshot => {
             let values = snapshot.payload.val()
             let actionTypes = ACTION_TYPES
-            actionTypes.push({value: "main", name: "Primární"})
+            actionTypes.push({ value: "main", name: "Primární" })
             return [
               findName(combined.delegates, values["delegate"]),
               findName(combined.delegations, values["delegation"]),
@@ -148,8 +148,52 @@ export class RoundComponent implements OnInit {
               }
             )
           ).subscribe()
-          this.db.object("actions/"+this.roundId).remove()
+          this.db.object("actions/" + this.roundId).remove()
           this.db.object(this.path).remove()
+        }
+      }
+    )
+  }
+
+  deleteActions() {
+    this.dialog.open(DeleteConfirmDialogComponent, { data: "všechny sekundární akce a vyčistit primární akce" }).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.db.list("actions/" + this.roundId).snapshotChanges().pipe(
+            take(1),
+            tap(
+              snapshots => {
+                snapshots.forEach(
+                  snapshot => {
+                    let action = snapshot.payload.val()
+                    if (action["type"] == "main") {
+                      this.db.object("actions/" + this.roundId + "/" + snapshot.key).set(
+                        {
+                          delegate: action["delegate"],
+                          delegation: action["delegation"],
+                          type: "main",
+                          visibility: "public"
+                        })
+                    } else {
+                      this.db.object("actions/" + this.roundId + "/" + snapshot.key).remove()
+                    }
+                  }
+                )
+              }
+            )
+          ).subscribe()
+          this.db.list("delegateRounds").snapshotChanges().pipe(
+            take(1),
+            tap(
+              snapshots => {
+                snapshots.forEach(
+                  snapshot => {
+                    this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId + "/markedAsSent").set(false)
+                  }
+                )
+              }
+            )
+          ).subscribe()
         }
       }
     )
