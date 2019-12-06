@@ -57,25 +57,32 @@
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="delegates">
-            <th mat-header-cell *matHeaderCellDef> Zúčastnění delegáti </th>
-            <td mat-cell *matCellDef="let element"> {{element.delegates}} </td>
+        <ng-container matColumnDef="delegations">
+            <th mat-header-cell *matHeaderCellDef> Zúčastněné delegace </th>
+            <td mat-cell *matCellDef="let element"> {{element.delegations}} </td>
         </ng-container>
 
         <ng-container matColumnDef="df">
             <th mat-header-cell *matHeaderCellDef> DF </th>
-            <td mat-cell *matCellDef="let element"> {{element.df}} </td>
+            <td mat-cell *matCellDef="let element">
+                <span class="positive" *ngIf="element.dfOk"> {{element.df}}</span>
+                <span *ngIf="!element.dfOk"> {{element.df}}</span>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="mainActions">
             <th mat-header-cell *matHeaderCellDef> Primární akce </th>
-            <td mat-cell *matCellDef="let element"> {{element.mainActions}} </td>
+            <td mat-cell *matCellDef="let element">
+                <span class="positive" *ngIf="element.mainActionsOk"> {{element.mainActions}}</span>
+                <span *ngIf="!element.mainActionsOk"> {{element.mainActions}}</span>
+            </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <button mat-button color="accent" *ngIf="!showingProjects" (click)="showProjects()">Ukázat progress projektů</button>
+    <button mat-button color="accent" *ngIf="!showingProjects" (click)="showProjects()">Ukázat progress
+        projektů</button>
 </mat-card>
 <br />
 <button mat-stroked-button color="accent" (click)="deleteRound()">Smazat kolo</button>&nbsp;

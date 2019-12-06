@@ -42,7 +42,7 @@ export class RoundComponent implements OnInit {
 
   projects: Observable<Project[]>
 
-  displayedColumns: string[] = ['keyword', 'name', 'delegates', 'df', 'mainActions'];
+  displayedColumns: string[] = ['keyword', 'name', 'delegations', 'df', 'mainActions'];
 
   ngOnInit() {
     this.path = "rounds/" + this.roundId
@@ -210,7 +210,8 @@ export class RoundComponent implements OnInit {
     return combineLatest<Project[]>(
       this.db.list("projects").valueChanges(),
       this.db.list("actions").snapshotChanges(),
-      (projects, actions) => {
+      this.db.object("delegations").valueChanges(),
+      (projects, actions, delegations) => {
         let actionsForThisAndPreviousRounds = []
         for (let i = 0; i < actions.length; i++) {
           let snap = actions[i]
@@ -225,15 +226,20 @@ export class RoundComponent implements OnInit {
         }
         let usedKeywords = actionsForThisAndPreviousRounds.map(action => action["keyword"])
         let uniqueKeywords = []
-        // TODO unique projects based on keyword
         return projects.filter(project => {
           let ok = usedKeywords.includes(project.keyword) && !uniqueKeywords.includes(project.keyword)
           if (ok) {
             uniqueKeywords.push(project["keyword"])
           }
           return ok
-        }).map(project => {          
-          return <Project>{ keyword: project["keyword"], name: project["name"], delegates: "TODO", df: "TODO/TODO", mainActions: "TODO/TODO" }
+        }).map(project => {
+          let relatedActions = actionsForThisAndPreviousRounds.filter(action => action["keyword"] == project["keyword"])
+          let delegationNames = relatedActions.map(action => delegations[action["delegation"]]["name"]).join(", ")
+          let spentDf = relatedActions.map(action => action["df"] || 0).reduce((sum, current) => sum + current)
+          let dfOk = spentDf >= project["df"]
+          let spentMainActions = relatedActions.filter(action => action["type"] == "main").length
+          let mainActionsOk = spentMainActions >= project["mainActions"]
+          return <Project>{ keyword: project["keyword"], name: project["name"], delegations: delegationNames, df: spentDf + "/" + project["df"], mainActions: spentMainActions + "/" + project["mainActions"], dfOk: dfOk, mainActionsOk: mainActionsOk }
         })
       }
     )
@@ -263,7 +269,9 @@ function findName(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], id: str
 interface Project {
   keyword: string;
   name: string;
-  delegates: string;
+  delegations: string;
   df: string;
+  dfOk: boolean;
   mainActions: string;
+  mainActionsOk: boolean;
 }
