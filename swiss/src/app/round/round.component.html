@@ -43,6 +43,40 @@
     </div>
     <button mat-button color="accent" *ngIf="!editingDelegations" (click)="editDelegations()">Upravit</button>
 </mat-card>
+<p>Projekty:</p>
+<mat-card class="card">
+    <table mat-table [dataSource]="projects | async" *ngIf="showingProjects">
+
+        <ng-container matColumnDef="keyword">
+            <th mat-header-cell *matHeaderCellDef> Klíčové slovo </th>
+            <td mat-cell *matCellDef="let element"> {{element.keyword}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Název </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delegates">
+            <th mat-header-cell *matHeaderCellDef> Zúčastnění delegáti </th>
+            <td mat-cell *matCellDef="let element"> {{element.delegates}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="df">
+            <th mat-header-cell *matHeaderCellDef> DF </th>
+            <td mat-cell *matCellDef="let element"> {{element.df}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="mainActions">
+            <th mat-header-cell *matHeaderCellDef> Primární akce </th>
+            <td mat-cell *matCellDef="let element"> {{element.mainActions}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <button mat-button color="accent" *ngIf="!showingProjects" (click)="showProjects()">Ukázat progress projektů</button>
+</mat-card>
 <br />
 <button mat-stroked-button color="accent" (click)="deleteRound()">Smazat kolo</button>&nbsp;
 <button mat-stroked-button color="accent" (click)="deleteActions()">Smazat akce</button>

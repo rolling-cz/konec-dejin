@@ -2,7 +2,10 @@
 // Actions 
 //
 
-path /actions/{round_id} {
+path /actions {
+  read() { isSwiss() }
+
+  path /{round_id} {
     index() {["delegate", "delegation"]}
     
     read() { isSwiss() || (query.orderByChild == "delegate" && query.equalTo == auth.uid) || (query.orderByChild == "delegation" && query.equalTo == prior(root).delegateRounds[auth.uid][round_id].delegation) }
@@ -11,6 +14,7 @@ path /actions/{round_id} {
       read() { isSameDelegation(this.delegation, round_id)}
       write() { (isDelete(this) && isSameDelegate(prior(this).delegate)) || (!isDelete(this) && isSameDelegate(this.delegate)) }
     }
+  }
 }
 
 type Action {

@@ -30,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
+    MatTableModule,
     MaterialFileInputModule,
     MatButtonToggleModule,
     FormsModule,

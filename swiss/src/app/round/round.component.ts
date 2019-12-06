@@ -38,6 +38,12 @@ export class RoundComponent implements OnInit {
 
   editingDelegations = false
 
+  showingProjects = false
+
+  projects: Observable<Project[]>
+
+  displayedColumns: string[] = ['keyword', 'name', 'delegates', 'df', 'mainActions'];
+
   ngOnInit() {
     this.path = "rounds/" + this.roundId
     this.roundForm = this.fb.group({
@@ -57,6 +63,7 @@ export class RoundComponent implements OnInit {
           return snapshots.map(snapshot => "delegationRounds/" + snapshot.key + "/" + this.roundId)
         })
     )
+    this.projects = this.calculateProjects()
   }
 
   changeHandler(state) {
@@ -199,12 +206,40 @@ export class RoundComponent implements OnInit {
     )
   }
 
+  private calculateProjects(): Observable<Project[]> {
+    return combineLatest<Project[]>(
+      this.db.list("projects").valueChanges(),
+      this.db.list("actions").snapshotChanges(),
+      (projects, actions) => {
+        let actionsForThisAndPreviousRounds = []
+        for (let i = 0; i < actions.length; i++) {
+          let snap = actions[i]
+          let roundId = snap.key
+          let val = snap.payload.val()
+          Object.keys(val).forEach((key) => {
+            actionsForThisAndPreviousRounds.push(val[key]);
+          });
+          if (roundId == this.roundId) {
+            break;
+          }
+        }
+        let usedKeywords = actionsForThisAndPreviousRounds.map(action => action["keyword"])
+        // TODO unique projects based on keyword
+        return projects.filter(project => usedKeywords.includes(project.keyword)).map(project => <Project>{ keyword: project["keyword"], name: project["name"], delegates: "aaa", df: "45/45", mainActions: "0/1" })
+      }
+    )
+  }
+
   editDelegates() {
     this.editingDelegates = true
   }
 
   editDelegations() {
     this.editingDelegations = true
+  }
+
+  showProjects() {
+    this.showingProjects = true
   }
 }
 
@@ -214,4 +249,12 @@ function findName(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], id: str
     return "N/A"
   }
   return snapshot.payload.val()["name"]
+}
+
+interface Project {
+  keyword: string;
+  name: string;
+  delegates: string;
+  df: string;
+  mainActions: string;
 }
