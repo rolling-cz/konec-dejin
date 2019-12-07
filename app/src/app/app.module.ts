@@ -26,6 +26,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SelectProjectDialogComponent } from './select-project-dialog/select-project-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatIconModule,
     FormsModule,
+    MatProgressSpinnerModule,
     MatListModule,
     MatAutocompleteModule,
     AngularFireModule.initializeApp(environment.firebase),

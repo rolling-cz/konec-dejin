@@ -5,6 +5,7 @@
             {{ project["name"]}} ({{ project["value"]}})
         </a>
     </mat-nav-list>
+    <mat-spinner class="center" *ngIf="!(projects | async)"></mat-spinner>
 </mat-dialog-content>
 <div mat-dialog-actions>
     <button mat-button (click)="onCloseClick()">Zavřít</button>
