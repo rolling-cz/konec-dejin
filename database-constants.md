@@ -23,3 +23,4 @@ This document defines constants used in database.
         - past
         - present
         - future
+        - processing

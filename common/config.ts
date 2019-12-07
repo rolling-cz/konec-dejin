@@ -52,6 +52,7 @@ export const VISIBILITIES_PRIMARY: ValueName[] = [
 
 export const TENSES: ValueName[] = [
     { value: 'past', name: "Proběhlo" },
+    { value: 'processing', name: "Vyhodnocování"},
     { value: 'present', name: "Aktuální" },
     { value: 'future', name: "Budoucí" }
 ]

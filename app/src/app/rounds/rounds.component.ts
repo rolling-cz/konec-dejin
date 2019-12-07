@@ -22,7 +22,7 @@ export class RoundsComponent implements OnInit {
       .pipe(map(snaps =>
         snaps.map(snap => {
           let val = snap.payload.val()
-          let suffix = (val["tense"] == "past") ? " (proběhlo)" : (val["tense"] == "present") ? " (aktuální)" : ""
+          let suffix = (val["tense"] == "past") ? " (proběhlo)" : (val["tense"] == "processing") ? " (vyhodnocování)" : (val["tense"] == "present") ? " (aktuální)" : ""
           return { id: snap.key, name: val["name"] + suffix, tense: val["tense"] }
         }
         )), map(rounds => {
