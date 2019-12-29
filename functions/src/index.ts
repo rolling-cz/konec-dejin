@@ -4,7 +4,7 @@ import { doLogin, doSwissLogin } from './login';
 import { doProcessLeaderChange, doProcessMainActionsChange, doProcessDelegationChange } from './database';
 
 admin.initializeApp({
-    databaseURL: "https://konec-dejin.firebaseio.com"
+    databaseURL: "https://dune-new-dawn.firebaseio.com"
 });
 
 export let login = functions.https.onRequest(async (request, response) => {

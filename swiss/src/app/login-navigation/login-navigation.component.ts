@@ -15,7 +15,7 @@ export class LoginNavigationComponent implements OnInit {
   constructor(public firebaseAuth: AngularFireAuth, public http: HttpClient, public db: AngularFireDatabase) {
   }
 
-  title = "Švýcaři"
+  title = "DND Admin"
   passwordError = false
   loading = false
   initializing = true
@@ -35,7 +35,7 @@ export class LoginNavigationComponent implements OnInit {
     this.loading = true
     this.passwordError = false
     let passwordValue = (password == undefined) ? "" : password.value
-    this.http.get<SignInResponse>("https://us-central1-konec-dejin.cloudfunctions.net/swissLogin?password=" + passwordValue).subscribe(
+    this.http.get<SignInResponse>("https://us-central1-dune-new-dawn.cloudfunctions.net/swissLogin?password=" + passwordValue).subscribe(
       (data: SignInResponse) => {
         if (data.invalidPassword) {
           this.loading = false

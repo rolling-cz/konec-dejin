@@ -2,14 +2,14 @@
 <p>Primární akce:</p>
 <mat-card *ngFor="let action of primaryActions | async" class="action">
     <p>{{formatDoneActionDescription(action)}}</p>
-    <p>Odpověď vlády: <strong>{{action.result}}</strong></p>
+    <p>Odpověď vedení: <strong>{{action.result}}</strong></p>
     <p><i class="em-svg em-{{action.targetCountry}}"></i> {{formatDoneActionDetails(action)}}<app-delegate-name
         [delegateId]="action.delegate"></app-delegate-name></p>
 </mat-card>
 <p>Sekundární akce:</p>
 <mat-card *ngFor="let action of secondaryActions | async" class="action">
     <p>{{formatDoneActionDescription(action)}}</p>
-    <p>Odpověď vlády: <strong>{{action.result}}</strong></p>
+    <p>Odpověď vedení: <strong>{{action.result}}</strong></p>
     <p><i class="em-svg em-{{action.targetCountry}}"></i> {{formatDoneActionDetails(action)}}<app-delegate-name
             [delegateId]="action.delegate"></app-delegate-name>
     </p>

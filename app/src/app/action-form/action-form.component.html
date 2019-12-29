@@ -4,7 +4,7 @@
             <textarea matInput placeholder="Popis akce" type="text" formControlName="description"></textarea>
         </mat-form-field>
         <mat-form-field class="df">
-            <input matInput placeholder="DF" type="number" formControlName="df">
+            <input matInput placeholder="BV" type="number" formControlName="df">
         </mat-form-field>
         &nbsp;
         <mat-form-field>
@@ -13,7 +13,7 @@
         </mat-form-field>
         &nbsp;
         <mat-form-field>
-            <mat-label>Cílová země</mat-label>
+            <mat-label>Cílová frakce</mat-label>
             <mat-select formControlName="targetCountry">
                 <mat-option *ngFor="let country of countries" [value]="country.value">
                     <i class="em-svg em-{{country.value}}"></i> {{country.name}}

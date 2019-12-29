@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-      apiKey: "AIzaSyD4CCBEB6uFbgDMNNuWFbG432BVVlouJW4",
-      authDomain: "konec-dejin.firebaseapp.com",
-      databaseURL: "https://konec-dejin.firebaseio.com",
-      projectId: "konec-dejin",
-      storageBucket: "konec-dejin.appspot.com",
-      messagingSenderId: "786915293631",
-      appId: "1:786915293631:web:eb1a4efc2bbe2209f9c90a"
+    apiKey: "AIzaSyCtDgiQcochnZtSYFIBYaeEuJjG__WyWCo",
+    authDomain: "dune-new-dawn.firebaseapp.com",
+    databaseURL: "https://dune-new-dawn.firebaseio.com",
+    projectId: "dune-new-dawn",
+    storageBucket: "dune-new-dawn.appspot.com",
+    messagingSenderId: "67050882133",
+    appId: "1:67050882133:web:5df5cfefccf8154df300dc"
   }
 };
 
