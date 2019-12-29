@@ -11,4 +11,4 @@ Chcete systém vylepšit? Pošlete pull request! Budu se Vám věnovat.
 ## Deploy
 Push do master větve automaticky deployne projekt přes CircleCI:
 
-[![CircleCI](https://circleci.com/gh/davidvavra/konec-dejin.svg?style=svg)](https://circleci.com/gh/davidvavra/konec-dejin)
+[![CircleCI](https://circleci.com/gh/davidvavra/dune-new-dawn.svg?style=svg)](https://circleci.com/gh/davidvavra/dune-new-dawn)
