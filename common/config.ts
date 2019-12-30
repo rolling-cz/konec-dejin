@@ -3,10 +3,10 @@ export const COUNTRIES: ValueName[] = [
     { value: 'city_sunset', name: 'Arrakén' },
     { value: 'city_sunset', name: 'Kartágo' },
     { value: 'eight_pointed_black_star', name: 'Severní pól' },
-    { value: 'rice_cracker', name: 'Síč Hannanya' },
+    { value: 'rice_cracker', name: 'Síč Habbanya' },
     { value: 'rice_cracker', name: 'Síč Tabr' },
-    { value: 'rice_cracker', name: 'Síč Tuek' },
     { value: 'sunrise_over_mountains', name: 'Štítový val' },
+    { value: 'rice_cracker', name: 'Tuekův síč' },
     { value: 'question', name: 'Jiné' }
 ]
 
