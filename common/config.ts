@@ -1,17 +1,12 @@
 // https://afeld.github.io/emoji-css/
 export const COUNTRIES: ValueName[] = [
-    { value: 'eagle', name: 'Atreides' },
-    { value: 'small_red_triangle', name: 'Bene Gesserit' },
-    { value: 'lion_face', name: 'Corrino' },
-    { value: 'desert', name: 'Fremeni' },
-    { value: 'dagger_knife', name: 'Gináz' },
-    { value: 'black_heart', name: 'Harkonnen' },
-    { value: 'family', name: 'Lid Arrakénu' },
-    { value: 'horse', name: 'Moritani' },
-    { value: 'electric_plug', name: 'Riches' },
-    { value: 'snail', name: 'Tleilax' },
-    { value: 'robot_face', name: 'Vernio' },
-    { value: 'rocket', name: 'Vesmírná Gilda' },
+    { value: 'city_sunset', name: 'Arrakén' },
+    { value: 'city_sunset', name: 'Kartágo' },
+    { value: 'eight_pointed_black_star', name: 'Severní pól' },
+    { value: 'rice_cracker', name: 'Síč Hannanya' },
+    { value: 'rice_cracker', name: 'Síč Tabr' },
+    { value: 'rice_cracker', name: 'Síč Tuek' },
+    { value: 'sunrise_over_mountains', name: 'Štítový val' },
     { value: 'question', name: 'Jiné' }
 ]
 
