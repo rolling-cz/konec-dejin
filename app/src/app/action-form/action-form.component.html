@@ -13,7 +13,7 @@
         </mat-form-field>
         &nbsp;
         <mat-form-field>
-            <mat-label>Cílová frakce</mat-label>
+            <mat-label>Lokace</mat-label>
             <mat-select formControlName="targetCountry">
                 <mat-option *ngFor="let country of countries" [value]="country.value">
                     <i class="em-svg em-{{country.value}}"></i> {{country.name}}
