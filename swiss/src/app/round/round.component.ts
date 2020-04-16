@@ -240,7 +240,7 @@ export class RoundComponent implements OnInit {
           let spentMainActions = relatedActions.filter(action => action["type"] == "main").length
           let mainActionsOk = spentMainActions >= project["mainActions"]
           return <Project>{ keyword: project["keyword"], name: project["name"], delegations: delegationNames, df: spentDf + "/" + project["df"], mainActions: spentMainActions + "/" + project["mainActions"], dfOk: dfOk, mainActionsOk: mainActionsOk }
-        })
+        }).sort((project1, project2) => project1.keyword.localeCompare(project2.keyword))
       }
     )
   }
