@@ -25,7 +25,7 @@ export const COUNTRIES: ValueName[] = [
     { value: 'flag-ru', name: 'Rusko' },
     { value: 'flag-sa', name: 'Saudská Arábie' },
     { value: 'flag-so', name: 'Somálsko' },
-    { value: 'flag-sd', name: 'Súdán'},
+    { value: 'flag-sd', name: 'Súdán' },
     { value: 'flag-sy', name: 'Sýrie' },
     { value: 'flag-tr', name: 'Turecko' },
     { value: 'flag-us', name: 'USA' },
@@ -52,7 +52,7 @@ export const VISIBILITIES_PRIMARY: ValueName[] = [
 
 export const TENSES: ValueName[] = [
     { value: 'past', name: "Proběhlo" },
-    { value: 'processing', name: "Vyhodnocování"},
+    { value: 'processing', name: "Vyhodnocování" },
     { value: 'present', name: "Aktuální" },
     { value: 'future', name: "Budoucí" }
 ]
@@ -75,9 +75,13 @@ export function findValueName(rows: ValueName[], value: string) {
 }
 
 export function calculateDelegateDf(delegationDf: number, numberOfDelegates: number, leader: boolean): number {
-    let dfToLeader = delegationDf * 0.2
+    let dfToLeader = Math.floor(delegationDf * 0.2)
     let remainingDf = delegationDf - dfToLeader
     let dfPerDelegate = remainingDf / numberOfDelegates
-    let dfForCurrentDelegate = (leader) ? dfPerDelegate + dfToLeader : dfPerDelegate
-    return Math.ceil(dfForCurrentDelegate)
+    let dfForCurrentDelegate = Math.floor((leader) ? dfPerDelegate + dfToLeader : dfPerDelegate)
+    if (leader) {
+        // remainder goes to leader
+        dfForCurrentDelegate += delegationDf - dfForCurrentDelegate - Math.floor(dfPerDelegate) * (numberOfDelegates - 1)
+    }
+    return dfForCurrentDelegate
 }
