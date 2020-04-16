@@ -66,6 +66,16 @@ export async function doProcessMainActionsChange(delegateId: string, roundId: st
 export async function doProcessDelegationChange(delegateId: string, roundId: string, change: Change<DataSnapshot>) {
     // Exit when the data is deleted.
     if (!change.after.exists()) {
+        const previousDelegationId = change.before.val() as string | null;
+        let otherDelegateCount = 0;
+        (await admin.database().ref("delegateRounds").once("value")).forEach(snap => {
+            if (snap.val()[roundId]["delegation"] == previousDelegationId) {
+                otherDelegateCount++;
+            }
+        });
+        if (previousDelegationId != null) {
+            await admin.database().ref("delegationRounds/" + previousDelegationId + "/" + roundId + "/delegateCount").set(otherDelegateCount);
+        }
         return;
     }
     const delegationId = change.after.val() as string;
