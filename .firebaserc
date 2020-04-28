@@ -1,15 +1,15 @@
 {
   "projects": {
-    "default": "konec-dejin"
+    "default": "dune-new-dawn"
   },
   "targets": {
-    "konec-dejin": {
+    "dune-new-dawn": {
       "hosting": {
         "app": [
-          "konec-dejin"
+          "dune-new-dawn"
         ],
         "swiss": [
-          "svycari"
+          "dnd-admin"
         ]
       }
     }

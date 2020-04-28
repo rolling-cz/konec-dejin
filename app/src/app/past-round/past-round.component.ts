@@ -61,7 +61,7 @@ export class PastRoundComponent implements OnInit {
   formatDoneActionDetails(action: Action) {
     let details = findValueName(COUNTRIES, action.targetCountry) + ", "
     if (action.df > 0) {
-      details += action.df + " DF, "
+      details += action.df + " BV, "
     }
     if (action.type != "main") {
       details += findValueName(ACTION_TYPES, action.type) + ", "
