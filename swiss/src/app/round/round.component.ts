@@ -233,14 +233,14 @@ export class RoundComponent implements OnInit {
           }
           return ok
         }).map(project => {
-          let relatedActions = actionsForThisAndPreviousRounds.filter(action => action["keyword"] != null && action["keyword"].toLowerCase() == project["keyword"].toLowerCase())
+          let relatedActions = actionsForThisAndPreviousRounds.filter(action => action["keyword"] != null && action["keyword"].toLowerCase().trim() == project["keyword"].toLowerCase().trim())
           let delegationNames = relatedActions.map(action => delegations[action["delegation"]]["name"]).join(", ")
           let spentDf = relatedActions.map(action => action["df"] || 0).reduce((sum, current) => sum + current)
           let dfOk = spentDf >= project["df"]
           let spentMainActions = relatedActions.filter(action => action["type"] == "main").length
           let mainActionsOk = spentMainActions >= project["mainActions"]
           return <Project>{ keyword: project["keyword"], name: project["name"], delegations: delegationNames, df: spentDf + "/" + project["df"], mainActions: spentMainActions + "/" + project["mainActions"], dfOk: dfOk, mainActionsOk: mainActionsOk }
-        })
+        }).sort((project1, project2) => project1.keyword.localeCompare(project2.keyword))
       }
     )
   }
