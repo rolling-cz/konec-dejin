@@ -20,4 +20,6 @@
     </ng-container> | 
     <span class="positive" *ngIf="delegateForm.controls.markedAsSent.value">Depeše odeslána</span>
     <span class="negative" *ngIf="!delegateForm.controls.markedAsSent.value">Depeše neodeslána</span>
+    <br />
+    <app-round-delegate-action-title *ngFor="let path of actionPaths | async" [path]="path"></app-round-delegate-action-title>
 </form>

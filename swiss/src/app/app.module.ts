@@ -31,6 +31,7 @@ import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-con
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import {MatTableModule} from '@angular/material/table';
+import { RoundDelegateActionTitleComponent } from './round-delegate-action-title/round-delegate-action-title.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {MatTableModule} from '@angular/material/table';
     NewRoundComponent,
     DeleteConfirmDialogComponent,
     ProjectsComponent,
-    ProjectFormComponent
+    ProjectFormComponent,
+    RoundDelegateActionTitleComponent
   ],
   imports: [
     BrowserModule,

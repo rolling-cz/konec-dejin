@@ -23,7 +23,6 @@ export class PastRoundComponent implements OnInit {
 
   delegateId: string
   primaryActions: Observable<Action[]>
-  secondaryActions: Observable<Action[]>
   spentDf = new BehaviorSubject<number>(0)
 
   ngOnInit() {
@@ -45,9 +44,6 @@ export class PastRoundComponent implements OnInit {
     this.primaryActions = delegationActions.pipe(map(actions => {
       return actions.filter(action => action["type"] == "main" && !this.isSecretForMe(action)).map(action => action as Action)
     }))
-    this.secondaryActions = delegationActions.pipe(map(actions => {
-      return actions.filter(action => action["type"] != "main" && !this.isSecretForMe(action)).map(action => action as Action)
-    }))
   }
 
   formatDoneActionDescription(action: Action) {
@@ -61,12 +57,10 @@ export class PastRoundComponent implements OnInit {
   formatDoneActionDetails(action: Action) {
     let details = findValueName(COUNTRIES, action.targetCountry) + ", "
     if (action.df > 0) {
-      details += action.df + " BV, "
+      details += action.df + " BV"
+    } else {
+      details += "0 BV"
     }
-    if (action.type != "main") {
-      details += findValueName(ACTION_TYPES, action.type) + ", "
-    }
-    details += findValueName(VISIBILITIES, action.visibility) + ", "
     return details
   }
 

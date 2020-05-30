@@ -29,6 +29,8 @@ export class RoundDelegateFormComponent implements OnInit {
 
   spentDf: Observable<number>
 
+  actionPaths: Observable<string[]>
+
   ngOnInit() {
     this.delegateForm = this.fb.group({
       delegation: [''],
@@ -50,7 +52,7 @@ export class RoundDelegateFormComponent implements OnInit {
     this.dfInfo = this.db.object("delegateRounds/" + delegateId + "/" + roundId + "/delegation").valueChanges().pipe(
       flatMap((delegationId, _) => {
         if (delegationId == null || delegationId == "") {
-          return of({spentDf: 0, availableDf: 0, spentState: SpentState.WARNING})
+          return of({ spentDf: 0, availableDf: 0, spentState: SpentState.WARNING })
         }
         return combineLatest<DfInfo>(
           this.db.object("delegationRounds/" + delegationId + "/" + roundId).valueChanges(),
@@ -71,6 +73,12 @@ export class RoundDelegateFormComponent implements OnInit {
         )
       }
       ))
+    this.actionPaths = this.db.list("actions/" + roundId, ref => ref.orderByChild("delegate").equalTo(delegateId)).snapshotChanges().pipe(
+      map(
+        snapshots => {
+          return snapshots.map(snapshot => "actions/" + roundId + "/" + snapshot.key)
+        })
+    )
   }
 
   changeHandler(state) {
@@ -92,5 +100,5 @@ interface DfInfo {
 }
 
 enum SpentState {
-  OK = 1, WARNING = 2 , ERROR = 3 
+  OK = 1, WARNING = 2, ERROR = 3
 }

@@ -1,21 +1,11 @@
 <app-round-info [roundId]="roundId" [spentDf]="spentDf"></app-round-info>
-<p>Primární akce:</p>
 <app-action-form *ngFor="let path of primaryActionPaths | async" [path]="path"></app-action-form>
-<p>Sekundární akce:</p>
-<app-action-form *ngFor="let path of secondaryActionPaths | async" [path]="path"></app-action-form>
-<button mat-stroked-button color="accent" (click)="addSecondaryAction()">
-  <mat-icon>add</mat-icon>
-  Přidat sekundární akci
-</button>
-<br />
-<br />
 <br />
 <button mat-raised-button color="accent" *ngIf="!(markedAsSent | async) else sent" (click)="send()">Odeslat depeši</button>
 <ng-template #sent>
-  <strong>Depeše odeslána</strong>
+  <p><strong>Depeše odeslána</strong></p>
 </ng-template>
-<br />
-<br />
+<p>
 (Všechny změny v depeši se ukládají automaticky. Kliknutím na "Odeslat depeši" dáváte najevo, že depeše je
 kompletní a může začít vyhodnocování. Můžete vše editovat i po odeslání, ale může se stát že už se na to ve vyhodnocování nebude brát zřetel. Vyhodnocování také začne po deadlinu i pokud jste depeši neodeslali. Pokud
-potřebujete více času, napište Švýcarům na Slacku.)
+potřebujete více času, napište Švýcarům na Slacku.)</p>

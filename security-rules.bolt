@@ -23,6 +23,7 @@ type Action {
   description: Description | Null,
   df: Number | Null,
   keyword: Keyword | Null,
+  title: Description | Null,
   targetCountry: Emoji | Null,
   result: Description | Null,
   type: ActionType,

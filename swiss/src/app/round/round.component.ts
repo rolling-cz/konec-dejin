@@ -89,6 +89,7 @@ export class RoundComponent implements OnInit {
             return [
               findName(combined.delegates, values["delegate"]),
               findName(combined.delegations, values["delegation"]),
+              values["title"] || "",
               values["description"] || "",
               findValueName(COUNTRIES, values["targetCountry"]),
               values["df"] || "",
@@ -100,7 +101,7 @@ export class RoundComponent implements OnInit {
             ]
           })
           let options = {
-            headers: ["Delegát", "Delegace", "Popis akce", "Lokace", "BV", "Klíčové slovo", "Typ akce", "Viditelnost", "Výsledek", "ID akce"]
+            headers: ["Delegát", "Delegace", "Titulek", "Popis akce", "Lokace", "BV", "Klíčové slovo", "Typ akce", "Viditelnost", "Výsledek", "ID akce"]
           };
           new ngxCsv(data, 'Export akcí ' + this.roundForm.controls.name.value, options);
         }
@@ -179,7 +180,7 @@ export class RoundComponent implements OnInit {
                           delegate: action["delegate"],
                           delegation: action["delegation"],
                           type: "main",
-                          visibility: "public"
+                          visibility: "private"
                         })
                     } else {
                       this.db.object("actions/" + this.roundId + "/" + snapshot.key).remove()

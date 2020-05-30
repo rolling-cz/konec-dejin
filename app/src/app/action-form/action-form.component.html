@@ -1,3 +1,4 @@
+<p><strong>{{actionForm.value.title}}</strong></p>
 <mat-card class="action">
     <form [formGroup]="actionForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
         <mat-form-field class="stretch">
@@ -20,33 +21,6 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        &nbsp;
-        <mat-form-field *ngIf="actionForm.get('type').value!='main'">
-            <mat-label>Viditelnost</mat-label>
-            <mat-select formControlName="visibility">
-                <mat-option *ngFor="let visibility of secondaryVisibilities" value="{{visibility.value}}">
-                    {{visibility.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field *ngIf="actionForm.get('type').value=='main'">
-            <mat-label>Viditelnost</mat-label>
-            <mat-select formControlName="visibility">
-                <mat-option *ngFor="let visibility of primaryVisibilities" value="{{visibility.value}}">
-                    {{visibility.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        &nbsp;
-        <mat-form-field class="type" *ngIf="actionForm.get('type').value!='main'">
-            <mat-label>Typ</mat-label>
-            <mat-select formControlName="type">
-                <mat-option *ngFor="let type of actionTypes" value="{{type.value}}">
-                    {{type.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
     </form>
-    <mat-card-footer class="state mat-small">{{state}} <span *ngIf="actionForm.get('type').value!='main'"> | <a href="#"
-                (click)="delete()">Smazat</a></span></mat-card-footer>
+    <mat-card-footer class="state mat-small">{{state}}</mat-card-footer>
 </mat-card>

@@ -50,7 +50,7 @@ export async function doProcessMainActionsChange(delegateId: string, roundId: st
                 delegate: delegateId,
                 delegation: delegationId,
                 type: "main",
-                visibility: "public"
+                visibility: "private"
             })
         }
     } else {

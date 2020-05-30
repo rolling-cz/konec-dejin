@@ -33,10 +33,9 @@ export class ActionFormComponent implements OnInit {
     this.actionForm = this.fb.group({
       description: [''],
       df: [0],
+      title: [''],
       keyword: [''],
-      targetCountry: [''],
-      visibility: [''],
-      type: ['']
+      targetCountry: ['']
     })
   }
 

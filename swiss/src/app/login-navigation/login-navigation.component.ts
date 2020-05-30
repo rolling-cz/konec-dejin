@@ -15,7 +15,7 @@ export class LoginNavigationComponent implements OnInit {
   constructor(public firebaseAuth: AngularFireAuth, public http: HttpClient, public db: AngularFireDatabase) {
   }
 
-  title = "DND Admin"
+  title = "DVA Admin"
   passwordError = false
   loading = false
   initializing = true
