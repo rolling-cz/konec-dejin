@@ -42,7 +42,7 @@ export class PastRoundComponent implements OnInit {
       })
     )
     this.primaryActions = delegationActions.pipe(map(actions => {
-      return actions.filter(action => action["type"] == "main" && !this.isSecretForMe(action)).map(action => action as Action)
+      return actions.filter(action => (action["type"] == "mission" || action["type"] == "other") && !this.isSecretForMe(action)).map(action => action as Action)
     }))
   }
 

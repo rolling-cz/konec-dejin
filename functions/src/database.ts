@@ -35,7 +35,7 @@ export async function doProcessMainActionsChange(delegateId: string, roundId: st
     }
     let currentMainActions: string[] = [];
     (await admin.database().ref("actions/" + roundId).orderByChild("delegate").equalTo(delegateId).once("value")).forEach(snap => {
-        if (snap.val()["type"] == "main") {
+        if (snap.val()["type"] == "mission" || snap.val()["type"] == "other") {
             currentMainActions.push(snap.key as string);
         }
     })
@@ -46,10 +46,11 @@ export async function doProcessMainActionsChange(delegateId: string, roundId: st
         // Add missing main actions
         const delegationId = (await admin.database().ref("delegateRounds/" + delegateId + "/" + roundId + "/delegation").once("value")).val()
         for (let index = 0; index < mainActions - currentMainActions.length; index++) {
+            var actionType = (currentMainActions.length == 0 && index == 0) ? "mission" : "other"
             await admin.database().ref("actions/" + roundId).push({
                 delegate: delegateId,
                 delegation: delegationId,
-                type: "main",
+                type: actionType,
                 visibility: "private"
             })
         }

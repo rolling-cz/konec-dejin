@@ -85,7 +85,6 @@ export class RoundComponent implements OnInit {
           let data = combined.actions.map(snapshot => {
             let values = snapshot.payload.val()
             let actionTypes = ACTION_TYPES
-            actionTypes.push({ value: "main", name: "Primární" })
             return [
               findName(combined.delegates, values["delegate"]),
               findName(combined.delegations, values["delegation"]),
@@ -174,17 +173,13 @@ export class RoundComponent implements OnInit {
                 snapshots.forEach(
                   snapshot => {
                     let action = snapshot.payload.val()
-                    if (action["type"] == "main") {
-                      this.db.object("actions/" + this.roundId + "/" + snapshot.key).set(
-                        {
-                          delegate: action["delegate"],
-                          delegation: action["delegation"],
-                          type: "main",
-                          visibility: "private"
-                        })
-                    } else {
-                      this.db.object("actions/" + this.roundId + "/" + snapshot.key).remove()
-                    }
+                    this.db.object("actions/" + this.roundId + "/" + snapshot.key).set(
+                      {
+                        delegate: action["delegate"],
+                        delegation: action["delegation"],
+                        type: action["type"],
+                        visibility: "private"
+                      })
                   }
                 )
               }
@@ -238,7 +233,7 @@ export class RoundComponent implements OnInit {
           let delegationNames = relatedActions.map(action => delegations[action["delegation"]]["name"]).join(", ")
           let spentDf = relatedActions.map(action => action["df"] || 0).reduce((sum, current) => sum + current)
           let dfOk = spentDf >= project["df"]
-          let spentMainActions = relatedActions.filter(action => action["type"] == "main").length
+          let spentMainActions = relatedActions.filter(action => action["type"] == "mission" ||action["type"] == "other").length
           let mainActionsOk = spentMainActions >= project["mainActions"]
           return <Project>{ keyword: project["keyword"], name: project["name"], delegations: delegationNames, df: spentDf + "/" + project["df"], mainActions: spentMainActions + "/" + project["mainActions"], dfOk: dfOk, mainActionsOk: mainActionsOk }
         }).sort((project1, project2) => project1.keyword.localeCompare(project2.keyword))

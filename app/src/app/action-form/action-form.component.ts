@@ -35,7 +35,8 @@ export class ActionFormComponent implements OnInit {
       df: [0],
       title: [''],
       keyword: [''],
-      targetCountry: ['']
+      targetCountry: [''],
+      type: ['']
     })
   }
 

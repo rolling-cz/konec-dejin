@@ -43,7 +43,7 @@
     </div>
     <button mat-button color="accent" *ngIf="!editingDelegations" (click)="editDelegations()">Upravit</button>
 </mat-card>
-<p>Projekty:</p>
+<p>Mise:</p>
 <mat-card class="card">
     <table mat-table [dataSource]="projects | async" *ngIf="showingProjects">
 
@@ -82,7 +82,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <button mat-button color="accent" *ngIf="!showingProjects" (click)="showProjects()">Ukázat progress
-        projektů</button>
+        misí</button>
 </mat-card>
 <br />
 <button mat-stroked-button color="accent" (click)="deleteRound()">Smazat kolo</button>&nbsp;

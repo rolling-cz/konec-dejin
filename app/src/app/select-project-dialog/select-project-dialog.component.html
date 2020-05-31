@@ -1,11 +1,18 @@
-<h1 mat-dialog-title>Dostupné projekty:</h1>
+<h1 mat-dialog-title>Dostupné mise:</h1>
 <mat-dialog-content>
-    <mat-nav-list>
-        <a href="#" mat-list-item *ngFor="let project of projects | async" [mat-dialog-close]="project">
-            {{ project["name"]}} ({{ project["value"]}})
-        </a>
+    <mat-nav-list *ngIf="projects | async as _projects; else loading">
+        <ng-container *ngIf="_projects.length; else noItems">
+            <a href="#" mat-list-item *ngFor="let project of _projects" [mat-dialog-close]="project">
+                {{ project["name"]}} ({{ project["value"]}})
+            </a>
+        </ng-container>
+        <ng-template #noItems>
+            Žádné mise nejsou k dispozici
+        </ng-template>
     </mat-nav-list>
-    <mat-spinner class="center" *ngIf="!(projects | async)"></mat-spinner>
+    <ng-template #loading>
+        <mat-spinner class="center"></mat-spinner>
+    </ng-template>
 </mat-dialog-content>
 <div mat-dialog-actions>
     <button mat-button (click)="onCloseClick()">Zavřít</button>

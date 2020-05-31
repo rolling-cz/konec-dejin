@@ -2,7 +2,7 @@
     <mat-card class="card">
          <app-project-form *ngFor="let path of projectPaths | async" [path]="path"></app-project-form>
     </mat-card>
-    <p>Přidat projekt:</p>
+    <p>Přidat misi:</p>
     <mat-card class="card">
         <form (ngSubmit)="addProject(addProjectForm)" #addProjectForm="ngForm">
             <mat-form-field class="text">
@@ -47,7 +47,7 @@
                 </mat-select>
             </mat-form-field>
             <br />
-            <button type="Submit" mat-raised-button color="accent">Přidat projekt</button>
+            <button type="Submit" mat-raised-button color="accent">Přidat misi</button>
         </form>
     </mat-card>
 </div>

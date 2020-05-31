@@ -10,7 +10,7 @@
         &nbsp;
         <mat-form-field>
             <input matInput placeholder="Klíčové slovo" type="text" formControlName="keyword">
-            <mat-icon matSuffix (click)="projectSelected()">list</mat-icon>
+            <mat-icon matSuffix (click)="projectSelected()" *ngIf="actionForm.value.type == 'mission'">list</mat-icon>
         </mat-form-field>
         &nbsp;
         <mat-form-field>

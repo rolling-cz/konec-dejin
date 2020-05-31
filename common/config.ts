@@ -11,9 +11,7 @@ export const COUNTRIES: ValueName[] = [
 ]
 
 export const ACTION_TYPES: ValueName[] = [
-    { value: 'support', name: "Podpora" },
-    { value: 'economic', name: "Ekonomika" },
-    { value: 'elections', name: "Volby" },
+    { value: 'mission', name: "Mise" },
     { value: 'other', name: "Jiné" }
 ]
 export const VISIBILITIES: ValueName[] = [

@@ -39,7 +39,7 @@ type Keyword extends String {
 }
 
 type ActionType extends String {
-    validate() { this == "main" || this == "support" || this == "economic" || this == "elections" || this == "other" }
+    validate() { this == "mission" || this == "other" }
 }
 
 type ActionVisibility extends String {
