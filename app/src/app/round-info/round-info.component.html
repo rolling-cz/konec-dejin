@@ -1,7 +1,6 @@
 <ng-container *ngIf="(roundInfo | async) as info">
     <mat-card class="action">
-        <p><i class="em-svg em-{{ info.flag }}"></i> {{ info.name }}, vedoucí delegace:
-            {{ info.leader }}
+        <p><i class="em-svg em-{{ info.flag }}"></i> {{ info.name }}
         </p>
         <p *ngIf="info.presentRound">Deadline odeslání depeše: <strong>{{ info.deadline }}</strong>
         </p>

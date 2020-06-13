@@ -1,13 +1,31 @@
 // https://afeld.github.io/emoji-css/
 export const COUNTRIES: ValueName[] = [
     { value: 'city_sunset', name: 'Arrakén' },
+    { value: 'mountain', name: 'Bílá stolová hora' },
+    { value: 'sunrise_over_mountains', name: 'Bledá planina' },
+    { value: 'sunrise_over_mountains', name: 'Imperiální pánev' },
+    { value: 'sunrise_over_mountains', name: 'Jižní nepravý val' },
+    { value: 'sunrise_over_mountains', name: 'Jižní planina' },
+    { value: 'sunrise_over_mountains', name: 'Kamenná brada' },
     { value: 'city_sunset', name: 'Kartágo' },
-    { value: 'eight_pointed_black_star', name: 'Severní pól' },
-    { value: 'rice_cracker', name: 'Síč Habbanya' },
-    { value: 'rice_cracker', name: 'Síč Tabr' },
-    { value: 'sunrise_over_mountains', name: 'Štítový val' },
-    { value: 'rice_cracker', name: 'Tuekův síč' },
-    { value: 'question', name: 'Jiné' }
+    { value: 'sunrise_over_mountains', name: 'Malý erg' },
+    { value: 'sunrise_over_mountains', name: 'Nerovná země' },
+    { value: 'sunrise_over_mountains', name: 'Pánev Hagga' },
+    { value: 'snowflake', name: 'Polární čepička' },
+    { value: 'sunrise_over_mountains', name: 'Předěl Habbanya' },
+    { value: 'sunrise_over_mountains', name: 'Proláklina Cielago' },
+    { value: 'sunrise_over_mountains', name: 'Průsmyk Harg' },
+    { value: 'red_circle', name: 'Rudý jícen' },
+    { value: 'sunrise_over_mountains', name: 'Sádrová pánev' },
+    { value: 'sunrise_over_mountains', name: 'Skalní výchozy' },
+    { value: 'sunrise_over_mountains', name: 'Stará průrva' },
+    { value: 'mountain', name: 'Štítový val' },
+    { value: 'sunrise_over_mountains', name: 'Útes Sihája' },
+    { value: 'sunrise_over_mountains', name: 'Velká rovina' },
+    { value: 'sunrise_over_mountains', name: 'Větrný průsmyk' },
+    { value: 'sunrise_over_mountains', name: 'Východní nepravá stěna' },
+    { value: 'sunrise_over_mountains', name: 'Vykrojený útes' },
+    { value: 'sunrise_over_mountains', name: 'Západní nepravá stěna' }
 ]
 
 export const ACTION_TYPES: ValueName[] = [
