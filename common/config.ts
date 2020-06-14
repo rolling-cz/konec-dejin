@@ -25,7 +25,8 @@ export const COUNTRIES: ValueName[] = [
     { value: 'sunrise_over_mountains', name: 'Větrný průsmyk' },
     { value: 'sunrise_over_mountains', name: 'Východní nepravá stěna' },
     { value: 'sunrise_over_mountains', name: 'Vykrojený útes' },
-    { value: 'sunrise_over_mountains', name: 'Západní nepravá stěna' }
+    { value: 'sunrise_over_mountains', name: 'Západní nepravá stěna' },
+    { value: 'question', name: 'Jiné' }
 ]
 
 export const ACTION_TYPES: ValueName[] = [
