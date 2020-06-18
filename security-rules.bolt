@@ -136,7 +136,7 @@ type Id extends String {
 }
 
 type Emoji extends String {
-    validate() { hasMaxLength(this, 16) }
+    validate() { hasMaxLength(this, 50) }
 }
 
 isSwiss() {
