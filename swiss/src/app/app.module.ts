@@ -24,7 +24,6 @@ import { DelegationFormComponent } from './delegation-form/delegation-form.compo
 import { RoundComponent } from './round/round.component';
 import { RoundDelegateFormComponent } from './round-delegate-form/round-delegate-form.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { RoundDelegationFormComponent } from './round-delegation-form/round-delegation-form.component';
 import { NewRoundComponent } from './new-round/new-round.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
@@ -45,7 +44,6 @@ import { RoundDelegateActionTitleComponent } from './round-delegate-action-title
     DelegationFormComponent,
     RoundComponent,
     RoundDelegateFormComponent,
-    RoundDelegationFormComponent,
     NewRoundComponent,
     DeleteConfirmDialogComponent,
     ProjectsComponent,

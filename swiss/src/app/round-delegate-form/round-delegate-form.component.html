@@ -8,18 +8,25 @@
             </mat-option>
         </mat-select>
     </mat-form-field>&nbsp;
-    <mat-form-field class="main-actions">
-        <input matInput placeholder="Primární akce" type="number" formControlName="mainActions" />
+    <mat-form-field class="bv" class="main-actions">
+        <input matInput placeholder="BV" type="number" formControlName="bv" />
     </mat-form-field>
     {{ state }} |
     <ng-container *ngIf="(dfInfo | async) as df">
         <span class="positive" *ngIf="df.spentState == 1">{{df.spentDf}}</span>
         <span class="negative" *ngIf="df.spentState == 3">{{df.spentDf}}</span>
         <span *ngIf="df.spentState == 2">{{df.spentDf}}</span>
-        / {{df.availableDf}} BV použito
+        BV použito
     </ng-container> | 
     <span class="positive" *ngIf="delegateForm.controls.markedAsSent.value">Depeše odeslána</span>
     <span class="negative" *ngIf="!delegateForm.controls.markedAsSent.value">Depeše neodeslána</span>
     <br />
+    <mat-form-field class="main-actions">
+        <input matInput placeholder="Akce" type="number" formControlName="mainActions" />
+    </mat-form-field>&nbsp;
     <app-round-delegate-action-title *ngFor="let path of actionPaths | async" [path]="path"></app-round-delegate-action-title>
+    <br />
+    <mat-form-field class="message">
+        <textarea matInput placeholder="Důležitá sdělení vedení" formControlName="message"></textarea>
+    </mat-form-field>
 </form>

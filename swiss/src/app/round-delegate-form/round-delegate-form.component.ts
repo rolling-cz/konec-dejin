@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, combineLatest, of } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
-import { calculateDelegateDf } from '../../../../common/config';
 
 @Component({
   selector: 'app-round-delegate-form',
@@ -35,7 +34,9 @@ export class RoundDelegateFormComponent implements OnInit {
     this.delegateForm = this.fb.group({
       delegation: [''],
       mainActions: [0],
-      markedAsSent: [false]
+      markedAsSent: [false],
+      bv: [0],
+      message: ['']
     })
     let paths = this.path.split("/")
     let delegateId = paths[1]
@@ -49,41 +50,39 @@ export class RoundDelegateFormComponent implements OnInit {
           })
         })
     )
-    this.dfInfo = this.db.object("delegateRounds/" + delegateId + "/" + roundId + "/delegation").valueChanges().pipe(
-      flatMap((delegationId, _) => {
+    this.dfInfo = this.db.object("delegateRounds/" + delegateId + "/" + roundId).valueChanges().pipe(
+      flatMap((delegate, _) => {
+        let delegationId = delegate["delegation"];
         if (delegationId == null || delegationId == "") {
-          return of({ spentDf: 0, availableDf: 0, spentState: SpentState.WARNING })
+          return of({ spentDf: 0, spentState: SpentState.WARNING })
         }
-        return combineLatest<DfInfo>(
-          this.db.object("delegationRounds/" + delegationId + "/" + roundId).valueChanges(),
-          this.db.list("actions/" + roundId, ref => ref.orderByChild("delegate").equalTo(delegateId)).snapshotChanges().pipe(map(
-            snaps => {
-              if (snaps.length == 0) {
-                return 0
-              }
-              return snaps.map(snap => snap.payload.val()["df"] || 0).reduce((sum, current) => sum + current)
+        return this.db.list("actions/" + roundId, ref => ref.orderByChild("delegate").equalTo(delegateId)).snapshotChanges().pipe(map(
+          snaps => {
+            if (snaps.length == 0) {
+              return 0
             }
-          )),
-          (delegationRound, spentDf) => {
-            let delegationAvailableDf = delegationRound["availableDf"]
-            let availableDf = calculateDelegateDf(delegationAvailableDf, delegationRound["delegateCount"], delegationRound["leader"] == delegateId)
-            let state = (availableDf == spentDf) ? SpentState.OK : (availableDf > spentDf) ? SpentState.WARNING : SpentState.ERROR
-            return { spentDf: spentDf, availableDf: availableDf, spentState: state }
+            return snaps.map(snap => snap.payload.val()["df"] || 0).reduce((sum, current) => sum + current)
           }
-        )
+        ), map(
+          spentDf => {
+            let availableDf = delegate["bv"]
+            let state = (availableDf == spentDf) ? SpentState.OK : (availableDf > spentDf) ? SpentState.WARNING : SpentState.ERROR
+            return { spentDf: spentDf, spentState: state }
+          }
+        ))
       }
       ))
     this.actionPaths = this.db.list("actions/" + roundId, ref => ref.orderByChild("delegate").equalTo(delegateId)).snapshotChanges().pipe(
-      map(
-        snapshots => {
-          return snapshots.map(snapshot => "actions/" + roundId + "/" + snapshot.key)
-        })
-    )
+            map(
+              snapshots => {
+                return snapshots.map(snapshot => "actions/" + roundId + "/" + snapshot.key)
+              })
+          )
   }
 
-  changeHandler(state) {
-    this.state = state
-  }
+changeHandler(state) {
+  this.state = state
+}
 
 }
 
@@ -95,7 +94,6 @@ interface Delegation {
 
 interface DfInfo {
   spentDf: number,
-  availableDf: number,
   spentState: SpentState
 }
 

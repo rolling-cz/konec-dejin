@@ -12,7 +12,6 @@ import { NgForm } from '@angular/forms';
 export class DelegatesComponent implements OnInit {
 
   delegatePaths: Observable<string[]>
-  delegations: Observable<Delegation[]>
 
   constructor(public db: AngularFireDatabase) { }
 
@@ -21,14 +20,6 @@ export class DelegatesComponent implements OnInit {
       map(
         snapshots => {
           return snapshots.map(snapshot => "delegates/" + snapshot.key)
-        })
-    )
-    this.delegations = this.db.list("delegations").snapshotChanges().pipe(
-      map(
-        snapshots => {
-          return snapshots.map(snapshot => {
-            return { id: snapshot.key, name: snapshot.payload.val()["name"] }
-          })
         })
     )
   }
@@ -40,36 +31,6 @@ export class DelegatesComponent implements OnInit {
         password: form.value["password"],
         spreadsheet: form.value["spreadsheet"]
       })
-      this.db.list("rounds").snapshotChanges().pipe(
-        take(1),
-        tap(
-          snapshots => {
-            snapshots.forEach(
-              snapshot => {
-                this.db.object("delegateRounds/" + ref.key + "/" + snapshot.key).set(
-                  {
-                    delegation: form.value["defaultDelegation"],
-                    markedAsSent: false,
-                    mainActions: (form.value["defaultLeader"] == true) ? 3 : 2
-                  }
-                )
-                if (form.value["defaultLeader"] == true) {
-                  this.db.object("delegationRounds/" + form.value["defaultDelegation"] + "/" + snapshot.key).update(
-                    {
-                      leader: ref.key
-                    }
-                  )
-                }
-              }
-            )
-          }
-        )
-      ).subscribe()
     }
   }
-}
-
-interface Delegation {
-  id: string,
-  name: string
 }

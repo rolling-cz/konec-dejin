@@ -3,11 +3,14 @@
     display: inline-block;
 }
 .main-actions {
-    width: 4em;
+    width: 3em;
 }
 .positive {
     color: #4CAF50;
 }
 .negative {
     color: #FF5252;
+}
+.message {
+    width: 20em;
 }

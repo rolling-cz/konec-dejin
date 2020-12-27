@@ -79,19 +79,6 @@ path /delegates {
 }
 
 //
-// Delegation rounds
-//
-
-path /delegationRounds {
-  read() { isSwiss() }
-  write() { isSwiss() }
-
-  path /{delegation_id}/{round_id} {
-    read() { isSameDelegation(delegation_id, round_id) }
-  }
-}
-
-//
 // Delegations
 //
 

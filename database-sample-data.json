@@ -68,7 +68,9 @@
       "round_1" : {
         "delegation" : "delegation_id_1",
         "markedAsSent" : true,
-        "mainActions": 3
+        "mainActions": 3,
+        "bv": 30,
+        "message": "You are doomed"
       },
       "round_2" : {
         "delegation" : "delegation_id_1",
@@ -80,22 +82,8 @@
   "delegates" : {
     "delegate_id_1" : {
       "name" : "Daniel Appleby",
-      "password" : "secret"
-    }
-  },
-  "delegationRounds" : {
-    "delegation_id_1" : {
-      "round_1" : {
-        "availableDf" : 200,
-        "delegateCount" : 1,
-        "leader" : "delegate_id_1",
-        "message" : "Nízké ceny ropy pomohly mírně oživit naši ekonomiku. Finanční krize a krize Eura však dále poškozuje naši ekonomiku"
-      },
-      "round_2" : {
-        "availableDf" : 303,
-        "delegateCount" : 2,
-        "leader" : "delegate_id_1"
-      }
+      "password" : "secret",
+      "spreadsheet": "https://porno"
     }
   },
   "delegations" : {

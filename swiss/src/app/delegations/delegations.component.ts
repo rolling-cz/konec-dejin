@@ -26,27 +26,10 @@ export class DelegationsComponent implements OnInit {
 
   addDelegation(form: NgForm) {
     if (form.valid) {
-      let ref = this.db.list("delegations").push({
+      this.db.list("delegations").push({
         name: form.value["name"],
         flag: form.value["flag"]
       })
-      this.db.list("rounds").snapshotChanges().pipe(
-        take(1),
-        tap(
-          snapshots => {
-            snapshots.forEach(
-              snapshot => {
-                this.db.object("delegationRounds/"+ref.key+"/"+snapshot.key).set(
-                  {
-                    availableDf: form.value["defaultDf"],
-                    delegateCount: 0
-                  }
-                )
-              }
-            )
-          }
-        )
-      ).subscribe()
     }
   }
 }

@@ -66,15 +66,3 @@ export function findValueName(rows: ValueName[], value: string) {
     if (row == undefined) return "N/A"
     return row.name
 }
-
-export function calculateDelegateDf(delegationDf: number, numberOfDelegates: number, leader: boolean): number {
-    let dfToLeader = Math.floor(delegationDf * 0.2)
-    let remainingDf = delegationDf - dfToLeader
-    let dfPerDelegate = remainingDf / numberOfDelegates
-    let dfForCurrentDelegate = Math.floor((leader) ? dfPerDelegate + dfToLeader : dfPerDelegate)
-    if (leader) {
-        // remainder goes to leader
-        dfForCurrentDelegate += delegationDf - dfForCurrentDelegate - Math.floor(dfPerDelegate) * (numberOfDelegates - 1)
-    }
-    return dfForCurrentDelegate
-}

@@ -35,14 +35,6 @@
     &nbsp;
     <button mat-stroked-button color="accent" (click)="importActions(file)">Import výsledků</button>
 </mat-card>
-<p>Delegace:</p>
-<mat-card class="card">
-    <div *ngIf="editingDelegations">
-        <app-round-delegation-form *ngFor="let path of delegationPaths | async" [path]="path">
-        </app-round-delegation-form>
-    </div>
-    <button mat-button color="accent" *ngIf="!editingDelegations" (click)="editDelegations()">Upravit</button>
-</mat-card>
 <p>Mise:</p>
 <mat-card class="card">
     <table mat-table [dataSource]="projects | async" *ngIf="showingProjects">
