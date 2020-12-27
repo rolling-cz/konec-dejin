@@ -37,7 +37,8 @@ export class DelegatesComponent implements OnInit {
     if (form.valid) {
       let ref = this.db.list("delegates").push({
         name: form.value["name"],
-        password: form.value["password"]
+        password: form.value["password"],
+        spreadsheet: form.value["spreadsheet"]
       })
       this.db.list("rounds").snapshotChanges().pipe(
         take(1),

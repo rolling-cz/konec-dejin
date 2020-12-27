@@ -24,7 +24,8 @@ export class DelegateFormComponent implements OnInit {
   ngOnInit() {
     this.delegateForm = this.fb.group({
       name: [''],
-      password: ['']
+      password: [''],
+      spreadsheet: ['']
     })
   }
 

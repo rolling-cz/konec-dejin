@@ -33,3 +33,7 @@ export interface RoundInfo {
     availableDf: number,
     message: string
 }
+
+export interface Delegate {
+    name: string, spreadsheet: string
+}

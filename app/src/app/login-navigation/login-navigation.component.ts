@@ -5,6 +5,7 @@ import { SignInResponse } from '../model';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
+import { auth } from 'firebase';
 
 @Component({
   selector: 'app-login-navigation',
@@ -21,12 +22,14 @@ export class LoginNavigationComponent implements OnInit {
   loading = false
   initializing = true
   delegateName: Observable<string>
+  spreadsheet: Observable<string>
 
   ngOnInit() {
     this.delegateName = this.firebaseAuth.authState.pipe(flatMap((state, _) => {
       if (state == null) {
         return of(null) as Observable<string>
       } else {
+        this.spreadsheet = this.db.object("delegates/" + state.uid + "/spreadsheet").valueChanges() as Observable<string>
         return this.db.object("delegates/" + state.uid + "/name").valueChanges() as Observable<string>
       }
     }), tap(
@@ -34,6 +37,7 @@ export class LoginNavigationComponent implements OnInit {
         this.initializing = false
       }
     ))
+
   }
 
   login(password) {

@@ -14,6 +14,10 @@
             </mat-form-field>
             <br />
             <mat-form-field>
+                <input matInput placeholder="Spreadsheet" type="url" name="spreadsheet" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
                 <mat-label>Výchozí delegace</mat-label>
                 <mat-select name="defaultDelegation" required ngModel>
                     <mat-option *ngFor="let delegation of delegations | async" value="{{delegation.id}}">

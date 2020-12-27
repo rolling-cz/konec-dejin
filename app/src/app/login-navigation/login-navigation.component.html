@@ -2,10 +2,13 @@
     <mat-toolbar color="primary">
         <span>{{title}}</span>
         <span class="fill-remaining-space"></span>
-        <span class="name">{{ name }}</span>
-        <button mat-icon-button (click)="logout()">
-            <mat-icon>logout</mat-icon>
-        </button>
+        <div class="personal">
+            <span class="name">{{ name }}</span>
+            <button mat-icon-button (click)="logout()">
+                <mat-icon>logout</mat-icon>
+            </button> <br />
+            <a href="{{ spreadsheet | async }}" target="_blank" class="spreadsheet">Osobní přehled</a>
+        </div>
     </mat-toolbar>
     <app-rounds></app-rounds>
 </div>
