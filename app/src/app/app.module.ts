@@ -27,6 +27,7 @@ import { SelectProjectDialogComponent } from './select-project-dialog/select-pro
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ProcessingRoundComponent } from './processing-round/processing-round.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FireFormDirective,
     ActionFormComponent,
     DelegateNameComponent,
-    SelectProjectDialogComponent
+    SelectProjectDialogComponent,
+    ProcessingRoundComponent
   ],
   imports: [
     BrowserModule,
