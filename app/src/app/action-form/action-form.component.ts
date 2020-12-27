@@ -60,8 +60,8 @@ export class ActionFormComponent implements OnInit {
     this.dialog.open(SelectProjectDialogComponent, { data: roundId }).afterClosed().subscribe(
       result => {
         if (result) {
-          let keyword = result["value"]
-          this.actionForm.controls.keyword.setValue(keyword)
+          this.actionForm.controls.keyword.setValue(result["value"])
+          this.actionForm.controls.df.setValue(result["df"])
         }
       })
   }

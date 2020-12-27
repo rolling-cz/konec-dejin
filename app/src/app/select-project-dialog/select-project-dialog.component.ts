@@ -35,7 +35,7 @@ export class SelectProjectDialogComponent implements OnInit {
               let generalProjects = projects.filter(project => project["type"] == "general")
               let mergedProjects = delegateProjects.concat(delegationProjects).concat(generalProjects)
               return mergedProjects.map(project => {
-                return { value: project["keyword"].toUpperCase(), name: project["name"] }
+                return { value: project["keyword"].toUpperCase(), name: project["name"], df: project["df"] }
               })
             }
           )
