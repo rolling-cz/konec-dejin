@@ -49,6 +49,10 @@ export const TENSES: ValueName[] = [
     { value: 'present', name: "Aktuální" },
     { value: 'future', name: "Budoucí" }
 ]
+export const SIZES: ValueName[] = [
+    { value: 'small', name: "Malé" },
+    { value: 'large', name: "Velké" }
+]
 export const PROJECT_TYPES: ValueName[] = [
     { value: 'general', name: "Pro všechny" },
     { value: 'delegation', name: "Pro delegaci" },

@@ -106,7 +106,8 @@
     "round3" : {
       "deadline" : 1457015264499,
       "name" : "3. kolo",
-      "tense" : "future"
+      "tense" : "future",
+      "size": "small"
     },
     "round_1" : {
       "deadline" : 1457015264428,

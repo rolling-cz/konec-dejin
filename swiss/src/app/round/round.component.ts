@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { TENSES, COUNTRIES, findValueName, ACTION_TYPES, VISIBILITIES } from '../../../../common/config';
+import { TENSES, COUNTRIES, findValueName, ACTION_TYPES, VISIBILITIES, SIZES } from '../../../../common/config';
 import { AngularFireDatabase, DatabaseSnapshot, AngularFireAction } from '@angular/fire/database';
 import { Observable, combineLatest } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
@@ -28,11 +28,11 @@ export class RoundComponent implements OnInit {
 
   tenses = TENSES
 
+  sizes = SIZES
+
   path
 
   delegatePaths: Observable<string[]>
-
-  delegationPaths: Observable<string[]>
 
   editingDelegates = false
 
@@ -49,18 +49,13 @@ export class RoundComponent implements OnInit {
     this.roundForm = this.fb.group({
       name: [''],
       tense: [''],
-      deadline: ['']
+      deadline: [''],
+      size: ['']
     })
     this.delegatePaths = this.db.list("delegateRounds").snapshotChanges().pipe(
       map(
         snapshots => {
           return snapshots.map(snapshot => "delegateRounds/" + snapshot.key + "/" + this.roundId)
-        })
-    )
-    this.delegationPaths = this.db.list("delegationRounds").snapshotChanges().pipe(
-      map(
-        snapshots => {
-          return snapshots.map(snapshot => "delegationRounds/" + snapshot.key + "/" + this.roundId)
         })
     )
     this.projects = this.calculateProjects()
@@ -138,18 +133,6 @@ export class RoundComponent implements OnInit {
                 snapshots.forEach(
                   snapshot => {
                     this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId).remove()
-                  }
-                )
-              }
-            )
-          ).subscribe()
-          this.db.list("delegationRounds").snapshotChanges().pipe(
-            take(1),
-            tap(
-              snapshots => {
-                snapshots.forEach(
-                  snapshot => {
-                    this.db.object("delegationRounds/" + snapshot.key + "/" + this.roundId).remove()
                   }
                 )
               }

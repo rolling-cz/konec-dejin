@@ -24,3 +24,6 @@ This document defines constants used in database.
         - present
         - future
         - processing
+    - size
+        - small
+        - large

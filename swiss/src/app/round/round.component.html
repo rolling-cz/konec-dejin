@@ -15,6 +15,15 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Velikost kola</mat-label>
+            <mat-select formControlName="size">
+                <mat-option *ngFor="let size of sizes" [value]="size.value">
+                    {{size.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </form>
     <mat-card-footer class="state mat-small">{{state}}</mat-card-footer>
 </mat-card>

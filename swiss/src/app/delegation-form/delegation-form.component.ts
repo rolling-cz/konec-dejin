@@ -35,7 +35,6 @@ export class DelegationFormComponent implements OnInit {
     this.dialog.open(DeleteConfirmDialogComponent, { data: this.delegationForm.controls.name.value }).afterClosed().subscribe(
       result => {
         if (result) {
-          this.db.object(this.path.replace("delegations", "delegationRounds")).remove()
           this.db.object(this.path).remove()
         }
       })

@@ -25,11 +25,13 @@ export async function doProcessMainActionsChange(delegateId: string, roundId: st
         const delegationId = (await admin.database().ref("delegateRounds/" + delegateId + "/" + roundId + "/delegation").once("value")).val()
         for (let index = 0; index < mainActions - currentMainActions.length; index++) {
             var actionType = (currentMainActions.length == 0 && index == 0) ? "mission" : "other"
+            var title = (actionType == "mission") ? "Mise" : ""
             await admin.database().ref("actions/" + roundId).push({
                 delegate: delegateId,
                 delegation: delegationId,
                 type: actionType,
-                visibility: "private"
+                visibility: "private",
+                title: title
             })
         }
     } else {
