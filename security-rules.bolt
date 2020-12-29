@@ -95,7 +95,7 @@ path /delegations {
 //
 
 path /projects {
-    index() {["delegate", "delegation", "type"]}
+    index() {["delegate", "delegation", "type", "enabled"]}
     
     read() { isSignedIn() }
 

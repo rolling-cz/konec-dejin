@@ -25,22 +25,15 @@ export class SelectProjectDialogComponent implements OnInit {
 
   ngOnInit() {
     let delegateId = this.auth.auth.currentUser.uid
-    this.projects = this.db.object("delegateRounds/" + delegateId + "/" + this.roundId + "/delegation").valueChanges().pipe(
-      flatMap((delegationId, _) => {
-        return this.db.list("projects").valueChanges().pipe(
-          map(
-            projects => {
-              let delegateProjects = projects.filter(project => project["type"] == "delegate" && project["delegate"] == delegateId)
-              let delegationProjects = projects.filter(project => project["type"] == "delegation" && project["delegation"] == delegationId)
-              let generalProjects = projects.filter(project => project["type"] == "general")
-              let mergedProjects = delegateProjects.concat(delegationProjects).concat(generalProjects)
-              return mergedProjects.map(project => {
-                return { value: project["keyword"].toUpperCase(), name: project["name"], df: project["df"] }
-              })
-            }
-          )
-        )
-      }
-      ))
+    this.projects = this.db.list("projects", ref => ref.orderByChild("enabled").equalTo(true)).valueChanges().pipe(
+      map(
+        projects => {
+          let delegateProjects = projects.filter(project => project["type"] == "delegate" && project["delegate"] == delegateId)
+          return delegateProjects.map(project => {
+            return { value: project["keyword"].toUpperCase(), name: project["name"], df: project["df"] }
+          })
+        }
+      )
+    )
   }
 }

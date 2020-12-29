@@ -99,6 +99,7 @@
       "keyword": "ROPOVOD",
       "delegation": "delegation_id_1",
       "df": 50,
+      "enabled": true,
       "mainActions": 1
     }
   },

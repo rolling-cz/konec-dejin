@@ -12,23 +12,12 @@ import { ValueName, PROJECT_TYPES } from '../../../../common/config';
 })
 export class ProjectsComponent implements OnInit {
 
-  delegations: Observable<ValueName[]>
   delegates: Observable<ValueName[]>
-  types = PROJECT_TYPES
-  selectedType = "general"
   projectPaths: Observable<string[]>
 
   constructor(public db: AngularFireDatabase) { }
 
   ngOnInit() {
-    this.delegations = this.db.list("delegations").snapshotChanges().pipe(
-      map(
-        snapshots => {
-          return snapshots.map(snapshot => {
-            return { value: snapshot.key, name: snapshot.payload.val()["name"] }
-          })
-        })
-    )
     this.delegates = this.db.list("delegates").snapshotChanges().pipe(
       map(
         snapshots => {
@@ -37,7 +26,11 @@ export class ProjectsComponent implements OnInit {
           })
         })
     )
-    this.projectPaths = this.db.list("projects").snapshotChanges().pipe(
+  }
+
+  delegateChanged(form: NgForm) {
+    let delegateId = form.value["delegate"]
+    this.projectPaths = this.db.list("projects", ref => ref.orderByChild("delegate").equalTo(delegateId)).snapshotChanges().pipe(
       map(
         snapshots => {
           return snapshots.map(snapshot => "projects/" + snapshot.key)
@@ -45,20 +38,16 @@ export class ProjectsComponent implements OnInit {
     )
   }
 
-  typeChanged(form: NgForm) {
-    this.selectedType = form.value["type"]
-  }
-
   addProject(form: NgForm) {
     if (form.valid) {
       this.db.list("projects").push({
         name: form.value["name"],
         keyword: form.value["keyword"],
+        enabled: true,
         df: form.value["df"],
-        mainActions: form.value["mainActions"],
-        type: form.value["type"],
-        delegation: this.selectedType == "delegation" ? form.value["delegation"] : null,
-        delegate: this.selectedType == "delegate" ? form.value["delegate"] : null
+        mainActions: 1,
+        type: "delegate",
+        delegate: form.value["delegate"]
       })
     }
   }

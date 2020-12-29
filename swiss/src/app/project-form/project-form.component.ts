@@ -32,10 +32,7 @@ export class ProjectFormComponent implements OnInit {
       name: [''],
       keyword: [''],
       df: [0],
-      mainActions: [0],
-      type: ['general'],
-      delegation: [''],
-      delegate: ['']
+      enabled: [true]
     })
     this.delegations = this.db.list("delegations").snapshotChanges().pipe(
       map(

@@ -1,6 +1,16 @@
 <div class="tab-content">
     <mat-card class="card">
-         <app-project-form *ngFor="let path of projectPaths | async" [path]="path"></app-project-form>
+        <form #selectDelegateForm="ngForm">
+            <mat-form-field>
+                <mat-label>Delegát</mat-label>
+                <mat-select name="delegate" ngModel (selectionChange)="delegateChanged(selectDelegateForm)">
+                    <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
+                        {{delegate.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+        <app-project-form *ngFor="let path of projectPaths | async" [path]="path"></app-project-form>
     </mat-card>
     <p>Přidat misi:</p>
     <mat-card class="card">
@@ -17,30 +27,9 @@
                 <input matInput placeholder="Cena BV" type="number" name="df" required ngModel>
             </mat-form-field>
             <br />
-            <mat-form-field class="number">
-                <input matInput placeholder="Primární akce" type="number" name="mainActions" required ngModel>
-            </mat-form-field>
-            <br />
-            <mat-form-field >
-                <mat-label>Typ</mat-label>
-                <mat-select name="type" ngModel required (selectionChange)="typeChanged(addProjectForm)">
-                    <mat-option *ngFor="let type of types" value="{{type.value}}">
-                        {{type.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field *ngIf="selectedType=='delegation'">
-                <mat-label>Delegace</mat-label>
-                <mat-select name="delegation" ngModel>
-                    <mat-option *ngFor="let delegation of delegations | async" value="{{delegation.value}}">
-                        {{delegation.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field *ngIf="selectedType=='delegate'">
+            <mat-form-field>
                 <mat-label>Delegát</mat-label>
-                <mat-select name="delegate" ngModel>
+                <mat-select name="delegate" required ngModel>
                     <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
                         {{delegate.name}}
                     </mat-option>
