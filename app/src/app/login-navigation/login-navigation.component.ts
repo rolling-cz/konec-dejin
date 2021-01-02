@@ -23,6 +23,7 @@ export class LoginNavigationComponent implements OnInit {
   initializing = true
   delegateName: Observable<string>
   spreadsheet: Observable<string>
+  votingQuestion: Observable<string>
 
   ngOnInit() {
     this.delegateName = this.firebaseAuth.authState.pipe(flatMap((state, _) => {
@@ -30,6 +31,7 @@ export class LoginNavigationComponent implements OnInit {
         return of(null) as Observable<string>
       } else {
         this.spreadsheet = this.db.object("delegates/" + state.uid + "/spreadsheet").valueChanges() as Observable<string>
+        this.votingQuestion = this.db.object("landsraad/currentQuestion").valueChanges() as Observable<string>
         return this.db.object("delegates/" + state.uid + "/name").valueChanges() as Observable<string>
       }
     }), tap(

@@ -3,13 +3,18 @@
         <form #currentQuestionForm="ngForm">
             <mat-form-field>
                 <mat-label>Aktuální otázka</mat-label>
-                <mat-select name="currentQuestion" [value]="currentQuestion | async" (selectionChange)="currentQuestionChanged($event)"> 
+                <mat-select name="currentQuestion" [value]="currentQuestion | async"
+                    (selectionChange)="currentQuestionChanged($event)">
                     <mat-option *ngFor="let question of questions | async" value="{{question.value}}">
                         {{question.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </form>
+        <ng-container *ngIf="(currentQuestion | async) as questionId">
+            <span>Hlasovalo: {{ alreadyVotedCount | async }} / {{ maxVotedCount | async }} hlasovacích práv</span>&nbsp;
+            <button mat-raised-button color="accent" (click)="exportVotes(questionId)">Export hlasů</button>
+        </ng-container>
     </mat-card>
     <p>Otázky:</p>
     <mat-card class="card">
@@ -27,7 +32,7 @@
             </mat-form-field>
             <br />
             <button type="Submit" mat-raised-button color="accent">Přidat otázku</button>
-        </form>          
+        </form>
     </mat-card>
     <p>Hlasovací práva:</p>
     <mat-card class="card">
@@ -54,7 +59,7 @@
             </mat-form-field>
             <br />
             <button type="Submit" mat-raised-button color="accent">Přidat hlasovací právo</button>
-        </form>        
+        </form>
     </mat-card>
 
 </div>

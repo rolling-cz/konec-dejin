@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAction, AngularFireDatabase, DatabaseSnapshot } from '@angular/fire/database';
 import { NgForm } from '@angular/forms';
-import { fromEventPattern, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ngxCsv } from 'ngx-csv';
+import { combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
+import { flatMap, map, take, tap } from 'rxjs/operators';
 import { ValueName } from '../../../../common/config';
 
 @Component({
@@ -17,6 +19,8 @@ export class LandsraadComponent implements OnInit {
   questionPaths: Observable<string[]>
   questions: Observable<ValueName[]>
   currentQuestion: Observable<string>
+  alreadyVotedCount: Observable<number>
+  maxVotedCount: Observable<number>
 
   constructor(public db: AngularFireDatabase) { }
 
@@ -50,6 +54,12 @@ export class LandsraadComponent implements OnInit {
         })
     )
     this.currentQuestion = this.db.object("landsraad/currentQuestion").valueChanges() as Observable<string>
+    this.alreadyVotedCount = (this.db.object("landsraad/currentQuestion").valueChanges() as Observable<string>).pipe(flatMap((currentQuestionId, _) => {
+      return this.db.list("landsraad/votes/" + currentQuestionId).snapshotChanges().pipe(
+        map(snaps => snaps.length)
+      )
+    }))
+    this.maxVotedCount = this.votingRightPaths.pipe(map(items => items.length))
   }
 
   addVotingRight(form: NgForm) {
@@ -61,7 +71,7 @@ export class LandsraadComponent implements OnInit {
       })
     }
   }
-  
+
   addQuestion(form: NgForm) {
     if (form.valid) {
       let ref = this.db.list("landsraad/questions").push({
@@ -69,7 +79,7 @@ export class LandsraadComponent implements OnInit {
       });
       (form.value["answers"] as string).split(",").forEach(
         answer => {
-          this.db.list("landsraad/answers/"+ref.key).push({
+          this.db.list("landsraad/answers/" + ref.key).push({
             name: answer.trim()
           });
         }
@@ -81,4 +91,50 @@ export class LandsraadComponent implements OnInit {
     this.db.object("landsraad/currentQuestion").set(event.value)
   }
 
+  exportVotes(questionId: string) {
+    combineLatest(
+      this.db.list("landsraad/votes/" + questionId).snapshotChanges(),
+      this.db.list("landsraad/answers/"+questionId).snapshotChanges(),
+      this.db.list("landsraad/votingRights").snapshotChanges(),
+      (votes, answers, votingRights) => {
+        return { votes: votes, answers: answers, votingRights: votingRights }
+      }
+    ).pipe(
+      take(1),
+      tap(
+        combined => {
+          let data = combined.answers.map(answerSnap => {
+            let answerName = answerSnap.payload.val()["name"]
+            let answerId = answerSnap.key
+            let row = [answerName]
+            combined.votingRights.forEach(votingRightSnap => {
+              let votingRightId = votingRightSnap.key
+              row.push(findVote(combined.votes, votingRightId, answerId))
+            })
+            return row
+          })
+          let headers = ["Odpověď"]
+          combined.votingRights.forEach(votingRightSnap => {
+            headers.push(votingRightSnap.payload.val()["name"])
+          })
+          let options = {
+            headers: headers
+          };
+          new ngxCsv(data, 'Export hlasů', options);
+        }
+      )
+    ).subscribe()
+  }
+}
+
+function findVote(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], votingRightId: string, answerId: string) {
+  let snapshot = snapshots.find((row) => row.key == votingRightId);
+  if (snapshot == null) {
+    return ""
+  }
+  let votes = snapshot.payload.val()[answerId]
+  if (votes == null) {
+    return ""
+  }
+  return votes
 }

@@ -136,11 +136,13 @@
       }
     },
     "answers": {
-      "answer_id_1": {
-        "name": "Ano"
-      },
-      "answer_id1_2": {
-        "name": "Ne"
+      "question_id_1": {
+        "answer_id_1": {
+          "name": "Ano"
+        },
+        "answer_id1_2": {
+          "name": "Ne"
+        }
       }
     },
     "votes": {

@@ -10,6 +10,7 @@
             <a href="{{ spreadsheet | async }}" target="_blank" class="spreadsheet">Osobní přehled</a>
         </div>
     </mat-toolbar>
+    <app-voting *ngIf="votingQuestion | async"></app-voting>
     <app-rounds></app-rounds>
 </div>
 <ng-template #showLogin>

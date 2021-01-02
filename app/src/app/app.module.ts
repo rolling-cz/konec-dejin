@@ -28,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ProcessingRoundComponent } from './processing-round/processing-round.component';
+import { VotingComponent } from './voting/voting.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ProcessingRoundComponent } from './processing-round/processing-round.co
     ActionFormComponent,
     DelegateNameComponent,
     SelectProjectDialogComponent,
-    ProcessingRoundComponent
+    ProcessingRoundComponent,
+    VotingComponent
   ],
   imports: [
     BrowserModule,
