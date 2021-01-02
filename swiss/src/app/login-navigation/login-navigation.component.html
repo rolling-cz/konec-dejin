@@ -14,6 +14,9 @@
             <mat-button-toggle value="projects" class="small">
                 Mise
             </mat-button-toggle>
+            <mat-button-toggle value="landsraad" class="small">
+                Landsraad
+            </mat-button-toggle>
         </mat-button-toggle-group>
         <span class="fill-remaining-space"></span>
         <button mat-icon-button (click)="logout()">
@@ -24,6 +27,7 @@
     <app-delegations *ngIf="selectedMenuItem == 'delegations'"></app-delegations>
     <app-delegates *ngIf="selectedMenuItem == 'delegates'"></app-delegates>
     <app-projects *ngIf="selectedMenuItem == 'projects'"></app-projects>
+    <app-landsraad *ngIf="selectedMenuItem == 'landsraad'"></app-landsraad>
 </div>
 <ng-template #showLogin>
     <mat-toolbar color="primary">

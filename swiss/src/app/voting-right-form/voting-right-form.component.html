@@ -1,0 +1,20 @@
+<form [formGroup]="votingRightForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
+    <mat-form-field class="text">
+        <input matInput placeholder="Název" type="text" formControlName="name" />
+    </mat-form-field>&nbsp;
+    <mat-form-field class="number">
+        <input matInput placeholder="Počet hlasů" type="number" formControlName="votes" />
+    </mat-form-field>&nbsp;
+    <mat-form-field>
+        <mat-label>Kontroluje</mat-label>
+        <mat-select formControlName="controlledBy">
+            <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
+                {{delegate.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>&nbsp;
+     {{ state }} &nbsp;
+    <button mat-stroked-button color="accent" (click)="delete()">
+        Smazat
+    </button>
+</form>

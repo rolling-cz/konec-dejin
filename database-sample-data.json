@@ -1,95 +1,95 @@
 {
-  "actions" : {
-    "round_1" : {
-      "-LpiIkTEaRtBAsIJXmZy" : {
-        "delegate" : "delegate_id_1",
-        "delegation" : "delegation_id_1",
-        "description" : "Kampaň v UK: \"Proč mít euro je super\"",
-        "df" : 10,
-        "result" : "Britové jsou nakloněni přechodu na Euro.",
-        "targetCountry" : "gb",
-        "type" : "support",
-        "visibility" : "public"
+  "actions": {
+    "round_1": {
+      "-LpiIkTEaRtBAsIJXmZy": {
+        "delegate": "delegate_id_1",
+        "delegation": "delegation_id_1",
+        "description": "Kampaň v UK: \"Proč mít euro je super\"",
+        "df": 10,
+        "result": "Britové jsou nakloněni přechodu na Euro.",
+        "targetCountry": "gb",
+        "type": "support",
+        "visibility": "public"
       },
-      "action_id_1" : {
-        "delegate" : "delegate_id_1",
-        "delegation" : "delegation_id_1",
-        "description" : "Lokalizace Abú Musa Zarkávího",
-        "df" : 8,
-        "keyword" : "OMEGA",
-        "result" : "Obrovský úspěch! Povedlo se nám Zarkávího zahnat do rohu a protože neměl zjevně žádnou podporu...dostali jsme ho. Máme ho jako zajatce u našich hochů v Iráku. Co dál?",
-        "targetCountry" : "flag-iq",
-        "type" : "main",
-        "visibility" : "covert"
+      "action_id_1": {
+        "delegate": "delegate_id_1",
+        "delegation": "delegation_id_1",
+        "description": "Lokalizace Abú Musa Zarkávího",
+        "df": 8,
+        "keyword": "OMEGA",
+        "result": "Obrovský úspěch! Povedlo se nám Zarkávího zahnat do rohu a protože neměl zjevně žádnou podporu...dostali jsme ho. Máme ho jako zajatce u našich hochů v Iráku. Co dál?",
+        "targetCountry": "flag-iq",
+        "type": "main",
+        "visibility": "covert"
       }
     },
-    "round_2" : {
-      "-LpiIrTJqpQerhqMq1rO" : {
-        "delegate" : "delegate_id_1",
-        "delegation" : "delegation_id_1",
-        "description" : "Test",
-        "df" : 11,
-        "keyword" : "sss",
-        "targetCountry" : "flag-iq",
-        "type" : "support",
-        "visibility" : "public"
+    "round_2": {
+      "-LpiIrTJqpQerhqMq1rO": {
+        "delegate": "delegate_id_1",
+        "delegation": "delegation_id_1",
+        "description": "Test",
+        "df": 11,
+        "keyword": "sss",
+        "targetCountry": "flag-iq",
+        "type": "support",
+        "visibility": "public"
       },
-      "-LprTzOvxUt1WSVHdt5t" : {
-        "delegate" : "delegate_id_1",
-        "delegation" : "delegation_id_1",
-        "description" : "",
-        "keyword" : "",
-        "targetCountry" : "",
-        "type" : "main",
-        "visibility" : "public"
+      "-LprTzOvxUt1WSVHdt5t": {
+        "delegate": "delegate_id_1",
+        "delegation": "delegation_id_1",
+        "description": "",
+        "keyword": "",
+        "targetCountry": "",
+        "type": "main",
+        "visibility": "public"
       },
-      "-LprTzOvxUt1WSVHdt5u" : {
-        "delegate" : "delegate_id_1",
-        "delegation" : "delegation_id_1",
-        "description" : "",
-        "keyword" : "",
-        "targetCountry" : "",
-        "type" : "main",
-        "visibility" : "public"
+      "-LprTzOvxUt1WSVHdt5u": {
+        "delegate": "delegate_id_1",
+        "delegation": "delegation_id_1",
+        "description": "",
+        "keyword": "",
+        "targetCountry": "",
+        "type": "main",
+        "visibility": "public"
       },
-      "-LprTzOvxUt1WSVHdt5v" : {
-        "delegate" : "delegate_id_1",
-        "delegation" : "delegation_id_1",
-        "description" : "",
-        "keyword" : "",
-        "targetCountry" : "",
-        "type" : "main",
-        "visibility" : "public"
+      "-LprTzOvxUt1WSVHdt5v": {
+        "delegate": "delegate_id_1",
+        "delegation": "delegation_id_1",
+        "description": "",
+        "keyword": "",
+        "targetCountry": "",
+        "type": "main",
+        "visibility": "public"
       }
     }
   },
-  "delegateRounds" : {
-    "delegate_id_1" : {
-      "round_1" : {
-        "delegation" : "delegation_id_1",
-        "markedAsSent" : true,
+  "delegateRounds": {
+    "delegate_id_1": {
+      "round_1": {
+        "delegation": "delegation_id_1",
+        "markedAsSent": true,
         "mainActions": 3,
         "bv": 30,
         "message": "You are doomed"
       },
-      "round_2" : {
-        "delegation" : "delegation_id_1",
-        "markedAsSent" : true,
+      "round_2": {
+        "delegation": "delegation_id_1",
+        "markedAsSent": true,
         "mainActions": 3
       }
     }
   },
-  "delegates" : {
-    "delegate_id_1" : {
-      "name" : "Daniel Appleby",
-      "password" : "secret",
+  "delegates": {
+    "delegate_id_1": {
+      "name": "Daniel Appleby",
+      "password": "secret",
       "spreadsheet": "https://porno"
     }
   },
-  "delegations" : {
-    "delegation_id_1" : {
-      "flag" : "gb",
-      "name" : "Velká Británie"
+  "delegations": {
+    "delegation_id_1": {
+      "flag": "gb",
+      "name": "Velká Británie"
     }
   },
   "projects": {
@@ -103,22 +103,52 @@
       "mainActions": 1
     }
   },
-  "rounds" : {
-    "round3" : {
-      "deadline" : 1457015264499,
-      "name" : "3. kolo",
-      "tense" : "future",
+  "rounds": {
+    "round3": {
+      "deadline": 1457015264499,
+      "name": "3. kolo",
+      "tense": "future",
       "size": "small"
     },
-    "round_1" : {
-      "deadline" : 1457015264428,
-      "name" : "1. kolo",
-      "tense" : "past"
+    "round_1": {
+      "deadline": 1457015264428,
+      "name": "1. kolo",
+      "tense": "past"
     },
-    "round_2" : {
-      "deadline" : 1457015264488,
-      "name" : "2. kolo",
-      "tense" : "present"
+    "round_2": {
+      "deadline": 1457015264488,
+      "name": "2. kolo",
+      "tense": "present"
+    }
+  },
+  "landsraad": {
+    "currentQuestion": "question_id_1",
+    "votingRights": {
+      "right_id_1": {
+        "name": "Harko",
+        "votes": 5,
+        "controlledBy": "delegate_id_1"
+      }
+    },
+    "questions": {
+      "question_id_1": {
+        "name": "Deploy Sardaukarů?"
+      }
+    },
+    "answers": {
+      "answer_id_1": {
+        "name": "Ano"
+      },
+      "answer_id1_2": {
+        "name": "Ne"
+      }
+    },
+    "votes": {
+      "question_id_1": {
+        "voting_right_1": {
+          "answer_id_1": 5
+        }
+      }
     }
   }
 }

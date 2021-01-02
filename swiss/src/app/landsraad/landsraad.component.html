@@ -1,0 +1,60 @@
+<div class="tab-content">
+    <mat-card class="card">
+        <form #currentQuestionForm="ngForm">
+            <mat-form-field>
+                <mat-label>Aktuální otázka</mat-label>
+                <mat-select name="currentQuestion" [value]="currentQuestion | async" (selectionChange)="currentQuestionChanged($event)"> 
+                    <mat-option *ngFor="let question of questions | async" value="{{question.value}}">
+                        {{question.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </mat-card>
+    <p>Otázky:</p>
+    <mat-card class="card">
+        <app-question-form *ngFor="let path of questionPaths | async" [path]="path"></app-question-form>
+    </mat-card>
+    <p>Přidat otázku:</p>
+    <mat-card class="card">
+        <form (ngSubmit)="addQuestion(addQuestionForm)" #addQuestionForm="ngForm">
+            <mat-form-field class="text">
+                <input matInput placeholder="Otázka" type="text" name="name" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="text">
+                <input matInput placeholder="Odpovědi oddělené čárkou" type="text" name="answers" required ngModel>
+            </mat-form-field>
+            <br />
+            <button type="Submit" mat-raised-button color="accent">Přidat otázku</button>
+        </form>          
+    </mat-card>
+    <p>Hlasovací práva:</p>
+    <mat-card class="card">
+        <app-voting-right-form *ngFor="let path of votingRightPaths | async" [path]="path"></app-voting-right-form>
+    </mat-card>
+    <p>Přidat hlasovací právo:</p>
+    <mat-card class="card">
+        <form (ngSubmit)="addVotingRight(addVotingRightForm)" #addVotingRightForm="ngForm">
+            <mat-form-field class="text">
+                <input matInput placeholder="Název" type="text" name="name" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="number">
+                <input matInput placeholder="Počet hlasů" type="number" name="votes" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Kontroluje</mat-label>
+                <mat-select name="controlledBy" ngModel>
+                    <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
+                        {{delegate.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <button type="Submit" mat-raised-button color="accent">Přidat hlasovací právo</button>
+        </form>        
+    </mat-card>
+
+</div>
