@@ -49,6 +49,7 @@ export class QuestionFormComponent implements OnInit {
       result => {
         if (result) {
           this.db.object("landsraad/answers/"+this.questionId).remove();
+          this.db.object("landsraad/votes/"+this.questionId).remove();
           this.db.object(this.path).remove()
         }
       })
