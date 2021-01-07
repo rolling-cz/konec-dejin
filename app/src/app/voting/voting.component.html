@@ -3,9 +3,9 @@
         <p><strong>{{questionName | async}}</strong></p>
         <form (ngSubmit)="vote(votingForm)" #votingForm="ngForm">
             <ng-container *ngFor="let votingRight of votingRights | async">
-                <mat-form-field>
+                <mat-form-field class="select-field">
                     <mat-label>{{ votingRight.name }} ({{ votingRight.votes }})</mat-label>
-                    <mat-select name="{{votingRight.id}}" required ngModel>
+                    <mat-select name="{{votingRight.id}}" required ngModel class="select">
                         <mat-option *ngFor="let answer of answers | async" value="{{answer.value}}">
                             {{answer.name}}
                         </mat-option>

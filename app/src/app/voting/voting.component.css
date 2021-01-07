@@ -1,3 +1,9 @@
 .tab-content {
     padding-bottom: 0;
 }
+.select {
+    width: 270px; 
+}
+.select-field {
+    width: 270px;
+}
