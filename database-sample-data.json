@@ -100,7 +100,10 @@
       "delegation": "delegation_id_1",
       "df": 50,
       "enabled": true,
-      "mainActions": 1
+      "mainActions": 1,
+      "condition": "Armáda je v síči",
+      "benefit": "Zvýší morálku armády.",
+      "instructions": "zprávy"
     }
   },
   "rounds": {

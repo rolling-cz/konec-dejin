@@ -8,6 +8,15 @@
     <mat-form-field class="number">
         <input matInput placeholder="Cena BV" type="number" formControlName="df" />
     </mat-form-field>&nbsp;
+    <mat-form-field class="text">
+        <input matInput placeholder="Podmínka" type="text" formControlName="condition" />
+    </mat-form-field>&nbsp;
+    <mat-form-field class="text">
+        <input matInput placeholder="Benefit" type="text" formControlName="benefit" />
+    </mat-form-field>&nbsp;
+    <mat-form-field class="text">
+        <input matInput placeholder="Instrukce" type="text" formControlName="instructions" />
+    </mat-form-field>&nbsp;
     <mat-checkbox formControlName="enabled">Dostupná</mat-checkbox>
     | {{ state }} &nbsp;
     <button mat-stroked-button color="accent" (click)="delete()">

@@ -47,7 +47,10 @@ export class ProjectsComponent implements OnInit {
         df: form.value["df"],
         mainActions: 1,
         type: "delegate",
-        delegate: form.value["delegate"]
+        delegate: form.value["delegate"],
+        condition: form.value["condition"],
+        benefit: form.value["benefit"],
+        instructions: form.value["instructions"]
       })
     }
   }

@@ -70,8 +70,9 @@ export class RoundComponent implements OnInit {
       this.db.list("actions/" + this.roundId).snapshotChanges(),
       this.db.list("delegates").snapshotChanges(),
       this.db.list("delegations").snapshotChanges(),
-      (actions, delegates, delegations) => {
-        return { actions: actions, delegates: delegates, delegations: delegations }
+      this.db.list("projects").valueChanges(),
+      (actions, delegates, delegations, projects) => {
+        return { actions: actions, delegates: delegates, delegations: delegations, projects: projects }
       }
     ).pipe(
       take(1),
@@ -80,7 +81,9 @@ export class RoundComponent implements OnInit {
           let data = combined.actions.map(snapshot => {
             let values = snapshot.payload.val()
             let actionTypes = ACTION_TYPES
+            let project = findProject(combined.projects, values["keyword"], values["delegate"])
             return [
+              snapshot.key.substr(1), // Excel doesn't like - at the beginning
               findName(combined.delegates, values["delegate"]),
               findName(combined.delegations, values["delegation"]),
               values["title"] || "",
@@ -89,13 +92,13 @@ export class RoundComponent implements OnInit {
               values["df"] || "",
               values["keyword"] || "",
               findValueName(actionTypes, values["type"]),
-              findValueName(VISIBILITIES, values["visibility"]),
-              values["result"] || "",
-              snapshot.key.substr(1) // Excel doesn't like - at the beginning
+              formatProjectDescription(project),
+              formatInstructions(project),
+              values["result"] || ""
             ]
           })
           let options = {
-            headers: ["Delegát", "Delegace", "Titulek", "Popis akce", "Lokace", "BV", "Klíčové slovo", "Typ akce", "Viditelnost", "Výsledek", "ID akce"]
+            headers: ["ID akce", "Delegát", "Delegace", "Titulek", "Popis akce", "Lokace", "BV", "Klíčové slovo", "Typ akce", "Popis mise", "Instrukce", "Výsledek"]
           };
           new ngxCsv(data, 'Export akcí ' + this.roundForm.controls.name.value, options);
         }
@@ -216,7 +219,7 @@ export class RoundComponent implements OnInit {
           let delegationNames = relatedActions.map(action => delegations[action["delegation"]]["name"]).join(", ")
           let spentDf = relatedActions.map(action => action["df"] || 0).reduce((sum, current) => sum + current)
           let dfOk = spentDf >= project["df"]
-          let spentMainActions = relatedActions.filter(action => action["type"] == "mission" ||action["type"] == "other").length
+          let spentMainActions = relatedActions.filter(action => action["type"] == "mission" || action["type"] == "other").length
           let mainActionsOk = spentMainActions >= project["mainActions"]
           return <Project>{ keyword: project["keyword"], name: project["name"], delegations: delegationNames, df: spentDf + "/" + project["df"], mainActions: spentMainActions + "/" + project["mainActions"], dfOk: dfOk, mainActionsOk: mainActionsOk }
         }).sort((project1, project2) => project1.keyword.localeCompare(project2.keyword))
@@ -243,6 +246,36 @@ function findName(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], id: str
     return "N/A"
   }
   return snapshot.payload.val()["name"]
+}
+
+function findProject(projects: unknown[], keyword: string, delegateId: string) {
+  return projects.find((row) => {
+    let sameProject = keyword != null && row["keyword"].toLowerCase().trim() == keyword.toLowerCase().trim() && row["delegate"] == delegateId
+    return sameProject
+  });
+}
+
+function formatProjectDescription(project: unknown) {
+  if (project == null) {
+    return ""
+  }
+  if (project["condition"] != null) {
+    return "Podmínka: " + project["condition"] + "\n\n" + project["benefit"]
+  }
+  if (project["benefit"] != null) {
+    return project["benefit"]
+  }
+  return ""
+}
+
+function formatInstructions(project: unknown) {
+  if (project == null) {
+    return ""
+  }
+  if (project["instructions"] != null) {
+    return project["instructions"]
+  }
+  return ""
 }
 
 interface Project {
