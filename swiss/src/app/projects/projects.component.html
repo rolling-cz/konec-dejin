@@ -51,4 +51,15 @@
             <button type="Submit" mat-raised-button color="accent">Přidat misi</button>
         </form>
     </mat-card>
+    <ng-container *ngIf="delegateId">
+        <p>Přidat mise:</p>
+        <mat-card class="card">
+            <mat-form-field>
+                <ngx-mat-file-input placeholder="Vyber CSV soubor" [accept]="'.csv'" #file></ngx-mat-file-input>
+                <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+            &nbsp;
+            <button mat-stroked-button color="accent" (click)="importProjects(file)">Přidat mise</button>
+        </mat-card>
+    </ng-container>
 </div>

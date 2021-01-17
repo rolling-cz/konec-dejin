@@ -248,14 +248,14 @@ function findName(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], id: str
   return snapshot.payload.val()["name"]
 }
 
-function findProject(projects: unknown[], keyword: string, delegateId: string) {
+function findProject(projects: any[], keyword: string, delegateId: string) {
   return projects.find((row) => {
     let sameProject = keyword != null && row["keyword"].toLowerCase().trim() == keyword.toLowerCase().trim() && row["delegate"] == delegateId
     return sameProject
   });
 }
 
-function formatProjectDescription(project: unknown) {
+function formatProjectDescription(project: any) {
   if (project == null) {
     return ""
   }
@@ -268,7 +268,7 @@ function formatProjectDescription(project: unknown) {
   return ""
 }
 
-function formatInstructions(project: unknown) {
+function formatInstructions(project: any) {
   if (project == null) {
     return ""
   }
