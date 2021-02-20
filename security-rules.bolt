@@ -144,6 +144,9 @@ path /landsraad/answers {
 
 path /landsraad/votes {
   read() { isSwiss() }
+  path /{question_id}/{voting_right_id} {
+    delete() { isControllingVotingRight(voting_right_id) }
+  }
   path /{question_id}/{voting_right_id}/{answer_id} is Number {
     write() { isControllingVotingRight(voting_right_id) }
   }

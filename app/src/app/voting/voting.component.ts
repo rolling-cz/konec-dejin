@@ -58,6 +58,7 @@ export class VotingComponent implements OnInit {
         this.db.object("landsraad/votingRights/" + votingRightId + "/votes").valueChanges().pipe(
           take(1),
           map(votes => {
+            this.db.object("landsraad/votes/" + this.questionId + "/" + votingRightId).remove()
             this.db.object("landsraad/votes/" + this.questionId + "/" + votingRightId + "/" + answerId).set(votes)
           })
         ).subscribe()
