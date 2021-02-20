@@ -3,7 +3,7 @@
     <mat-nav-list *ngIf="projects | async as _projects; else loading">
         <ng-container *ngIf="_projects.length; else noItems">
             <a href="#" mat-list-item *ngFor="let project of _projects" [mat-dialog-close]="project">
-                {{ project["name"]}} ({{ project["value"]}})
+                {{ project["name"]}}&nbsp; <span *ngIf="project.value"> ({{ project.value }})</span>
             </a>
         </ng-container>
         <ng-template #noItems>

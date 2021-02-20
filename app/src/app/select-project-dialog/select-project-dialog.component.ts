@@ -29,9 +29,11 @@ export class SelectProjectDialogComponent implements OnInit {
       map(
         projects => {
           let delegateProjects = projects.filter(project => project["type"] == "delegate" && project["delegate"] == delegateId)
-          return delegateProjects.map(project => {
+          let formattedProjects = delegateProjects.map(project => {
             return { value: project["keyword"].toUpperCase(), name: project["name"], df: project["df"], condition: project["condition"], benefit: project["benefit"] }
           })
+          formattedProjects.push({ value: "", name: "- Žádná -", df: 0, condition: null, benefit: null })
+          return formattedProjects
         }
       )
     )
