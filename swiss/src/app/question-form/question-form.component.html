@@ -4,6 +4,9 @@
     </mat-form-field>&nbsp;
     <app-answer-form *ngFor="let path of answerPaths | async" [path]="path"></app-answer-form>
      {{ state }} &nbsp;
+    <button mat-stroked-button color="accent" (click)="export()">
+        Export hlasů
+    </button>&nbsp;
     <button mat-stroked-button color="accent" (click)="delete()">
         Smazat
     </button>

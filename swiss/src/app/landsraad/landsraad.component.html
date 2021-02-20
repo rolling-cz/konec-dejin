@@ -12,8 +12,7 @@
             </mat-form-field>
         </form>
         <ng-container *ngIf="(currentQuestion | async) as questionId">
-            <span>Hlasovalo: {{ alreadyVotedCount | async }} / {{ maxVotedCount | async }} hlasovacích práv</span>&nbsp;
-            <button mat-raised-button color="accent" (click)="exportVotes(questionId)">Export hlasů</button>
+            <span>Hlasovalo: {{ alreadyVotedCount | async }} / {{ maxVotedCount | async }} hlasovacích práv</span>
         </ng-container>
     </mat-card>
     <p>Otázky:</p>

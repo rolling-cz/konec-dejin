@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAction, AngularFireDatabase, DatabaseSnapshot } from '@angular/fire/database';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ngxCsv } from 'ngx-csv';
+import { combineLatest, Observable } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 
 @Component({
@@ -55,4 +56,51 @@ export class QuestionFormComponent implements OnInit {
       })
   }
 
+  export() {
+    combineLatest(
+      this.db.list("landsraad/votes/" + this.questionId).snapshotChanges(),
+      this.db.list("landsraad/answers/"+this.questionId).snapshotChanges(),
+      this.db.list("landsraad/votingRights").snapshotChanges(),
+      (votes, answers, votingRights) => {
+        return { votes: votes, answers: answers, votingRights: votingRights }
+      }
+    ).pipe(
+      take(1),
+      tap(
+        combined => {
+          let data = combined.answers.map(answerSnap => {
+            let answerName = answerSnap.payload.val()["name"]
+            let answerId = answerSnap.key
+            let row = [answerName]
+            combined.votingRights.forEach(votingRightSnap => {
+              let votingRightId = votingRightSnap.key
+              row.push(findVote(combined.votes, votingRightId, answerId))
+            })
+            return row
+          })
+          let headers = ["Odpověď"]
+          combined.votingRights.forEach(votingRightSnap => {
+            headers.push(votingRightSnap.payload.val()["name"])
+          })
+          let options = {
+            headers: headers
+          };
+          new ngxCsv(data, 'Export hlasů: '+this.questionForm.get("name").value, options);
+        }
+      )
+    ).subscribe()
+  }
+
+}
+
+function findVote(snapshots: AngularFireAction<DatabaseSnapshot<any>>[], votingRightId: string, answerId: string) {
+  let snapshot = snapshots.find((row) => row.key == votingRightId);
+  if (snapshot == null) {
+    return ""
+  }
+  let votes = snapshot.payload.val()[answerId]
+  if (votes == null) {
+    return ""
+  }
+  return votes
 }
