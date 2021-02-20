@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { SignInResponse } from '../model';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, of } from 'rxjs';
-import { flatMap, tap } from 'rxjs/operators';
+import { flatMap, tap, map } from 'rxjs/operators';
 import { auth } from 'firebase';
 
 @Component({
@@ -31,7 +31,21 @@ export class LoginNavigationComponent implements OnInit {
         return of(null) as Observable<string>
       } else {
         this.spreadsheet = this.db.object("delegates/" + state.uid + "/spreadsheet").valueChanges() as Observable<string>
-        this.votingQuestion = this.db.object("landsraad/currentQuestion").valueChanges() as Observable<string>
+        this.votingQuestion = this.db.object("landsraad/currentQuestion").valueChanges().pipe(
+          flatMap((questionId, _) => {
+            // show voting only those with voting rights
+            return this.db.list("landsraad/votingRights", ref => ref.orderByChild("controlledBy").equalTo(state.uid)).snapshotChanges().pipe(
+              map(
+                snapshots => {
+                  if (snapshots.length > 0) {
+                    return questionId
+                  } else {
+                    return null
+                  }
+                })
+            )
+          })
+        ) as Observable<string>
         return this.db.object("delegates/" + state.uid + "/name").valueChanges() as Observable<string>
       }
     }), tap(
