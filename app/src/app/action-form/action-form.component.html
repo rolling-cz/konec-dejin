@@ -22,5 +22,7 @@
             </mat-select>
         </mat-form-field>
     </form>
+    <div *ngIf="projectCondition" class="projectDescription"><i>Podmínka: </i>{{ projectCondition }}</div>
+    <div *ngIf="projectBenefit" class="projectDescription"><i>Benefit: </i>{{ projectBenefit }}</div>
     <mat-card-footer class="state mat-small">{{state}}</mat-card-footer>
 </mat-card>

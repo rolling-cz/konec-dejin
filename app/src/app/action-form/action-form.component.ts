@@ -23,6 +23,8 @@ export class ActionFormComponent implements OnInit {
   secondaryVisibilities = VISIBILITIES
   primaryVisibilities = VISIBILITIES_PRIMARY
   actionTypes = ACTION_TYPES
+  projectCondition = null
+  projectBenefit = null
 
   @Input()
   path: string
@@ -70,6 +72,8 @@ export class ActionFormComponent implements OnInit {
         if (result) {
           this.actionForm.controls.keyword.setValue(result["value"])
           this.actionForm.controls.df.setValue(result["df"])
+          this.projectCondition = result["condition"]
+          this.projectBenefit = result["benefit"]
         }
       })
   }
