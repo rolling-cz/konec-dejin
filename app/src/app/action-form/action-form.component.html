@@ -5,7 +5,7 @@
             <textarea matInput placeholder="Popis akce" type="text" formControlName="description"></textarea>
         </mat-form-field>
         <mat-form-field class="df">
-            <input matInput placeholder="BV" type="number" formControlName="df" [attr.disabled]="actionForm.value.type == 'mission' ? '' : null">
+            <input matInput placeholder="BV" type="number" formControlName="df" [attr.disabled]="actionForm.value.type == 'mission' ? '' : null" max="4" min="0" (change)="dfChanged($event)">
         </mat-form-field>
         &nbsp;
         <mat-form-field>

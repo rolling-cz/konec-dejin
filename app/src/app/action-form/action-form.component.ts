@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { COUNTRIES, VISIBILITIES, ACTION_TYPES, VISIBILITIES_PRIMARY, ValueName } from '../../../../common/config';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
-import { map, tap, flatMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material';
 import { SelectProjectDialogComponent } from '../select-project-dialog/select-project-dialog.component';
@@ -48,6 +46,16 @@ export class ActionFormComponent implements OnInit {
       'error': "Chyba ukládání!"
     }
     this.state = names[e]
+  } 
+  
+  dfChanged(e) {
+    let newDf = e.target.value
+    if (newDf > 4) {
+      this.actionForm.controls.df.setValue(4)
+    }
+    if (newDf < 0) {
+      this.actionForm.controls.df.setValue(0)
+    }
   }
 
   delete() {
