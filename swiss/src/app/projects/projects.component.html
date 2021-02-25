@@ -2,7 +2,7 @@
     <mat-card class="card">
         <form #selectDelegateForm="ngForm">
             <mat-form-field>
-                <mat-label>Delegát</mat-label>
+                <mat-label>Hráč</mat-label>
                 <mat-select name="delegate" ngModel (selectionChange)="delegateChanged(selectDelegateForm)">
                     <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
                         {{delegate.name}}
@@ -28,7 +28,7 @@
             </mat-form-field>
             <br />
             <mat-form-field>
-                <mat-label>Delegát</mat-label>
+                <mat-label>Hráč</mat-label>
                 <mat-select name="delegate" required ngModel>
                     <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
                         {{delegate.name}}

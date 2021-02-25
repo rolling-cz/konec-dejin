@@ -2,7 +2,7 @@
     <mat-card class="card">
         <app-delegation-form *ngFor="let path of delegationPaths | async" [path]="path"></app-delegation-form>
     </mat-card>
-    <p>Přidat delegaci:</p>
+    <p>Přidat frakci:</p>
     <mat-card class="card">
         <form (ngSubmit)="addDelegation(addDelegationForm)" #addDelegationForm="ngForm">
             <mat-form-field class="text">
@@ -15,7 +15,7 @@
             </mat-form-field>
             <br />
             <br />
-            <button type="Submit" mat-raised-button color="accent">Přidat delegaci</button>
+            <button type="Submit" mat-raised-button color="accent">Přidat frakci</button>
         </form>
     </mat-card>
 </div>

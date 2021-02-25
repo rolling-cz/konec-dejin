@@ -27,7 +27,7 @@
     </form>
     <mat-card-footer class="state mat-small">{{state}}</mat-card-footer>
 </mat-card>
-<p>Delegáti:</p>
+<p>Hráči:</p>
 <mat-card class="card">
     <div *ngIf="editingDelegates">
         <app-round-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-round-delegate-form>
@@ -59,7 +59,7 @@
         </ng-container>
 
         <ng-container matColumnDef="delegations">
-            <th mat-header-cell *matHeaderCellDef> Zúčastněné delegace </th>
+            <th mat-header-cell *matHeaderCellDef> Zúčastněné frakce </th>
             <td mat-cell *matCellDef="let element"> {{element.delegations}} </td>
         </ng-container>
 

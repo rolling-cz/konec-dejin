@@ -35,12 +35,12 @@ export const ACTION_TYPES: ValueName[] = [
 ]
 export const VISIBILITIES: ValueName[] = [
     { value: 'public', name: "Veřejná" },
-    { value: 'covert', name: "Tajná vůči delegacím" },
-    { value: 'private', name: "Tajná uvnitř delegace" }
+    { value: 'covert', name: "Tajná vůči frakcím" },
+    { value: 'private', name: "Tajná uvnitř frakce" }
 ]
 export const VISIBILITIES_PRIMARY: ValueName[] = [
     { value: 'public', name: "Veřejná" },
-    { value: 'covert', name: "Tajná vůči delegacím" }
+    { value: 'covert', name: "Tajná vůči frakcím" }
 ]
 
 export const TENSES: ValueName[] = [
@@ -55,8 +55,8 @@ export const SIZES: ValueName[] = [
 ]
 export const PROJECT_TYPES: ValueName[] = [
     { value: 'general', name: "Pro všechny" },
-    { value: 'delegation', name: "Pro delegaci" },
-    { value: 'delegate', name: "Pro delegáta" }
+    { value: 'delegation', name: "Pro frakci" },
+    { value: 'delegate', name: "Pro hráče" }
 ]
 
 export interface ValueName {

@@ -98,7 +98,7 @@ export class RoundComponent implements OnInit {
             ]
           })
           let options = {
-            headers: ["ID akce", "Delegát", "Delegace", "Titulek", "Popis akce", "Lokace", "BV", "Klíčové slovo", "Typ akce", "Popis mise", "Instrukce", "Výsledek"]
+            headers: ["ID akce", "Hráč", "Frakce", "Titulek", "Popis akce", "Lokace", "BV", "Klíčové slovo", "Typ akce", "Popis mise", "Instrukce", "Výsledek"]
           };
           new ngxCsv(data, 'Export akcí ' + this.roundForm.controls.name.value, options);
         }

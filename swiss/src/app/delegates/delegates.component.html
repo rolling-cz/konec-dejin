@@ -2,7 +2,7 @@
     <mat-card class="card">
         <app-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-delegate-form>
     </mat-card>
-    <p>Přidat delegáta:</p>
+    <p>Přidat hráče:</p>
     <mat-card class="card">
         <form (ngSubmit)="addDelegate(addDelegateForm)" #addDelegateForm="ngForm">
             <mat-form-field>
@@ -17,7 +17,7 @@
                 <input matInput placeholder="Spreadsheet" type="url" name="spreadsheet" required ngModel>
             </mat-form-field>
             <br /><br />
-            <button type="Submit" mat-raised-button color="accent">Přidat delegáta</button>
+            <button type="Submit" mat-raised-button color="accent">Přidat hráče</button>
         </form>
     </mat-card>
 </div>

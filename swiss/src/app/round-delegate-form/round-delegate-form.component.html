@@ -1,7 +1,7 @@
 <form [formGroup]="delegateForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
     <div class="delegate-name">{{ name | async }}</div>&nbsp;
     <mat-form-field>
-        <mat-label>Delegace</mat-label>
+        <mat-label>Frakce</mat-label>
         <mat-select formControlName="delegation">
             <mat-option *ngFor="let delegation of delegations | async" value="{{delegation.id}}">
                 {{delegation.name}}
