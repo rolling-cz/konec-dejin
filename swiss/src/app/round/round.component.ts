@@ -259,11 +259,11 @@ function formatProjectDescription(project: any) {
   if (project == null) {
     return ""
   }
-  if (project["condition"] != null) {
-    return "Podmínka: " + project["condition"] + "\n\n" + project["benefit"]
+  if (project["condition"] != null && project["condition"] != "") {
+    return project["name"] + "\nPodmínka: " + project["condition"] + "\n\n" + project["benefit"]
   }
-  if (project["benefit"] != null) {
-    return project["benefit"]
+  if (project["benefit"] != null && project["benefit"] != "") {
+    return project["name"] + "\n\n" + project["benefit"]
   }
   return ""
 }
