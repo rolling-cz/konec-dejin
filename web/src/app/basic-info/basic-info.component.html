@@ -1,0 +1,86 @@
+<mat-toolbar color="primary">
+    <span>{{title}}</span>
+</mat-toolbar>
+
+<div class="tab-content">
+    <mat-card>
+        <p><i>Hluboký vesmír, daleká budoucnost. Události v Impériu čítajícím přes třináct tisíc planet nabírají rychlý
+                spád. Po osmdesáti letech správy planety Arrakis rodem Harkonnen přechází arrakisské léno rozhodnutím
+                padišáh imperátora Shaddama IV. Corrino pod rod Atreides. Tento krok jen více prohloubí nepřátelství
+                mezi Atreidy a Harkonneny. Pouštní planeta Arrakis zvaná též Duna je navíc jediným zdrojem melanže ve
+                známém vesmíru. Melanže, která navigátorům Vesmírné gildy umožňuje bezpečně řídit lodě nadsvětelnými
+                rychlostmi. Melanže, jejíž kontrola a bohatství s ní spojené hýbe celou imperiální politikou. Melanže,
+                která prodlužuje život.</i></p>
+        <p><i> Rody Atreides a Harkonnen formálně vstoupili do Války assassinů a celé Impérium se propadá do nejistoty.
+                Dočasný správce Duny, hrabě Hasimir Fenring, zve všechny důležité zájmové skupiny k neformálnímu jednání
+                na neutrální půdě s cílem zajistit stabilitu na Duně. Jde předejít otevřenému konfliktu, který by
+                ohrozil tok melanže?</i></p>
+    </mat-card>
+    <p><strong>Formát hry</strong></p>
+    <mat-card>
+        Jedná se o online strategickou hru s roleplayovými prvky pro 15 hráčů inspirovanou světem Duny Franka Herberta a
+        hrou Konec Dějin od Rollingu. Hráči budou v rámci hracích večerů vyjednávat za svou frakci a činit za ně zásadní
+        rozhodnutí. My, organizátoři, pak budeme akce hráčů průběžně vyhodnocovat.
+    </mat-card>
+    <p><strong>Kdy?</strong></p>
+    <mat-card>
+        <p>Hrát budeme čtyři večery v únoru a březnu, vždy od 20:00 do půlnoci. První večer pak bude hře předcházet
+            technický workshop, ve kterém především vyzkoušíme, že vám vše správně funguje, a také první hrací kolo bude
+            o něco delší.</p>
+
+        Konkrétně budeme hrát:
+        <ul>
+            <li>neděle 9. května od 18:00 do 19:30 workshop, od 19:30 do 23:59 hrajeme</li>
+            <li>středa 12. května od 20:00 do 23:59</li>
+            <li>neděle 16. května od 20:00 do 23:59</li>
+            <li>středa 19. května od 20:00 do 23:59</li>
+        </ul>
+
+        <p>Půlnoc považujeme za “měkký” deadline pro odeslání depeší, ale necháváme hráče hrát až do dvou hodin do rána,
+            kdy je “tvrdý” deadline pro depeše. Hraní po půlnoci však není nutné a je naprosto dobrovolné.</p>
+    </mat-card>
+    <p><strong>Jak?</strong></p>
+    <mat-card>
+        Výhradně online formou prostřednictvím videokonference Zoom, chatovacího nástroje Slack a vlastní aplikace pro
+        zadávání pokynů vládě. Ke hře tak potřebujete počítač s webkamerou a mikrofonem, jinak ji můžete odehrát z
+        pohodlí svých domovů.
+    </mat-card>
+    <p><strong>Videokamera? Budu tedy potřebovat kostým?</strong></p>
+    <mat-card>
+        Rádi bychom zachovali alespoň základní imerzi. Využijeme k tomu funkcionalitu Zoomu, která umožňuje změnit
+        pozadí (místo svého obýváku či kuchyně tak ostatní hráči uvidí tématické pozadí odpovídající vaší frakci).
+        Zároveň budeme moc rádi, když si dáte dohromady zajímavý kostým (a i vám k němu pošleme pár tipů podle zvolené
+        frakce). Nijak na kostýmech však netrváme, nerušivé tričko či košile však budou stačit. Videokameru využijete
+        zejména při společných jednáních všech hráčů, při kuloárních jednáních je její využití zcela na vás.
+    </mat-card>
+    <p><strong>Přihlašování</strong></p>
+    <mat-card>
+        <p>Probíhá prostřednictvím přihlašovacího formuláře ve stanoveném časovém rozmezí. V rámci tohoto intervalu
+            nerozhoduje, kdy přesně jste svou přihlášku poslali. Pokud se přihlásí více hráčů, než je kapacity hry,
+            obsadíme v první řadě frakce, o které bude menší zájem (na základě odpovědí v přihlašovacím formuláři).
+            Zbylé účastníky budeme losovat, ale zároveň tento běh budeme preferovat hráče, kteří hru ještě nehráli. </p>
+
+        <button mat-raised-button color="accent" (click)="signUp()">Přihlásit na hru</button>
+    </mat-card>
+    <p><strong>Postavy</strong></p>
+    <mat-card>
+        <p>Snažíme se o minimalistický model postav. Ty jsou pro nás pouze nositelem myšlenek, postojů a cílů frakcí či
+            případně rozdílných zájmových skupin v rámci frakce (pokud má frakce více jak jednu postavu).</p>
+        <p>Všechny postavy jsou přístupné hráčům i hráčkám a výběr tak v tomto smyslu není nikterak genderově omezen.
+        </p>
+        <button mat-raised-button color="accent" (click)="factions()">Medailonky frakcí</button>
+    </mat-card>
+    <p><strong>Za kolik?</strong></p>
+    <mat-card>Po přihlášení vás požádáme o registrační poplatek 400 Kč.
+        Použijeme ho na občerstvení pro organizátory a také pro podporu dalších projektů, které chystáme!
+    </mat-card>
+    <p><strong>Kdo za tím stojí?</strong></p>
+    <mat-card>
+        <ul>
+            <li>Jan "Han" Šedivý </li>
+            <li>Jan Vaněček</li>
+            <li>Jakub Slavík</li>
+            <li>David "Destil" Vávra</li>
+        </ul>
+    </mat-card>
+</div>

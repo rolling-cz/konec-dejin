@@ -10,6 +10,9 @@
         ],
         "swiss": [
           "dnd-admin"
+        ],
+        "web": [
+          "dva-web"
         ]
       }
     }

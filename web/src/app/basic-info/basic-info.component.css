@@ -1,0 +1,11 @@
+.name {
+    font-size: medium;
+}
+.spreadsheet {
+    font-size: medium;
+    color: black;
+}
+.personal {
+    line-height: 0;
+    height: 100%;
+}
