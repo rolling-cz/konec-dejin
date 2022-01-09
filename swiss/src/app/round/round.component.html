@@ -34,6 +34,42 @@
     </div>
     <button mat-button color="accent" *ngIf="!editingDelegates" (click)="editDelegates()">Upravit</button>
 </mat-card>
+<p>Body vlivu:</p>
+<mat-card class="card">
+    <div *ngIf="editingBv">
+        <form #selectDelegateForm="ngForm">
+            <mat-form-field>
+                <mat-label>Hráč</mat-label>
+                <mat-select name="delegate" ngModel (selectionChange)="delegateChanged(selectDelegateForm)">
+                    <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
+                        {{delegate.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            &nbsp;
+            <span *ngIf="bvDelegateId">
+                {{ delegateTotalBv | async }} BV celkově
+            </span>
+        </form>
+        <app-round-bv-form *ngFor="let path of bvPaths | async" [path]="path"></app-round-bv-form>
+        <form (ngSubmit)="addBv(addBvForm)" #addBvForm="ngForm" *ngIf="bvDelegateId">
+            <mat-form-field class="number">
+                <input matInput placeholder="Změna BV" type="number" name="bv" required ngModel>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field>
+                <input matInput placeholder="Popis" type="text" name="description" ngModel>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="number">
+                <input matInput placeholder="Počet kol" type="number" name="rounds" required ngModel>
+            </mat-form-field>
+            &nbsp;
+            <button type="Submit" mat-raised-button color="accent">Přidat</button>
+        </form>
+    </div>
+    <button mat-button color="accent" *ngIf="!editingBv" (click)="editBv()">Upravit</button>
+</mat-card>
 <p>Akce:</p>
 <mat-card class="card">
     <button mat-raised-button color="accent" (click)="exportActions()">Export akcí</button><br /><br />

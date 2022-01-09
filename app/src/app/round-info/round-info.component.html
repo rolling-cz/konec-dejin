@@ -5,15 +5,25 @@
         <p *ngIf="info.presentRound">Deadline odeslání depeše: <strong>{{ info.deadline }}</strong>
         </p>
         <p *ngIf="!info.presentRound">Deadline odeslání depeše: {{ info.deadline }}</p>
+    </mat-card>
+    <mat-card class="action" *ngIf="info.message">
+        <p>Důležitá sdělení vedení:</p>
+        <p><strong>{{info.message}}</strong></p>
+    </mat-card>
+    <mat-card class="action">
+        <p>Body vlivu:</p>
         <p *ngIf="info.presentRound">K dispozici:
             <strong *ngIf="info.df == 0" class="positive">{{ info.df }} BV</strong>
             <strong *ngIf="info.df > 0">{{ info.df }} BV</strong>
             <strong *ngIf="info.df < 0" class="negative">{{ info.df }} BV</strong>
             z {{info.availableDf}} BV</p>
-        <p *ngIf="!info.presentRound">Použito: {{ info.df }} BV z {{info.availableDf}} BV</p>
-    </mat-card>
-    <mat-card class="action" *ngIf="info.message">
-        <p>Důležitá sdělení vedení:</p>
-        <p><strong>{{info.message}}</strong></p>
+        <p *ngIf="!info.presentRound">
+            <strong>Použito: {{ info.df }} BV z {{info.availableDf}} BV</strong>
+        </p>
+        <p *ngFor="let bv of info.bvs">
+            <span *ngIf="bv.bv > 0" class="positive">{{ bv.bv }} BV</span>
+            <span *ngIf="bv.bv < 0" class="negative">{{ bv.bv }} BV</span>
+            : {{ bv.description }}
+        </p>
     </mat-card>
 </ng-container>

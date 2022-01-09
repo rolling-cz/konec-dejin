@@ -8,9 +8,6 @@
             </mat-option>
         </mat-select>
     </mat-form-field>&nbsp;
-    <mat-form-field class="bv" class="main-actions">
-        <input matInput placeholder="BV" type="number" formControlName="bv" />
-    </mat-form-field>
     {{ state }} |
     <ng-container *ngIf="(dfInfo | async) as df">
         <span class="positive" *ngIf="df.spentState == 1">{{df.spentDf}}</span>

@@ -1,0 +1,12 @@
+<form [formGroup]="bvForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
+    <mat-form-field class="number">
+        <input matInput placeholder="Změna BV" type="number" formControlName="bv" />
+    </mat-form-field>&nbsp;
+    <mat-form-field class="text">
+        <input matInput placeholder="Popis" type="text" formControlName="description" />
+    </mat-form-field>&nbsp;
+    {{ state }} &nbsp;
+    <button mat-stroked-button color="accent" (click)="delete()">
+        Smazat
+    </button>
+</form>

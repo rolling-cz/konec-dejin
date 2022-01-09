@@ -156,6 +156,13 @@ isControllingVotingRight(voting_right_id) {
   auth.uid == prior(root).landsraad.votingRights[voting_right_id].controlledBy
 }
 
+// BV
+
+path /bvRounds/{round_id}/{delegate_id} {
+  read() { isSameDelegate(delegate_id) }
+  write() { isSwiss() }
+}
+
 //
 // Common
 //

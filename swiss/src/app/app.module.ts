@@ -35,6 +35,7 @@ import { LandsraadComponent } from './landsraad/landsraad.component';
 import { VotingRightFormComponent } from './voting-right-form/voting-right-form.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
 import { AnswerFormComponent } from './answer-form/answer-form.component';
+import { RoundBvFormComponent } from './round-bv-form/round-bv-form.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AnswerFormComponent } from './answer-form/answer-form.component';
     LandsraadComponent,
     VotingRightFormComponent,
     QuestionFormComponent,
-    AnswerFormComponent
+    AnswerFormComponent,
+    RoundBvFormComponent
   ],
   imports: [
     BrowserModule,

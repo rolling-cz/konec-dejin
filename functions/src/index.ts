@@ -23,8 +23,8 @@ export let processDelegationChange = functions.database.ref("delegateRounds/{del
     await doProcessDelegationChange(context.params.delegateId, context.params.roundId, change)
 })
 
-export let processBvChange = functions.database.ref("delegateRounds/{delegateId}/{roundId}/bv").onWrite(async (change, context) => {
-    await doProcessBvChange(context.params.delegateId, context.params.roundId, change)
+export let processBvChange = functions.database.ref("bvRounds/{roundId}/{delegateId}/{changeId}").onWrite(async (change, context) => {
+    await doProcessBvChange(context.params.roundId, context.params.delegateId)
 })
 
 export let processActionTitleChange = functions.database.ref("actions/{roundId}/{actionId}/title").onWrite(async (change, context) => {

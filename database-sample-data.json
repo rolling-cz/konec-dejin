@@ -155,5 +155,15 @@
         }
       }
     }
+  },
+  "bvRounds": {
+    "round_1": {
+      "delegateId": {
+        "change_id": {
+          "number": -1,
+          "description": "Těžba"
+        }
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { TENSES, COUNTRIES, findValueName, ACTION_TYPES, VISIBILITIES, SIZES } from '../../../../common/config';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { TENSES, COUNTRIES, findValueName, ACTION_TYPES, VISIBILITIES, SIZES, ValueName } from '../../../../common/config';
 import { AngularFireDatabase, DatabaseSnapshot, AngularFireAction } from '@angular/fire/database';
 import { Observable, combineLatest } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
@@ -34,15 +34,25 @@ export class RoundComponent implements OnInit {
 
   delegatePaths: Observable<string[]>
 
+  bvPaths: Observable<string[]>
+
   editingDelegates = false
 
   editingDelegations = false
 
   showingProjects = false
 
+  editingBv = false
+
   projects: Observable<Project[]>
 
   displayedColumns: string[] = ['keyword', 'name', 'delegations', 'df', 'mainActions'];
+
+  delegates: Observable<ValueName[]>
+
+  bvDelegateId: string
+
+  delegateTotalBv: Observable<number>
 
   ngOnInit() {
     this.path = "rounds/" + this.roundId
@@ -58,7 +68,56 @@ export class RoundComponent implements OnInit {
           return snapshots.map(snapshot => "delegateRounds/" + snapshot.key + "/" + this.roundId)
         })
     )
+    this.delegates = this.db.list("delegates").snapshotChanges().pipe(
+      map(
+        snapshots => {
+          return snapshots.map(snapshot => {
+            return { value: snapshot.key, name: snapshot.payload.val()["name"] }
+          })
+        })
+    )
     this.projects = this.calculateProjects()
+  }
+
+  delegateChanged(form: NgForm) {
+    this.bvDelegateId = form.value["delegate"]
+    this.bvPaths = this.db.list("bvRounds/" + this.roundId + "/" + this.bvDelegateId).snapshotChanges().pipe(
+      map(
+        snapshots => {
+          return snapshots.map(snapshot => "bvRounds/" + this.roundId+ "/" + this.bvDelegateId + "/" + snapshot.key)
+        })
+    )
+    this.delegateTotalBv = this.db.object("delegateRounds/" + this.bvDelegateId + "/" + this.roundId + "/bv").valueChanges() as Observable<number>
+  }
+
+  addBv(form: NgForm) {
+    if (form.valid) {
+      var adding = false
+      var addedCount = 0
+      var roundCount = form.value["rounds"]
+      this.db.list("rounds").snapshotChanges().pipe(
+        take(1),
+        tap(
+          rounds => {
+            rounds.forEach(
+              round => {
+                const roundId = round.key
+                if (roundId == this.roundId) {
+                  adding = true
+                }
+                if (adding && addedCount < roundCount) {
+                  this.db.list("bvRounds/" + roundId + "/" + this.bvDelegateId).push({
+                    description: form.value["description"],
+                    bv: form.value["bv"]
+                  })
+                  addedCount++
+                }
+              }
+            )
+          }
+        )
+      ).subscribe()
+    }
   }
 
   changeHandler(state) {
@@ -233,6 +292,10 @@ export class RoundComponent implements OnInit {
 
   editDelegations() {
     this.editingDelegations = true
+  }
+
+  editBv() {
+    this.editingBv = true
   }
 
   showProjects() {

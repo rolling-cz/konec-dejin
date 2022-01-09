@@ -31,11 +31,12 @@ export class RoundInfoComponent implements OnInit {
           this.db.object("rounds/" + this.roundId).valueChanges(),
           this.db.object("delegations/" + delegationId).valueChanges(),
           this.spentDf,
-          (round, delegation, spentDf) => {
+          this.db.list("bvRounds/" + this.roundId + "/" + delegateId).valueChanges(),
+          (round, delegation, spentDf, bvs) => {
             let presentRound = round["tense"] == "present"
             let availableDf = delegateRound["bv"];
-            let df = (presentRound) ? availableDf-spentDf : spentDf
-            return { name: delegation["name"], flag: delegation["flag"], deadline: round["deadline"], presentRound: presentRound, message: delegateRound["message"], availableDf: availableDf, df: df }
+            let df = (presentRound) ? availableDf - spentDf : spentDf
+            return { name: delegation["name"], flag: delegation["flag"], deadline: round["deadline"], presentRound: presentRound, message: delegateRound["message"], availableDf: availableDf, df: df, bvs: bvs }
           }
         )
       }

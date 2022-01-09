@@ -31,7 +31,13 @@ export interface RoundInfo {
     leader: string,
     presentRound: boolean,
     availableDf: number,
-    message: string
+    message: string,
+    bvs: BvChange[]
+}
+
+export interface BvChange {
+    bv: number
+    description: string
 }
 
 export interface Delegate {
