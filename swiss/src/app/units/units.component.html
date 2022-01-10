@@ -1,0 +1,77 @@
+<div class="tab-content">
+    <mat-card class="card">
+        <form #selectDelegateForm="ngForm">
+            <mat-form-field>
+                <mat-label>Hráč</mat-label>
+                <mat-select name="delegate" ngModel (selectionChange)="delegateChanged(selectDelegateForm)">
+                    <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
+                        {{delegate.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+        <app-unit-form *ngFor="let path of unitPaths | async" [path]="path"></app-unit-form>
+    </mat-card>
+    <p>Přidat jednotku:</p>
+    <mat-card class="card">
+        <form (ngSubmit)="addUnit(addUnitForm)" #addUnitForm="ngForm">
+            <mat-form-field class="text">
+                <input matInput placeholder="Název" type="text" name="name" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <input matInput placeholder="Klíčové slovo" type="text" name="keyword" required ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Hráč</mat-label>
+                <mat-select name="delegate" required ngModel>
+                    <mat-option *ngFor="let delegate of delegates | async" value="{{delegate.value}}">
+                        {{delegate.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Typ jednotky</mat-label>
+                <mat-select name="type" required ngModel>
+                    <mat-option *ngFor="let type of types" [value]="type.value">
+                        {{type.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Stav jednotky</mat-label>
+                <mat-select name="state" required ngModel>
+                    <mat-option *ngFor="let state of states" [value]="state.value">
+                        {{state.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Viditelnost jednotky</mat-label>
+                <mat-select name="visibility" required ngModel>
+                    <mat-option *ngFor="let visibility of visibilities" [value]="visibility.value">
+                        {{visibility.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="text">
+                <input matInput placeholder="Veřejné info" type="text" name="publicInfo" ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="text">
+                <input matInput placeholder="Info pro hráče" type="text" name="delegateInfo" ngModel>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="text">
+                <input matInput placeholder="Info pro orgy" type="text" name="internalInfo" ngModel>
+            </mat-form-field>
+            <br />
+            <button type="Submit" mat-raised-button color="accent">Přidat jednotku</button>
+        </form>
+    </mat-card>
+</div>

@@ -14,6 +14,9 @@
             <mat-button-toggle value="projects" class="small">
                 Mise
             </mat-button-toggle>
+            <mat-button-toggle value="units" class="small">
+                Jednotky
+            </mat-button-toggle>
             <mat-button-toggle value="landsraad" class="small">
                 Landsraad
             </mat-button-toggle>
@@ -27,6 +30,7 @@
     <app-delegations *ngIf="selectedMenuItem == 'delegations'"></app-delegations>
     <app-delegates *ngIf="selectedMenuItem == 'delegates'"></app-delegates>
     <app-projects *ngIf="selectedMenuItem == 'projects'"></app-projects>
+    <app-units *ngIf="selectedMenuItem == 'units'"></app-units>
     <app-landsraad *ngIf="selectedMenuItem == 'landsraad'"></app-landsraad>
 </div>
 <ng-template #showLogin>

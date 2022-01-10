@@ -36,6 +36,8 @@ import { VotingRightFormComponent } from './voting-right-form/voting-right-form.
 import { QuestionFormComponent } from './question-form/question-form.component';
 import { AnswerFormComponent } from './answer-form/answer-form.component';
 import { RoundBvFormComponent } from './round-bv-form/round-bv-form.component';
+import { UnitsComponent } from './units/units.component';
+import { UnitFormComponent } from './unit-form/unit-form.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { RoundBvFormComponent } from './round-bv-form/round-bv-form.component';
     VotingRightFormComponent,
     QuestionFormComponent,
     AnswerFormComponent,
-    RoundBvFormComponent
+    RoundBvFormComponent,
+    UnitsComponent,
+    UnitFormComponent
   ],
   imports: [
     BrowserModule,

@@ -27,3 +27,18 @@ This document defines constants used in database.
     - size
         - small
         - large
+- units/$unitId
+    - type
+        - active_hero
+        - passive_hero
+        - army
+    - state
+        - alive
+        - dead
+        - incubating
+        - other
+    - visibility
+        - public
+        - private
+        - fremen
+

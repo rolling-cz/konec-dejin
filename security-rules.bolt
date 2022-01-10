@@ -163,6 +163,19 @@ path /bvRounds/{round_id}/{delegate_id} {
   write() { isSwiss() }
 }
 
+// Units
+
+path /units {
+    index() {["delegate", "type", "state", "state", "visibility" ]}
+    
+    read() { isSignedIn() }
+
+    path /{unit_id} {
+      read() { isSignedIn() }
+      write() { isSwiss() }
+    }
+}
+
 //
 // Common
 //

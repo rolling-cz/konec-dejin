@@ -165,5 +165,18 @@
         }
       }
     }
+  },
+  "units": {
+    "unit_1": {
+      "name": "Paul Atreides",
+      "delegate": "delegate_1",
+      "keyword": "PAUL",
+      "type": "active_hero",
+      "state": "alive",
+      "visibility": "public",
+      "publicInfo": "Anti-hrdina",
+      "delegateInfo": "Může vidět budoucnost",
+      "internalInfo": "Kwisatz Haderach"
+    }
   }
 }

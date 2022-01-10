@@ -59,6 +59,25 @@ export const PROJECT_TYPES: ValueName[] = [
     { value: 'delegate', name: "Pro hráče" }
 ]
 
+export const UNIT_TYPES: ValueName[] = [
+    { value: 'active_hero', name: "Aktivní hrdina" },
+    { value: 'passive_hero', name: "Pasivní hrdina" },
+    { value: 'army', name: "Armáda" }
+]
+
+export const UNIT_STATES: ValueName[] = [
+    { value: 'alive', name: "Živý" },
+    { value: 'dead', name: "Mrtvý" },
+    { value: 'incubating', name: "Objeví se" },
+    { value: 'other', name: "Ostatní" }
+]
+
+export const UNIT_VISIBILITIES: ValueName[] = [
+    { value: 'public', name: "Veřejná" },
+    { value: 'private', name: "Soukromá" },
+    { value: 'fremen', name: "Fremenská" }
+]
+
 export interface ValueName {
     value: string;
     name: string;

@@ -1,0 +1,48 @@
+<form [formGroup]="unitForm" appFireForm [path]="path" (stateChange)="changeHandler($event)">
+    <mat-form-field class="text">
+        <input matInput placeholder="Název" type="text" formControlName="name" />
+    </mat-form-field>&nbsp;
+    <mat-form-field class="text">
+        <input matInput placeholder="Klíčové slovo" type="text" formControlName="keyword" />
+    </mat-form-field>&nbsp;
+    <mat-form-field>
+        <mat-label>Typ jednotky</mat-label>
+        <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+                {{type.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+        <mat-label>Stav jednotky</mat-label>
+        <mat-select formControlName="state">
+            <mat-option *ngFor="let state of states" [value]="state.value">
+                {{state.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+        <mat-label>Viditelnost jednotky</mat-label>
+        <mat-select formControlName="visibility">
+            <mat-option *ngFor="let visibility of visibilities" [value]="visibility.value">
+                {{visibility.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field class="text">
+        <input matInput placeholder="Veřejné info" type="text" formControlName="publicInfo" />
+    </mat-form-field>&nbsp;
+    <mat-form-field class="text">
+        <input matInput placeholder="Info pro hráče" type="text" formControlName="delegateInfo" />
+    </mat-form-field>&nbsp;
+    <mat-form-field class="text">
+        <input matInput placeholder="Info pro orgy" type="text" formControlName="internalInfo" />
+    </mat-form-field>
+    | {{ state }} &nbsp;
+    <button mat-stroked-button color="accent" (click)="delete()">
+        Smazat
+    </button>
+</form>
