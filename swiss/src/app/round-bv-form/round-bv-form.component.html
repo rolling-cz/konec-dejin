@@ -3,7 +3,7 @@
         <input matInput placeholder="Změna BV" type="number" formControlName="bv" />
     </mat-form-field>&nbsp;
     <mat-form-field class="number">
-        <input matInput placeholder="Počet kol při vytvoření" type="number" formControlName="originalRoundCount" />
+        <input matInput placeholder="Počet kol při vytvoření" type="number" formControlName="originalRoundCount" [attr.disabled]="bvForm.value.bv ? '' : null" />
     </mat-form-field>&nbsp;
     <mat-form-field class="text">
         <input matInput placeholder="Popis" type="text" formControlName="description" />
