@@ -161,7 +161,8 @@
       "delegateId": {
         "change_id": {
           "number": -1,
-          "description": "Těžba"
+          "description": "Těžba",
+          "originalRoundCount": 2
         }
       }
     }

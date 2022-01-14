@@ -23,7 +23,8 @@ export class RoundBvFormComponent implements OnInit {
   ngOnInit() {
     this.bvForm = this.fb.group({
       description: [''],
-      bv: [0]
+      bv: [0],
+      originalRoundCount: [0]
     })
   }
 

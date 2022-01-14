@@ -102,13 +102,16 @@ export class RoundComponent implements OnInit {
             rounds.forEach(
               round => {
                 const roundId = round.key
+                var originalRoundCount = null
                 if (roundId == this.roundId) {
                   adding = true
+                  originalRoundCount = roundCount
                 }
                 if (adding && addedCount < roundCount) {
                   this.db.list("bvRounds/" + roundId + "/" + this.bvDelegateId).push({
                     description: form.value["description"],
-                    bv: form.value["bv"]
+                    bv: form.value["bv"],
+                    originalRoundCount: originalRoundCount
                   })
                   addedCount++
                 }
