@@ -30,7 +30,6 @@ import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-con
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import {MatTableModule} from '@angular/material/table';
-import { RoundDelegateActionTitleComponent } from './round-delegate-action-title/round-delegate-action-title.component';
 import { LandsraadComponent } from './landsraad/landsraad.component';
 import { VotingRightFormComponent } from './voting-right-form/voting-right-form.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
@@ -55,7 +54,6 @@ import { UnitFormComponent } from './unit-form/unit-form.component';
     DeleteConfirmDialogComponent,
     ProjectsComponent,
     ProjectFormComponent,
-    RoundDelegateActionTitleComponent,
     LandsraadComponent,
     VotingRightFormComponent,
     QuestionFormComponent,
