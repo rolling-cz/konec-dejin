@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { ValueName, PROJECT_TYPES } from '../../../../common/config';
 import { Papa } from 'ngx-papaparse';
+import { isNumber } from 'util';
 
 @Component({
   selector: 'app-projects',
@@ -66,20 +67,25 @@ export class ProjectsComponent implements OnInit {
         skipEmptyLines: true,
         complete: (result) => {
           result.data.forEach(el => {
-            let enabledString = el["Dostupná"].toLowerCase() 
+            let enabledString = el["Dostupná"].toLowerCase()
             let enabled = enabledString == "true" || enabledString == "1"
-            this.db.list("projects").push({
-              name: el["Název"],
-              keyword: el["Klíčové slovo"],
-              enabled: enabled,
-              df: el["Cena BV"],
-              mainActions: 1,
-              type: "delegate",
-              delegate: this.delegateId,
-              condition: el["Podmínka"],
-              benefit: el["Benefit"],
-              instructions: el["Instrukce"]
-            })
+            let bv = +el["Cena BV"]
+            if (isNaN(bv)) {
+              alert("'" + el["Cena BV"] + "' není číslo, opakuj import")
+            } else {
+              this.db.list("projects").push({
+                name: el["Název"],
+                keyword: el["Klíčové slovo"],
+                enabled: enabled,
+                df: bv,
+                mainActions: 1,
+                type: "delegate",
+                delegate: this.delegateId,
+                condition: el["Podmínka"],
+                benefit: el["Benefit"],
+                instructions: el["Instrukce"]
+              })
+            }
           });
         }
       });
