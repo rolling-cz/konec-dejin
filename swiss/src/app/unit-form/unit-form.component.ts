@@ -28,7 +28,6 @@ export class UnitFormComponent implements OnInit {
   ngOnInit() {
     this.unitForm = this.fb.group({
       name: [''],
-      keyword: [''],
       type: [''],
       state: [''],
       visibility: [''],

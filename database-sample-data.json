@@ -171,7 +171,6 @@
     "unit_1": {
       "name": "Paul Atreides",
       "delegate": "delegate_1",
-      "keyword": "PAUL",
       "type": "active_hero",
       "state": "alive",
       "visibility": "public",

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UNIT_STATES, UNIT_TYPES, UNIT_VISIBILITIES, ValueName } from '../../../../common/config';
+import { Papa } from 'ngx-papaparse';
 
 @Component({
   selector: 'app-units',
@@ -46,7 +47,6 @@ export class UnitsComponent implements OnInit {
     if (form.valid) {
       this.db.list("units").push({
         name: form.value["name"],
-        keyword: form.value["keyword"],
         delegate: form.value["delegate"],
         publicInfo: form.value["publicInfo"],
         delegateInfo: form.value["delegateInfo"],
@@ -56,6 +56,32 @@ export class UnitsComponent implements OnInit {
         visibility: form.value["visibility"]
       })
     }
+  }
+
+  importUnits(file) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      let papa = new Papa()
+      papa.parse(fileReader.result as string, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (result) => {
+          result.data.forEach(el => {
+            this.db.list("units").push({
+              name: el["Název"],
+              delegate: this.delegateId,
+              publicInfo: el["Veřejné info"],
+              delegateInfo: el["Info pro hráče"],
+              internalInfo: el["Info pro orgy"],
+              type: el["Typ jednotky"],
+              state: el["Stav jednotky"],
+              visibility: el["Viditelnost jednotky"]
+            })
+          });
+        }
+      })
+    }
+    fileReader.readAsText(file.value.files[0]);
   }
 
 }
