@@ -133,8 +133,9 @@ export class RoundComponent implements OnInit {
       this.db.list("delegates").snapshotChanges(),
       this.db.list("delegations").snapshotChanges(),
       this.db.list("projects").valueChanges(),
-      (actions, delegates, delegations, projects) => {
-        return { actions: actions, delegates: delegates, delegations: delegations, projects: projects }
+      this.db.list("units").snapshotChanges(),
+      (actions, delegates, delegations, projects, units) => {
+        return { actions: actions, delegates: delegates, delegations: delegations, projects: projects, units: units }
       }
     ).pipe(
       take(1),
@@ -142,8 +143,8 @@ export class RoundComponent implements OnInit {
         combined => {
           let data = combined.actions.map(snapshot => {
             let values = snapshot.payload.val()
-            let actionTypes = ACTION_TYPES
-            let project = findProject(combined.projects, values["keyword"], values["delegate"])
+            let project = findProject(combined.projects, values["identifier"], values["delegate"])
+            let unit = findUnit(combined.units, values["identifier"])
             return [
               snapshot.key.substr(1), // Excel doesn't like - at the beginning
               findName(combined.delegates, values["delegate"]),
@@ -153,14 +154,14 @@ export class RoundComponent implements OnInit {
               findValueName(COUNTRIES, values["targetCountry"]),
               values["df"] || "",
               values["keyword"] || "",
-              findValueName(actionTypes, values["type"]),
-              formatProjectDescription(project),
-              formatInstructions(project),
+              values["identifier"] || "",
+              formatDescription(project, unit),
+              formatInstructions(project, unit),
               values["result"] || ""
             ]
           })
           let options = {
-            headers: ["ID akce", "Hráč", "Frakce", "Titulek", "Popis akce", "Lokace", "BV", "Klíčové slovo", "Typ akce", "Popis mise", "Instrukce", "Výsledek"]
+            headers: ["ID akce", "Hráč", "Frakce", "Titulek", "Popis akce", "Lokace", "BV", "Klíčové slovo", "Identifikátor", "Popis", "Instrukce", "Výsledek"]
           };
           new ngxCsv(data, 'Export akcí ' + this.roundForm.controls.name.value, options);
         }
@@ -321,7 +322,17 @@ function findProject(projects: any[], keyword: string, delegateId: string) {
   });
 }
 
-function formatProjectDescription(project: any) {
+function findUnit(units: any[], id: string) {
+  return units.find((snap) => {
+    let unit = snap.key == id
+    return unit
+  });
+}
+
+function formatDescription(project: any, unit: any) {
+  if (unit != null) {
+    return unit.payload.val()["delegateInfo"]
+  }
   if (project == null) {
     return ""
   }
@@ -334,7 +345,10 @@ function formatProjectDescription(project: any) {
   return ""
 }
 
-function formatInstructions(project: any) {
+function formatInstructions(project: any, unit: any) {
+  if (unit != null) {
+    return unit.payload.val()["internalInfo"]
+  }
   if (project == null) {
     return ""
   }

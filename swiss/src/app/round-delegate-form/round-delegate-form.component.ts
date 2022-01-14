@@ -28,8 +28,6 @@ export class RoundDelegateFormComponent implements OnInit {
 
   spentDf: Observable<number>
 
-  actionPaths: Observable<string[]>
-
   ngOnInit() {
     this.delegateForm = this.fb.group({
       delegation: [''],
@@ -72,17 +70,11 @@ export class RoundDelegateFormComponent implements OnInit {
         ))
       }
       ))
-    this.actionPaths = this.db.list("actions/" + roundId, ref => ref.orderByChild("delegate").equalTo(delegateId)).snapshotChanges().pipe(
-            map(
-              snapshots => {
-                return snapshots.map(snapshot => "actions/" + roundId + "/" + snapshot.key)
-              })
-          )
   }
 
-changeHandler(state) {
-  this.state = state
-}
+  changeHandler(state) {
+    this.state = state
+  }
 
 }
 

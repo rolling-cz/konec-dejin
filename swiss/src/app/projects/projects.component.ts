@@ -75,7 +75,7 @@ export class ProjectsComponent implements OnInit {
             } else {
               this.db.list("projects").push({
                 name: el["Název"],
-                keyword: el["Klíčové slovo"],
+                keyword: el["Identifikátor"],
                 enabled: enabled,
                 df: bv,
                 mainActions: 1,
