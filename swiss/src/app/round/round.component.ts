@@ -84,7 +84,7 @@ export class RoundComponent implements OnInit {
     this.bvPaths = this.db.list("bvRounds/" + this.roundId + "/" + this.bvDelegateId).snapshotChanges().pipe(
       map(
         snapshots => {
-          return snapshots.map(snapshot => "bvRounds/" + this.roundId+ "/" + this.bvDelegateId + "/" + snapshot.key)
+          return snapshots.map(snapshot => "bvRounds/" + this.roundId + "/" + this.bvDelegateId + "/" + snapshot.key)
         })
     )
     this.delegateTotalBv = this.db.object("delegateRounds/" + this.bvDelegateId + "/" + this.roundId + "/bv").valueChanges() as Observable<number>
@@ -249,6 +249,65 @@ export class RoundComponent implements OnInit {
         }
       }
     )
+  }
+
+  exportBv() {
+    combineLatest(
+      this.db.list("bvRounds").snapshotChanges(),
+      this.db.list("delegates").snapshotChanges(),
+      this.db.list("rounds").snapshotChanges(),
+      (bvRounds, delegates, rounds) => {
+        return { bvRounds: bvRounds, delegates: delegates, rounds: rounds }
+      }
+    ).pipe(
+      take(1),
+      tap(
+        combined => {
+          var data = []
+          var headers = ["Hráč", "Popis"]
+          var roundColumn = 1
+          let roundCount = combined.rounds.length
+          combined.rounds.forEach(round => {
+            let roundId = round.key
+            let roundName = round.payload.val()["name"]
+            headers.push(roundName)
+            roundColumn++
+
+            let bvsInRound = combined.bvRounds.find((row) => row.key == roundId);
+            if (bvsInRound != null) {
+              let val = bvsInRound.payload.val()
+              Object.keys(val).forEach((delegateId) => {
+                let delegateName = findName(combined.delegates, delegateId)
+                let val2 = val[delegateId]
+                Object.keys(val2).forEach((key) => {
+                  let bv = val2[key]
+                  let description = bv["description"]
+                  let row = data.find(row => row[0] == delegateName && row[1] == description)
+                  if (row == null) {
+                    var rowData = [delegateName, description]
+                    for (let index = 0; index < roundCount; index++) {
+                      if (index + 2  == roundColumn) {
+                        rowData.push(bv["bv"])
+                      } else {
+                        rowData.push(0)
+                      }
+                    }
+                    data.push(rowData)
+                  } else {
+                    row[roundColumn] = bv["bv"]
+                  }
+                })
+              });
+            }
+
+          });
+          let options = {
+            headers: headers
+          };
+          new ngxCsv(data, 'Export BV', options);
+        }
+      )
+    ).subscribe()
   }
 
   private calculateProjects(): Observable<Project[]> {

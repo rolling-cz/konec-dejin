@@ -158,9 +158,14 @@ isControllingVotingRight(voting_right_id) {
 
 // BV
 
-path /bvRounds/{round_id}/{delegate_id} {
-  read() { isSameDelegate(delegate_id) }
-  write() { isSwiss() }
+path /bvRounds {
+
+  read() { isSwiss() }
+
+  path /{round_id}/{delegate_id} {
+    read() { isSameDelegate(delegate_id) }
+    write() { isSwiss() }
+  }  
 }
 
 // Units
