@@ -23,7 +23,6 @@ import { ActionFormComponent } from './action-form/action-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DelegateNameComponent } from './delegate-name/delegate-name.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { SelectProjectDialogComponent } from './select-project-dialog/select-project-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -42,7 +41,6 @@ import { VotingComponent } from './voting/voting.component';
     FireFormDirective,
     ActionFormComponent,
     DelegateNameComponent,
-    SelectProjectDialogComponent,
     ProcessingRoundComponent,
     VotingComponent
   ],
@@ -69,9 +67,6 @@ import { VotingComponent } from './voting/voting.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ReactiveFormsModule
-  ],
-  entryComponents: [
-    SelectProjectDialogComponent
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'cs' }],
   bootstrap: [AppComponent]

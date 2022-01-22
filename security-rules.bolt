@@ -42,7 +42,7 @@ type Keyword extends String {
 }
 
 type ActionType extends String {
-    validate() { this == "mission" || this == "other" }
+    validate() { this == "mission" || this == "unit" || this == "other" }
 }
 
 type ActionVisibility extends String {

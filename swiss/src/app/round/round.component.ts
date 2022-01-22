@@ -311,7 +311,7 @@ export class RoundComponent implements OnInit {
                           {
                             delegate: delegateId,
                             delegation: delegationId,
-                            type: "other",
+                            type: "unit",
                             visibility: "private",
                             title: unitSnap.payload.val()["name"],
                             identifier: unitSnap.key

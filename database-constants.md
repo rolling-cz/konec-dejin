@@ -5,6 +5,7 @@ This document defines constants used in database.
 - actions/$roundId/$actionId
     - type
         - mission
+        - unit
         - other
     - visibility
         - public (visible to the world)
