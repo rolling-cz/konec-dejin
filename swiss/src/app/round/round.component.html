@@ -74,7 +74,13 @@
 </mat-card>
 <p>Akce:</p>
 <mat-card class="card">
-    <button mat-raised-button color="accent" (click)="exportActions()">Export akcí</button><br /><br />
+    <button mat-raised-button color="accent" (click)="exportActions()">Export akcí</button>
+    &nbsp;
+    <button mat-stroked-button color="accent" (click)="setSmallActions()" *ngIf="smallSize">Nastavit akce pro malé kolo</button>
+    <button mat-stroked-button color="accent" (click)="setLargeActions()" *ngIf="!smallSize">Nastavit akce podle jednotek</button>
+    &nbsp;
+    <button mat-stroked-button color="accent" (click)="deleteActions()">Promazat akce</button>
+    <br /><br />
     <mat-form-field>
         <ngx-mat-file-input placeholder="Vyber CSV soubor" [accept]="'.csv'" #file></ngx-mat-file-input>
         <mat-icon matSuffix>folder</mat-icon>
@@ -124,5 +130,4 @@
         misí</button>
 </mat-card>
 <br />
-<button mat-stroked-button color="accent" (click)="deleteRound()">Smazat kolo</button>&nbsp;
-<button mat-stroked-button color="accent" (click)="deleteActions()">Smazat akce</button>
+<button mat-stroked-button color="accent" (click)="deleteRound()">Smazat kolo</button>

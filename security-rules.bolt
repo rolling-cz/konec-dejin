@@ -10,9 +10,11 @@ path /actions {
     
     read() { isSwiss() || (query.orderByChild == "delegate" && query.equalTo == auth.uid) || (query.orderByChild == "delegation" && query.equalTo == prior(root).delegateRounds[auth.uid][round_id].delegation) }
 
+    write() { isSwiss() }
+
     path /{action_id} is Action {
       read() { isSameDelegation(this.delegation, round_id)}
-      write() { (isDelete(this) && isSameDelegate(prior(this).delegate)) || (!isDelete(this) && isSameDelegate(this.delegate)) }
+      write() { isSwiss() || (isDelete(this) && isSameDelegate(prior(this).delegate)) || (!isDelete(this) && isSameDelegate(this.delegate)) }
     }
   }
 }
@@ -24,6 +26,7 @@ type Action {
   df: Number | Null,
   keyword: Keyword | Null,
   title: Description | Null,
+  identifier: Description | Null,
   targetCountry: Emoji | Null,
   result: Description | Null,
   type: ActionType,

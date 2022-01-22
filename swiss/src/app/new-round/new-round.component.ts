@@ -37,7 +37,6 @@ export class NewRoundComponent implements OnInit {
                 this.db.object("delegateRounds/" + delegate.key + "/" + roundRef.key).set(
                   {
                     markedAsSent : false,
-                    mainActions: 2,
                     bv: 0
                   }
                 )

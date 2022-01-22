@@ -8,9 +8,6 @@
             </mat-option>
         </mat-select>
     </mat-form-field>&nbsp;
-    <mat-form-field class="main-actions">
-        <input matInput placeholder="Akce" type="number" formControlName="mainActions" />
-    </mat-form-field>&nbsp;
     {{ state }} |
     <ng-container *ngIf="(dfInfo | async) as df">
         <span class="positive" *ngIf="df.spentState == 1">{{df.spentDf}}</span>

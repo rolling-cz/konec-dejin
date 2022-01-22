@@ -46,13 +46,15 @@ export class RoundComponent implements OnInit {
 
   projects: Observable<Project[]>
 
-  displayedColumns: string[] = ['keyword', 'name', 'delegations', 'df', 'mainActions'];
+  displayedColumns: string[] = ['keyword', 'name', 'delegations', 'df'];
 
   delegates: Observable<ValueName[]>
 
   bvDelegateId: string
 
   delegateTotalBv: Observable<number>
+
+  smallSize = true
 
   ngOnInit() {
     this.path = "rounds/" + this.roundId
@@ -77,6 +79,11 @@ export class RoundComponent implements OnInit {
         })
     )
     this.projects = this.calculateProjects()
+    this.db.object("rounds/" + this.roundId + "/size").valueChanges().pipe(
+      tap(size => {
+        this.smallSize = size == "small"
+      })
+    ).subscribe()
   }
 
   delegateChanged(form: NgForm) {
@@ -188,31 +195,8 @@ export class RoundComponent implements OnInit {
     fileReader.readAsText(file.value.files[0]);
   }
 
-  deleteRound() {
-    this.dialog.open(DeleteConfirmDialogComponent, { data: this.roundForm.controls.name.value }).afterClosed().subscribe(
-      result => {
-        if (result) {
-          this.db.list("delegateRounds").snapshotChanges().pipe(
-            take(1),
-            tap(
-              snapshots => {
-                snapshots.forEach(
-                  snapshot => {
-                    this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId).remove()
-                  }
-                )
-              }
-            )
-          ).subscribe()
-          this.db.object("actions/" + this.roundId).remove()
-          this.db.object(this.path).remove()
-        }
-      }
-    )
-  }
-
   deleteActions() {
-    this.dialog.open(DeleteConfirmDialogComponent, { data: "všechny sekundární akce a vyčistit primární akce" }).afterClosed().subscribe(
+    this.dialog.open(DeleteConfirmDialogComponent, { data: "obsahu všech akcí" }).afterClosed().subscribe(
       result => {
         if (result) {
           this.db.list("actions/" + this.roundId).snapshotChanges().pipe(
@@ -246,6 +230,122 @@ export class RoundComponent implements OnInit {
               }
             )
           ).subscribe()
+        }
+      }
+    )
+  }
+
+  setSmallActions() {
+    this.dialog.open(DeleteConfirmDialogComponent, { data: "všech akcí v tomto kole a vytvoření nových prázdných: 1 mise a 1 akce libovolné jednotky" }).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.db.list("actions/" + this.roundId).remove()
+          this.db.list("delegateRounds").snapshotChanges().pipe(
+            take(1),
+            tap(
+              snapshots => {
+                snapshots.forEach(
+                  snapshot => {
+                    let delegateId = snapshot.key
+                    let delegationId = snapshot.payload.val()[this.roundId]["delegation"]
+                    this.db.list("actions/" + this.roundId).push(
+                      {
+                        delegate: delegateId,
+                        delegation: delegationId,
+                        type: "mission",
+                        visibility: "private",
+                        title: "Mise"
+                      })
+                    this.db.list("actions/" + this.roundId).push(
+                      {
+                        delegate: delegateId,
+                        delegation: delegationId,
+                        type: "other",
+                        visibility: "private",
+                        title: "Akce libovolné jednotky"
+                      })
+                    this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId + "/markedAsSent").set(false)
+                  }
+                )
+              }
+            )
+          ).subscribe()
+        }
+      }
+    )
+  }
+
+  setLargeActions() {
+    this.dialog.open(DeleteConfirmDialogComponent, { data: "všech akcí v tomto kole a vytvoření nových prázdných: 1 mise a akce pro každou aktivní jednotku" }).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.db.list("actions/" + this.roundId).remove()
+          combineLatest(
+            this.db.list("delegateRounds").snapshotChanges(),
+            this.db.list("units").snapshotChanges(),
+            (delegateRounds, units) => {
+              return { delegateRounds: delegateRounds, units: units }
+            }
+          )
+            .pipe(
+              take(1),
+              tap(
+                combined => {
+                  combined.delegateRounds.forEach(
+                    snapshot => {
+                      let delegateId = snapshot.key
+                      let delegationId = snapshot.payload.val()[this.roundId]["delegation"]
+                      this.db.list("actions/" + this.roundId).push(
+                        {
+                          delegate: delegateId,
+                          delegation: delegationId,
+                          type: "mission",
+                          visibility: "private",
+                          title: "Mise"
+                        })
+                      combined.units.filter(snap => {
+                        let unit = snap.payload.val()
+                        return unit["delegate"] == delegateId && (unit["type"] == "active_hero" || unit["type"] == "army") && unit["state"] == "alive"
+                      }).forEach(unitSnap => { 
+                        this.db.list("actions/" + this.roundId).push(
+                          {
+                            delegate: delegateId,
+                            delegation: delegationId,
+                            type: "other",
+                            visibility: "private",
+                            title: unitSnap.payload.val()["name"],
+                            identifier: unitSnap.key
+                          })
+                      })
+                      this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId + "/markedAsSent").set(false)
+                    }
+                  )
+                }
+              )
+            ).subscribe()
+        }
+      }
+    )
+  }
+
+  deleteRound() {
+    this.dialog.open(DeleteConfirmDialogComponent, { data: this.roundForm.controls.name.value }).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.db.list("delegateRounds").snapshotChanges().pipe(
+            take(1),
+            tap(
+              snapshots => {
+                snapshots.forEach(
+                  snapshot => {
+                    this.db.object("delegateRounds/" + snapshot.key + "/" + this.roundId).remove()
+                  }
+                )
+              }
+            )
+          ).subscribe()
+          this.db.object("actions/" + this.roundId).remove()
+          this.db.object(this.path).remove()
         }
       }
     )
@@ -286,7 +386,7 @@ export class RoundComponent implements OnInit {
                   if (row == null) {
                     var rowData = [delegateName, description]
                     for (let index = 0; index < roundCount; index++) {
-                      if (index + 2  == roundColumn) {
+                      if (index + 2 == roundColumn) {
                         rowData.push(bv["bv"])
                       } else {
                         rowData.push(0)

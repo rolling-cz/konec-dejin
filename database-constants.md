@@ -4,10 +4,7 @@ This document defines constants used in database.
 
 - actions/$roundId/$actionId
     - type
-        - main (limited number)
-        - support
-        - economic
-        - elections
+        - mission
         - other
     - visibility
         - public (visible to the world)

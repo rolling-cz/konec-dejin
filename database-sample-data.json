@@ -9,7 +9,8 @@
         "result": "Britové jsou nakloněni přechodu na Euro.",
         "targetCountry": "gb",
         "type": "support",
-        "visibility": "public"
+        "visibility": "public",
+        "title": "Mise"
       },
       "action_id_1": {
         "delegate": "delegate_id_1",
@@ -69,14 +70,12 @@
       "round_1": {
         "delegation": "delegation_id_1",
         "markedAsSent": true,
-        "mainActions": 3,
         "bv": 30,
         "message": "You are doomed"
       },
       "round_2": {
         "delegation": "delegation_id_1",
-        "markedAsSent": true,
-        "mainActions": 3
+        "markedAsSent": true
       }
     }
   },
