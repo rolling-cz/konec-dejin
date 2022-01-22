@@ -38,7 +38,7 @@ export class PresentRoundComponent implements OnInit {
       })
     )
     this.primaryActionPaths = delegateActions.pipe(map(snapshots => {
-      return snapshots.filter(snapshot => snapshot.payload.val()["type"] == "mission" || snapshot.payload.val()["type"] == "other").map(snapshot => "actions/" + this.roundId + "/" + snapshot.key)
+      return snapshots.filter(snapshot => snapshot.payload.val()["type"] == "mission" || snapshot.payload.val()["type"] == "other" || snapshot.payload.val()["type"] == "unit").map(snapshot => "actions/" + this.roundId + "/" + snapshot.key)
     }))
     this.markedAsSent = this.db.object("delegateRounds/" + this.delegateId + "/" + this.roundId + "/markedAsSent").valueChanges().pipe(
       map(val => {

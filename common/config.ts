@@ -66,8 +66,8 @@ export const UNIT_TYPES: ValueName[] = [
 ]
 
 export const UNIT_STATES: ValueName[] = [
-    { value: 'alive', name: "Živý" },
-    { value: 'dead', name: "Mrtvý" },
+    { value: 'alive', name: "Živá" },
+    { value: 'dead', name: "Mrtvá" },
     { value: 'incubating', name: "Objeví se" },
     { value: 'other', name: "Ostatní" }
 ]
