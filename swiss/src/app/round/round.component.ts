@@ -453,6 +453,10 @@ export class RoundComponent implements OnInit {
     this.editingDelegates = true
   }
 
+  dontEditDelegates() {
+    this.editingDelegates = false
+  }
+
   editDelegations() {
     this.editingDelegations = true
   }

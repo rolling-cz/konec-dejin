@@ -33,6 +33,7 @@
         <app-round-delegate-form *ngFor="let path of delegatePaths | async" [path]="path"></app-round-delegate-form>
     </div>
     <button mat-button color="accent" *ngIf="!editingDelegates" (click)="editDelegates()">Upravit</button>
+    <button mat-button color="accent" *ngIf="editingDelegates" (click)="dontEditDelegates()">Sbalit</button>
 </mat-card>
 <p>Body vlivu:</p>
 <mat-card class="card">
