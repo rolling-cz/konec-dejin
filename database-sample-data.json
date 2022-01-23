@@ -83,7 +83,8 @@
     "delegate_id_1": {
       "name": "Daniel Appleby",
       "password": "secret",
-      "spreadsheet": "https://porno"
+      "spreadsheet": "https://porno",
+      "fremen": false
     }
   },
   "delegations": {

@@ -4,6 +4,8 @@
 .spreadsheet {
     font-size: medium;
     color: black;
+    text-decoration: underline;
+    cursor: pointer;
 }
 .personal {
     line-height: 0;

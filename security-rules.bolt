@@ -75,6 +75,9 @@ path /delegates {
       path /name {
         read() { isSignedIn() }
       }
+      path /fremen {
+        read() { isSignedIn() }
+      }
       path /spreadsheet {
         read() { isSameDelegate(delegate_id) }
       }

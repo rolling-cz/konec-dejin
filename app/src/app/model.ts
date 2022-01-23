@@ -43,3 +43,11 @@ export interface BvChange {
 export interface Delegate {
     name: string, spreadsheet: string
 }
+
+export interface Unit {
+    name: string,
+    state: string,
+    type: string,
+    visibility: string,
+    description: string
+}

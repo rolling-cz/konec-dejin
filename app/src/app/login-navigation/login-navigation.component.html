@@ -7,11 +7,13 @@
             <button mat-icon-button (click)="logout()">
                 <mat-icon>logout</mat-icon>
             </button> <br />
-            <a href="{{ spreadsheet | async }}" target="_blank" class="spreadsheet">Osobní přehled</a>
+            <a class="spreadsheet" (click)="goToUnits()" *ngIf="!units">Přehled jednotek</a>
+            <a class="spreadsheet" (click)="goToRounds()" *ngIf="units">Depeše</a>
         </div>
     </mat-toolbar>
     <app-voting *ngIf="votingQuestion | async"></app-voting>
-    <app-rounds></app-rounds>
+    <app-rounds *ngIf="!units"></app-rounds>
+    <app-units *ngIf="units"></app-units>
 </div>
 <ng-template #showLogin>
     <mat-toolbar color="primary">

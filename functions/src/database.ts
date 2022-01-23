@@ -24,6 +24,9 @@ export async function doProcessDelegationChange(delegateId: string, roundId: str
     if (nextRoundId != null) {
         await admin.database().ref("delegateRounds/" + delegateId + "/" + nextRoundId + "/delegation").set(delegationId)
     }
+    // Set fremen flag
+    let fremen = (await admin.database().ref("delegations/" + delegationId + "/name").once("value")).val() == "Fremeni"
+    await admin.database().ref("delegates/" + delegateId + "/fremen").set(fremen)
 }
 
 export async function doProcessBvChange(roundId: string, delegateId: string) {
@@ -31,7 +34,7 @@ export async function doProcessBvChange(roundId: string, delegateId: string) {
     (await admin.database().ref("bvRounds/" + roundId + "/" + delegateId).once("value")).forEach(snap => {
         totalBv += snap.val()["bv"]
     })
-    let size = await (await admin.database().ref("rounds/"+roundId+"/size").once("value")).val()
+    let size = await (await admin.database().ref("rounds/" + roundId + "/size").once("value")).val()
     if (size == "small") {
         totalBv = Math.ceil(totalBv / 3)
     }

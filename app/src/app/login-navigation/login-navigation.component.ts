@@ -24,6 +24,7 @@ export class LoginNavigationComponent implements OnInit {
   delegateName: Observable<string>
   spreadsheet: Observable<string>
   votingQuestion: Observable<string>
+  units = false
 
   ngOnInit() {
     this.delegateName = this.firebaseAuth.authState.pipe(flatMap((state, _) => {
@@ -77,6 +78,14 @@ export class LoginNavigationComponent implements OnInit {
   logout() {
     this.loading = false
     this.firebaseAuth.auth.signOut();
+  }
+
+  goToUnits() {
+    this.units = true
+  }
+
+  goToRounds() {
+    this.units = false
   }
 
 }

@@ -1,0 +1,34 @@
+<div class="tab-content">
+    <p>Jednotky pod kontrolou:</p>
+    <mat-card class="action">
+        <table>
+            <tr>
+                <th>Název</th>
+                <th>Stav</th>
+                <th>Typ</th>
+                <th>Viditelnost</th>
+                <th>Popis</th>
+            </tr>
+            <tr *ngFor="let unit of units | async">
+                <td>{{ unit.name }}</td>
+                <td>{{ unit.state }}</td>
+                <td>{{ unit.type }}</td>
+                <td>{{ unit.visibility }}</td>
+                <td [innerHtml]="unit.description"></td>
+            </tr>
+        </table>
+    </mat-card>
+    <p>Známé jednotky:</p>
+    <mat-card class="action">
+        <table>
+            <tr>
+                <th>Název</th>
+                <th>Popis</th>
+            </tr>
+            <tr *ngFor="let unit of knownUnits | async">
+                <td>{{ unit.name }}</td>
+                <td [innerHtml]="unit.description"></td>
+            </tr>
+        </table>
+    </mat-card>
+</div>

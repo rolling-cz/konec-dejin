@@ -1,0 +1,15 @@
+table {
+    border-spacing: 0.5em;
+    border-collapse: separate;
+}
+
+th {
+    text-align: start;
+}
+
+td {
+    vertical-align: top;
+}
+tr { 
+    border:1px solid black; 
+  }
