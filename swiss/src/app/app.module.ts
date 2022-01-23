@@ -37,6 +37,7 @@ import { AnswerFormComponent } from './answer-form/answer-form.component';
 import { RoundBvFormComponent } from './round-bv-form/round-bv-form.component';
 import { UnitsComponent } from './units/units.component';
 import { UnitFormComponent } from './unit-form/unit-form.component';
+import { EditInfoDialogComponent } from './edit-info-dialog/edit-info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { UnitFormComponent } from './unit-form/unit-form.component';
     AnswerFormComponent,
     RoundBvFormComponent,
     UnitsComponent,
-    UnitFormComponent
+    UnitFormComponent,
+    EditInfoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { UnitFormComponent } from './unit-form/unit-form.component';
     ReactiveFormsModule
   ],
   entryComponents: [
-    DeleteConfirmDialogComponent
+    DeleteConfirmDialogComponent,
+    EditInfoDialogComponent
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'cs' }],
   bootstrap: [AppComponent]

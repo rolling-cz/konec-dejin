@@ -39,6 +39,9 @@
         <input matInput placeholder="Info pro orgy" type="text" formControlName="internalInfo" />
     </mat-form-field>
     | {{ state }} &nbsp;
+    <button mat-stroked-button color="accent" (click)="editInfo()">
+        Info
+    </button>&nbsp;
     <button mat-stroked-button color="accent" (click)="delete()">
         Smazat
     </button>

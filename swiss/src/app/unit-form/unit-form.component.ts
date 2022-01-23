@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { UNIT_STATES, UNIT_TYPES, UNIT_VISIBILITIES } from '../../../../common/config';
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
+import { EditInfoDialogComponent } from '../edit-info-dialog/edit-info-dialog.component';
 
 @Component({
   selector: 'app-unit-form',
@@ -48,6 +49,10 @@ export class UnitFormComponent implements OnInit {
           this.db.object(this.path).remove()
         }
       })
+  }
+
+  editInfo() {
+    this.dialog.open(EditInfoDialogComponent, { data: this.path })
   }
 
 }
