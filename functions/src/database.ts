@@ -31,6 +31,10 @@ export async function doProcessBvChange(roundId: string, delegateId: string) {
     (await admin.database().ref("bvRounds/" + roundId + "/" + delegateId).once("value")).forEach(snap => {
         totalBv += snap.val()["bv"]
     })
+    let size = await (await admin.database().ref("rounds/"+roundId+"/size").once("value")).val()
+    if (size == "small") {
+        totalBv = Math.ceil(totalBv / 3)
+    }
     await admin.database().ref("delegateRounds/" + delegateId + "/" + roundId + "/bv").set(totalBv)
 }
 

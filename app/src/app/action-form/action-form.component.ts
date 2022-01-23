@@ -48,9 +48,13 @@ export class ActionFormComponent implements OnInit {
     this.missions = this.db.list("projects", ref => ref.orderByChild("enabled").equalTo(true)).valueChanges().pipe(
       map(
         projects => {
-          let delegateProjects = projects.filter(project => project["type"] == "delegate" && project["delegate"] == delegateId)
+          let delegateProjects = projects.filter(project => project["type"] == "delegate" && project["delegate"] == delegateId).sort((a, b) => {
+            if(a["keyword"] < b["keyword"]) { return -1; }
+            if(a["keyword"] > b["keyword"]) { return 1; }
+            return 0;
+          })
           let formattedProjects = delegateProjects.map(project => {
-            return { value: project["keyword"], name: project["name"] }
+            return { value: project["keyword"], name: project["name"]+" ("+project["keyword"]+")" }
           })
           formattedProjects.push({ value: "", name: "- Žádná -" })
           return formattedProjects

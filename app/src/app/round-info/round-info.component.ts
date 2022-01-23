@@ -36,7 +36,8 @@ export class RoundInfoComponent implements OnInit {
             let presentRound = round["tense"] == "present"
             let availableDf = delegateRound["bv"];
             let df = (presentRound) ? availableDf - spentDf : spentDf
-            return { name: delegation["name"], flag: delegation["flag"], deadline: round["deadline"], presentRound: presentRound, message: delegateRound["message"], availableDf: availableDf, df: df, bvs: bvs }
+            let smallSize = round["size"] == "small"
+            return { name: delegation["name"], flag: delegation["flag"], deadline: round["deadline"], presentRound: presentRound, message: delegateRound["message"], availableDf: availableDf, df: df, bvs: bvs, smallSize: smallSize }
           }
         )
       }

@@ -28,7 +28,7 @@ export interface RoundInfo {
     name: string,
     flag: string,
     deadline: string,
-    leader: string,
+    smallSize: boolean,
     presentRound: boolean,
     availableDf: number,
     message: string,
