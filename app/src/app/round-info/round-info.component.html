@@ -18,13 +18,13 @@
             <strong *ngIf="info.df < 0" class="negative">{{ info.df }} BV</strong>
             z {{info.availableDf}} BV
             <ng-container *ngIf="info.smallSize">
-                (V malém kole pouze třetina)
+                (1/3 zaokr. nahoru)
             </ng-container>
         </p>
         <p *ngIf="!info.presentRound">
             <strong>Použito: {{ info.df }} BV z {{info.availableDf}} BV</strong>
             <ng-container *ngIf="info.smallSize">
-                (V malém kole pouze třetina)
+                (1/3 zaokr. nahoru)
             </ng-container>
         </p>
         <p *ngFor="let bv of info.bvs">
