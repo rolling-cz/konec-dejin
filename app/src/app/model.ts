@@ -48,6 +48,7 @@ export interface Unit {
     name: string,
     state: string,
     type: string,
+    delegate: string,
     visibility: string,
     description: string
 }

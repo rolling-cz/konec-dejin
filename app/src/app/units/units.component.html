@@ -23,10 +23,12 @@
         <table>
             <tr>
                 <th>Název</th>
+                <th>Kontroluje</th>
                 <th>Popis</th>
             </tr>
             <tr *ngFor="let unit of knownUnits | async">
                 <td>{{ unit.name }}</td>
+                <td>{{ unit.delegate }}</td>
                 <td [innerHtml]="unit.description"></td>
             </tr>
         </table>
