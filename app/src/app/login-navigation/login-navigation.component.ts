@@ -22,7 +22,6 @@ export class LoginNavigationComponent implements OnInit {
   loading = false
   initializing = true
   delegateName: Observable<string>
-  spreadsheet: Observable<string>
   votingQuestion: Observable<string>
   units = false
 
@@ -31,7 +30,6 @@ export class LoginNavigationComponent implements OnInit {
       if (state == null) {
         return of(null) as Observable<string>
       } else {
-        this.spreadsheet = this.db.object("delegates/" + state.uid + "/spreadsheet").valueChanges() as Observable<string>
         this.votingQuestion = this.db.object("landsraad/currentQuestion").valueChanges().pipe(
           flatMap((questionId, _) => {
             // show voting only those with voting rights

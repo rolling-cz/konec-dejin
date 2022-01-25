@@ -41,7 +41,7 @@ export interface BvChange {
 }
 
 export interface Delegate {
-    name: string, spreadsheet: string
+    name: string
 }
 
 export interface Unit {
