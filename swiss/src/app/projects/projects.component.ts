@@ -68,7 +68,7 @@ export class ProjectsComponent implements OnInit {
         complete: (result) => {
           result.data.forEach(el => {
             let enabledString = el["Dostupná"].toLowerCase()
-            let enabled = enabledString == "true" || enabledString == "1"
+            let enabled = enabledString == "true" || enabledString == "TRUE" || enabledString == "1"
             let bv = +el["Cena BV"]
             if (isNaN(bv)) {
               alert("'" + el["Cena BV"] + "' není číslo, opakuj import")
