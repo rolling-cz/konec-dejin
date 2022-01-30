@@ -7,3 +7,14 @@
 .select-field {
     width: 270px;
 }
+
+/deep/ .mat-select-panel mat-option.mat-option {
+  height: unset;
+}
+  
+/deep/ .mat-option-text.mat-option-text {
+  white-space: normal;
+  line-height: normal;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
