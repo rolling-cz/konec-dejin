@@ -152,6 +152,7 @@ export class RoundComponent implements OnInit {
             let values = snapshot.payload.val()
             let project = findProject(combined.projects, values["identifier"], values["delegate"])
             let unit = findUnit(combined.units, values["identifier"])
+            let identifier = (project != null) ? project["keyword"] : ((unit != null) ? unit.payload.val()["name"] : "")
             return [
               snapshot.key.substr(1), // Excel doesn't like - at the beginning
               findName(combined.delegates, values["delegate"]),
@@ -161,7 +162,7 @@ export class RoundComponent implements OnInit {
               findValueName(COUNTRIES, values["targetCountry"]),
               values["df"] || "",
               values["keyword"] || "",
-              values["identifier"] || "",
+              identifier,
               formatDescription(project, unit),
               formatInstructions(project, unit),
               values["result"] || ""
