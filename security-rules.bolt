@@ -34,7 +34,7 @@ type Action {
 }
 
 type Description extends String {
-    validate() { hasMaxLength(this, 1000) }
+    validate() { hasMaxLength(this, 5000) }
 }
 
 type Keyword extends String {
