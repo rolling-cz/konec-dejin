@@ -16,7 +16,7 @@ export class BasicInfoComponent implements OnInit {
   title = "Duna: Válka Assasinů"
 
   signUp() {
-    window.location.href = "https://forms.gle/eSuPg9A6A67Z2G4v8"
+    window.location.href = "https://forms.gle/GfvWwHbnTVzD9yPu6"
   }
 
   factions() {
