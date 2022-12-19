@@ -3,7 +3,7 @@ import { AngularFireAction, AngularFireDatabase, DatabaseSnapshot } from '@angul
 import { NgForm } from '@angular/forms';
 import { ngxCsv } from 'ngx-csv';
 import { combineLatest } from 'rxjs';
-import { Observable } from 'rxjs';
+import { Observable} from 'rxjs';
 import { flatMap, map, take, tap } from 'rxjs/operators';
 import { ValueName } from '../../../../common/config';
 
@@ -21,6 +21,7 @@ export class LandsraadComponent implements OnInit {
   currentQuestion: Observable<string>
   alreadyVotedCount: Observable<number>
   maxVotedCount: Observable<number>
+  votingEnabled: Observable<boolean>
 
   constructor(public db: AngularFireDatabase) { }
 
@@ -60,6 +61,7 @@ export class LandsraadComponent implements OnInit {
       )
     }))
     this.maxVotedCount = this.votingRightPaths.pipe(map(items => items.length))
+    this.votingEnabled = this.db.object("landsraad/votingConfig/votingEnabled").valueChanges() as Observable<boolean>
   }
 
   addVotingRight(form: NgForm) {
@@ -89,5 +91,10 @@ export class LandsraadComponent implements OnInit {
 
   currentQuestionChanged(event) {
     this.db.object("landsraad/currentQuestion").set(event.value)
+  }
+
+  toggleVotingCheckbox(event) {
+    this.votingEnabled = event.checked
+    this.db.object("landsraad/votingConfig/votingEnabled").set(event.checked)
   }
 }
